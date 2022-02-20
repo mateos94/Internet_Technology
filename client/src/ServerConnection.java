@@ -49,7 +49,7 @@ public class ServerConnection implements Runnable{
             }
         } catch (IOException e) {
             e.printStackTrace();
-        }finally {
+        } finally {
             try {
                 in.close();
             } catch (IOException e) {

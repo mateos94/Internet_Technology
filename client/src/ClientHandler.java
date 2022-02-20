@@ -65,6 +65,9 @@ public class ClientHandler implements Runnable{
             responseMessage = "";
     }
         } catch (IOException e) {
+            if (clientName != null) {
+                changeLoginStatus(clientName);
+            }
             System.err.println("IO exception in client handler");
             return;
         }finally {
@@ -123,6 +126,23 @@ public class ClientHandler implements Runnable{
         int i = string.indexOf(' ');
         String senderName = string.substring(0, i);
         String restOfMessage = string.substring(i + 1);
+        if (restOfMessage.equals("?")) {
+            responseMessage =
+                    "Login <username>: a command used to login to the chat server or create a new user if <username> isn’t registered before. \n" +
+                    "Request users: a command to request all users from the server that are currently online. \n" +
+                    "Broadcast <message>: a command to broadcast a message to all connected(online) users. \n" +
+                    "Quit server: a command to log out from the server. \n" +
+                    "Join <group name>: a command to join a group that exists. \n" +
+                    "Leave <group name>: a command to leave a group you are in. \n" +
+                    "Create <group name>: a command to create a new group. \n" +
+                    "Kick <username to be kicked> <group name>: a command to kick a user from your group (you have to \n" +
+                    "be the admin/creator of that group) \n" +
+                    "Private <username to message> <message>: a command to send a private message to another user. \n" +
+                    "Group <group name> <message>: a command to send a message to all members of your group. \n" +
+                    "Send < receiver’s username> <file name>: a command to send a file to another user. \n" +
+                    "Pong: extend the duration of your connection";
+            return responseMessage;
+        }
         int x = restOfMessage.indexOf(' ');
         //if the restOfMessage was not defined ask used to enter the full command
         if(x<0) {

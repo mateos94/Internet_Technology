@@ -196,7 +196,7 @@ public class ClientHandler implements Runnable{
                 responseMessage = "*You need to login first.";
             } else {
                 responseMessage = "*<" + senderName + "> " + restOfMessage;
-                outToAll(responseMessage);
+                outToAllLoggedIn(responseMessage);
                 responseMessage = "Your message has been broadcasted";
             }
         } else if (typeOfMessage.equalsIgnoreCase("Quit")) {
@@ -322,6 +322,14 @@ public class ClientHandler implements Runnable{
     private void outToAll(String responseMessage) {
         for( ClientHandler clientHandlers : clients){
             clientHandlers.out.println(AES.encrypt(responseMessage));
+        }
+    }
+
+    private void outToAllLoggedIn(String responseMessage) {
+        for( ClientHandler clientHandlers : clients){
+            if (clientHandlers.getClientName() != null){
+                clientHandlers.out.println(AES.encrypt(responseMessage));
+            }
         }
     }
 

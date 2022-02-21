@@ -116,6 +116,22 @@ public class ClientHandler implements Runnable{
         return false;
     }
 
+    public String getGroups() {
+        String listOfGroupsAsString = "";
+        if (groups.size() == 0) {
+            listOfGroupsAsString = "*There is no group.";
+        } else {
+            listOfGroupsAsString = "*Here are the list of groups:";
+            listOfGroupsAsString += "\n";
+            for (Group nextGroup: groups) {
+                listOfGroupsAsString += nextGroup.getGroupName();
+                listOfGroupsAsString += "\n";
+            }
+            listOfGroupsAsString += "*End.";
+        }
+        return listOfGroupsAsString;
+    }
+
     public String parseMessage (String string) {
         //if user responds with Pong extend session.
         if (string.contains("Pong")){
@@ -142,12 +158,19 @@ public class ClientHandler implements Runnable{
                     "Send < receiver’s username> <file name>: a command to send a file to another user. \n" +
                     "Pong: extend the duration of your connection";
             return responseMessage;
+        } else if (restOfMessage.equalsIgnoreCase("Groups")) {
+            if (senderName.equals("0")) {
+                responseMessage = "*You need to login first.";
+            } else {
+                responseMessage = getGroups();
+            }
+            return responseMessage;
         }
         int x = restOfMessage.indexOf(' ');
         //if the restOfMessage was not defined ask used to enter the full command
         if(x<0) {
             responseMessage = "Please enter the full command";
-            return  responseMessage;
+            return responseMessage;
         }
         String typeOfMessage = restOfMessage.substring(0, x);
         String contentOfMessage = restOfMessage.substring(x + 1);
@@ -209,7 +232,10 @@ public class ClientHandler implements Runnable{
         } else if (typeOfMessage.equalsIgnoreCase("Join")) {
             if (senderName.equals("0")) {
                 responseMessage = "*You need to login first.";
+            } else if (getGroupByName(contentOfMessage) == null){
+                responseMessage = "*Such group does not exist.";
             } else if(getGroupByName(contentOfMessage).addMember(getUserByName(senderName))){
+                outToAllLoggedIn("*User " + senderName + " joint group " + contentOfMessage + ".");
                 responseMessage = "*You joined group " + contentOfMessage;
             } else{
                responseMessage = "Failed to join the group";
@@ -218,7 +244,9 @@ public class ClientHandler implements Runnable{
             if (senderName.equals("0")) {
                 responseMessage = "*You need to login first.";
             } else {
-                if (getGroupByName(contentOfMessage).checkIfUserExist(senderName)) {
+                if (getGroupByName(contentOfMessage) == null) {
+                    responseMessage = "*Such group does not exist.";
+                } else if (getGroupByName(contentOfMessage).checkIfUserExist(senderName)) {
                     getGroupByName(contentOfMessage).deleteMemberByName(senderName);
                     responseMessage = "*You left group " + contentOfMessage;
                 } else {
@@ -235,6 +263,7 @@ public class ClientHandler implements Runnable{
                     Group group = new Group(contentOfMessage, getUserByName(senderName));
                     group.addMember(getUserByName(senderName));
                     groups.add(group);
+                    outToAllLoggedIn("*User " + senderName + " created group " + contentOfMessage + ".");
                     responseMessage = "*Group created.";
                 }
             }
@@ -287,9 +316,22 @@ public class ClientHandler implements Runnable{
                 } else if (getGroupByName(groupName).checkIfUserExist(senderName)) {
                     responseMessage = "*<" + groupName + ">" + "<" + senderName + "> " + messageToGroup;
                     outToGroup(responseMessage);
+                    getGroupByName(groupName).addHistoryMessage(responseMessage);
                     responseMessage = "Your message has been sent to the group.";
                 } else {
                     responseMessage = "*You cannot send message to a group that you have not joint.";
+                }
+            }
+        } else if (typeOfMessage.equalsIgnoreCase("History")) {
+            if (senderName.equals("0")) {
+                responseMessage = "*You need to login first.";
+            } else {
+                if (!checkIfGroupExist(contentOfMessage)) {
+                    responseMessage = "*This group does not exist.";
+                } else if (getGroupByName(contentOfMessage).checkIfUserExist(senderName)) {
+                    responseMessage = getGroupByName(contentOfMessage).getHistoryMessages();
+                } else {
+                    responseMessage = "*You cannot get chatting history of a group that you did not join.";
                 }
             }
         } else if (typeOfMessage.equalsIgnoreCase("Send")){

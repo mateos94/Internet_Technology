@@ -4,6 +4,7 @@ public class Group {
     private String groupName;
     private User owner;
     private ArrayList<User> members = new ArrayList<>();
+    private ArrayList<String> historyMessages = new ArrayList<>();
 
     public Group(String groupName, User owner) {
         this.groupName = groupName;
@@ -64,5 +65,25 @@ public class Group {
             }
         }
         return false;
+    }
+
+    public void addHistoryMessage(String historyMessage) {
+        historyMessages.add(historyMessage);
+    }
+
+    public String getHistoryMessages() {
+        String historyMessagesOfGroup = "";
+        if (historyMessages.size() == 0) {
+            historyMessagesOfGroup = "*The group has no history message";
+        } else {
+            historyMessagesOfGroup = "*Following are the history messages of group:";
+            for (String historyMessage: historyMessages){
+                historyMessagesOfGroup += "\n";
+                historyMessagesOfGroup += historyMessage;
+            }
+            historyMessagesOfGroup += "\n";
+            historyMessagesOfGroup += "*End.";
+        }
+        return historyMessagesOfGroup;
     }
 }

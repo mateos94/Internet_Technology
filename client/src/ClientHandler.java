@@ -132,6 +132,10 @@ public class ClientHandler implements Runnable{
         return listOfGroupsAsString;
     }
 
+    public void disbandGroup(String groupName) {
+        groups.removeIf(nextGroup -> nextGroup.getGroupName().equals(groupName));
+    }
+
     public String parseMessage (String string) {
         //if user responds with Pong extend session.
         if (string.contains("Pong")){
@@ -249,6 +253,9 @@ public class ClientHandler implements Runnable{
                 } else if (getGroupByName(contentOfMessage).checkIfUserExist(senderName)) {
                     getGroupByName(contentOfMessage).deleteMemberByName(senderName);
                     responseMessage = "*You left group " + contentOfMessage;
+                    if (getGroupByName(contentOfMessage).getOwner().getUserName().equals(senderName)) {
+                        disbandGroup(contentOfMessage);
+                    }
                 } else {
                     responseMessage = "*You cannot leave a group that you have not joint yet.";
                 }
@@ -315,7 +322,7 @@ public class ClientHandler implements Runnable{
                     responseMessage = "*This group does not exist.";
                 } else if (getGroupByName(groupName).checkIfUserExist(senderName)) {
                     responseMessage = "*<" + groupName + ">" + "<" + senderName + "> " + messageToGroup;
-                    outToGroup(responseMessage);
+                    outToGroup(responseMessage, groupName);
                     getGroupByName(groupName).addHistoryMessage(responseMessage);
                     responseMessage = "Your message has been sent to the group.";
                 } else {
@@ -383,10 +390,10 @@ public class ClientHandler implements Runnable{
         }
     }
 
-    private void outToGroup(String responseMessage){
+    private void outToGroup(String responseMessage, String groupName){
         for( ClientHandler clientHandlers : clients){
             for (Group group : groups){
-                if(group.checkIfUserExist(clientHandlers.getClientName())){
+                if(group.checkIfUserExist(clientHandlers.getClientName()) && groupName.equals(group.getGroupName())){
                     clientHandlers.out.println(AES.encrypt(responseMessage));
                 }
             }

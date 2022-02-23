@@ -1,5 +1,6 @@
 public class User {
     private String userName;
+    private String password = null;
     private boolean loggedIn = true;
 
     public User(String userName) {
@@ -12,6 +13,18 @@ public class User {
 
     public void setUserName(String userName) {
         this.userName = userName;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public boolean checkIfUserIsAuthenticated() {
+        return password != null;
     }
 
     public boolean isLoggedIn() {

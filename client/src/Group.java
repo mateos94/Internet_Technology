@@ -3,7 +3,7 @@ import java.util.ArrayList;
 public class Group {
     private String groupName;
     private User owner;
-    private ArrayList<User> members = new ArrayList<>();
+    private ArrayList<UserAndTimeOfLastMessage> membersAndTimeOfLastMessage = new ArrayList<>();
     private ArrayList<String> historyMessages = new ArrayList<>();
 
     public Group(String groupName, User owner) {
@@ -23,44 +23,59 @@ public class Group {
         this.groupName = groupName;
     }
 
-    public ArrayList<User> getMembers() {
+    public ArrayList<User> getMembersAndTimeOfLastMessage() {
+        ArrayList<User> members = new ArrayList<>();
+        if (!membersAndTimeOfLastMessage.isEmpty()) {
+            for (UserAndTimeOfLastMessage nextUserAndTimeOfLastMessage: membersAndTimeOfLastMessage) {
+                members.add(nextUserAndTimeOfLastMessage.getUser());
+            }
+        }
         return members;
     }
 
-    public void setMembers(ArrayList<User> members) {
-        this.members = members;
+    public void setMembersAndTimeOfLastMessage(ArrayList<UserAndTimeOfLastMessage> membersAndTimeOfLastMessage) {
+        this.membersAndTimeOfLastMessage = membersAndTimeOfLastMessage;
     }
 
-    public boolean addMember(User user){
+    public void updateTimeOfLastMessage(String username, Long newTimestamp){
+        for (UserAndTimeOfLastMessage nextUserAndTimeOfLastMessage: membersAndTimeOfLastMessage) {
+            if (nextUserAndTimeOfLastMessage.getUser().getUserName().equals(username)){
+                nextUserAndTimeOfLastMessage.setTimestampOfLastMessage(newTimestamp);
+            }
+        }
+    }
+
+    public boolean addMember(User user, Long timestamp){
         if (checkIfUserExist(user.getUserName())){
             return false;
         }else {
-            members.add(user);
+            UserAndTimeOfLastMessage userAndTimeOfLastMessage = new UserAndTimeOfLastMessage(user, timestamp);
+            membersAndTimeOfLastMessage.add(userAndTimeOfLastMessage);
             return true;
         }
     }
 
     public void deleteMemberByName(String name){
-        for (User user: members){
-            if (user.getUserName().equals(name)){
-                members.remove(user);
+        for (UserAndTimeOfLastMessage userAndTimeOfLastMessage: membersAndTimeOfLastMessage){
+            if (userAndTimeOfLastMessage.getUser().getUserName().equals(name)){
+                membersAndTimeOfLastMessage.remove(userAndTimeOfLastMessage);
                 return;
             }
         }
     }
 
     public User getMemberByName(String name){
-        for (User user: members){
-            if (user.getUserName().equals(name)){
-                return user;
+        for (UserAndTimeOfLastMessage userAndTimeOfLastMessage: membersAndTimeOfLastMessage){
+            if (userAndTimeOfLastMessage.getUser().getUserName().equals(name)){
+                return userAndTimeOfLastMessage.getUser();
             }
         }
         return null;
     }
 
     public boolean checkIfUserExist(String name){
-        for (User user: members){
-            if (user.getUserName().equals(name)){
+        for (UserAndTimeOfLastMessage userAndTimeOfLastMessage: membersAndTimeOfLastMessage){
+            if (userAndTimeOfLastMessage.getUser().getUserName().equals(name)){
                 return true;
             }
         }

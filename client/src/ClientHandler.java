@@ -140,6 +140,7 @@ public class ClientHandler implements Runnable{
     }
 
     public String parseMessage (String string) {
+        String currentTimeAsDateString = convertTimestampToDate(System.currentTimeMillis());
         //if user responds with Pong extend session.
         if (string.contains("Pong")){
             responseMessage = "Connection duration extended";
@@ -175,7 +176,6 @@ public class ClientHandler implements Runnable{
             return responseMessage;
         }
         int x = restOfMessage.indexOf(' ');
-        //if the restOfMessage was not defined ask used to enter the full command
         if(x<0) {
             responseMessage = "#Please enter the full command";
             return responseMessage;
@@ -183,7 +183,6 @@ public class ClientHandler implements Runnable{
         String typeOfMessage = restOfMessage.substring(0, x);
         String contentOfMessage = restOfMessage.substring(x + 1);
         if (typeOfMessage.equalsIgnoreCase("Login")) {
-            String currentTimeAsDateString = convertTimestampToDate(System.currentTimeMillis());
             if (senderName.equals("0")) {
                 boolean userExist = false;
                 if (!users.isEmpty()) {
@@ -204,7 +203,6 @@ public class ClientHandler implements Runnable{
                 responseMessage = "# " + currentTimeAsDateString + " You are already logged in.";
             }
         } else if (typeOfMessage.equalsIgnoreCase("Signup")) {
-            String currentTimeAsDateString = convertTimestampToDate(System.currentTimeMillis());
             if (senderName.equals("0")) {
                 if (!contentOfMessage.contains(" ")) {
                     responseMessage = "# " + currentTimeAsDateString + " You need a password.";
@@ -233,7 +231,6 @@ public class ClientHandler implements Runnable{
                 responseMessage = "# " + currentTimeAsDateString + " You are already logged in.";
             }
         } else if (typeOfMessage.equalsIgnoreCase("Request")) {
-            String currentTimeAsDateString = convertTimestampToDate(System.currentTimeMillis());
             boolean anyUserLoggedIn = false;
             if (!users.isEmpty()) {
                 for (User nextUser : users) {
@@ -254,7 +251,6 @@ public class ClientHandler implements Runnable{
             }
         }
         else if (typeOfMessage.equalsIgnoreCase("Broadcast")) {
-            String currentTimeAsDateString = convertTimestampToDate(System.currentTimeMillis());
             if (senderName.equals("0")) {
                 responseMessage = "# " + currentTimeAsDateString + " You need to login first.";
             } else {
@@ -263,7 +259,6 @@ public class ClientHandler implements Runnable{
                 responseMessage = "# " + currentTimeAsDateString + "Your message has been broadcasted";
             }
         } else if (typeOfMessage.equalsIgnoreCase("Quit")) {
-            String currentTimeAsDateString = convertTimestampToDate(System.currentTimeMillis());
             if (senderName.equals("0")) {
                 responseMessage = "# " + currentTimeAsDateString + " You need to login first.";
             } else {
@@ -271,7 +266,6 @@ public class ClientHandler implements Runnable{
                 changeLoginStatus(senderName);
             }
         } else if (typeOfMessage.equalsIgnoreCase("Join")) {
-            String currentTimeAsDateString = convertTimestampToDate(System.currentTimeMillis());
             if (senderName.equals("0")) {
                 responseMessage = "# " + currentTimeAsDateString + " You need to login first.";
             } else if (getGroupByName(contentOfMessage) == null){
@@ -283,7 +277,6 @@ public class ClientHandler implements Runnable{
                responseMessage = "# " + currentTimeAsDateString + " Failed to join the group";
             }
         } else if (typeOfMessage.equalsIgnoreCase("Leave")) {
-            String currentTimeAsDateString = convertTimestampToDate(System.currentTimeMillis());
             if (senderName.equals("0")) {
                 responseMessage = "# " + currentTimeAsDateString + " You need to login first.";
             } else {
@@ -300,7 +293,6 @@ public class ClientHandler implements Runnable{
                 }
             }
         } else if (typeOfMessage.equalsIgnoreCase("Create")) {
-            String currentTimeAsDateString = convertTimestampToDate(System.currentTimeMillis());
             if (senderName.equals("0")) {
                 responseMessage = "# " + currentTimeAsDateString + " You need to login first.";
             } else {
@@ -315,7 +307,6 @@ public class ClientHandler implements Runnable{
                 }
             }
         } else if (typeOfMessage.equalsIgnoreCase("Kick")) {
-            String currentTimeAsDateString = convertTimestampToDate(System.currentTimeMillis());
             if (senderName.equals("0")) {
                 responseMessage = "# " + currentTimeAsDateString + " You need to login first.";
             } else {
@@ -338,7 +329,6 @@ public class ClientHandler implements Runnable{
                 }
             }
         } else if (typeOfMessage.equalsIgnoreCase("Private")) {
-            String currentTimeAsDateString = convertTimestampToDate(System.currentTimeMillis());
             if (senderName.equals("0")) {
                 responseMessage = "# " + currentTimeAsDateString + " You need to login first.";
             } else {
@@ -364,7 +354,6 @@ public class ClientHandler implements Runnable{
                 }
             }
         } else if (typeOfMessage.equalsIgnoreCase("Group")) {
-            String currentTimeAsDateString = convertTimestampToDate(System.currentTimeMillis());
             if (senderName.equals("0")) {
                 responseMessage = "# " + currentTimeAsDateString + " You need to login first.";
             } else {
@@ -388,7 +377,6 @@ public class ClientHandler implements Runnable{
                 }
             }
         } else if (typeOfMessage.equalsIgnoreCase("History")) {
-            String currentTimeAsDateString = convertTimestampToDate(System.currentTimeMillis());
             if (senderName.equals("0")) {
                 responseMessage = "# " + currentTimeAsDateString + " You need to login first.";
             } else {
@@ -401,7 +389,6 @@ public class ClientHandler implements Runnable{
                 }
             }
         } else if (typeOfMessage.equalsIgnoreCase("Send")){
-            String currentTimeAsDateString = convertTimestampToDate(System.currentTimeMillis());
             if (senderName.equals("0")) {
                 responseMessage = "# " + currentTimeAsDateString + " You need to login first.";
             } else {
@@ -421,7 +408,6 @@ public class ClientHandler implements Runnable{
         }
 
         else {
-            String currentTimeAsDateString = convertTimestampToDate(System.currentTimeMillis());
             responseMessage = "# " + currentTimeAsDateString + " It does not match any function.";
         }
         counter = 0;

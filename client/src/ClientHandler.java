@@ -122,15 +122,15 @@ public class ClientHandler implements Runnable{
     public String getGroups() {
         String listOfGroupsAsString = "";
         if (groups.size() == 0) {
-            listOfGroupsAsString = "*There is no group.";
+            listOfGroupsAsString = "#There is no group.";
         } else {
-            listOfGroupsAsString = "*Here are the list of groups:";
+            listOfGroupsAsString = "#Here are the list of groups:";
             listOfGroupsAsString += "\n";
             for (Group nextGroup: groups) {
                 listOfGroupsAsString += nextGroup.getGroupName();
                 listOfGroupsAsString += "\n";
             }
-            listOfGroupsAsString += "*End.";
+            listOfGroupsAsString += "#End.";
         }
         return listOfGroupsAsString;
     }
@@ -151,7 +151,7 @@ public class ClientHandler implements Runnable{
         String restOfMessage = string.substring(i + 1);
         if (restOfMessage.equals("?")) {
             responseMessage =
-                    "* Help list:\n" +
+                    "# Help list:\n" +
                     "Login <username>: a command used to login to the chat server or create a new user if <username> isn’t registered before. \n" +
                     "Request users: a command to request all users from the server that are currently online. \n" +
                     "Broadcast <message>: a command to broadcast a message to all connected(online) users. \n" +
@@ -168,7 +168,7 @@ public class ClientHandler implements Runnable{
             return responseMessage;
         } else if (restOfMessage.equalsIgnoreCase("Groups")) {
             if (senderName.equals("0")) {
-                responseMessage = "*You need to login first.";
+                responseMessage = "#You need to login first.";
             } else {
                 responseMessage = getGroups();
             }
@@ -177,7 +177,7 @@ public class ClientHandler implements Runnable{
         int x = restOfMessage.indexOf(' ');
         //if the restOfMessage was not defined ask used to enter the full command
         if(x<0) {
-            responseMessage = "*Please enter the full command";
+            responseMessage = "#Please enter the full command";
             return responseMessage;
         }
         String typeOfMessage = restOfMessage.substring(0, x);
@@ -189,7 +189,7 @@ public class ClientHandler implements Runnable{
                 if (!users.isEmpty()) {
                     for (User nextUser : users) {
                         if (nextUser.getUserName().equals(contentOfMessage) && nextUser.isLoggedIn()) {
-                            responseMessage = "* " + currentTimeAsDateString + " Logging in failed, this user already exists.";
+                            responseMessage = "# " + currentTimeAsDateString + " Logging in failed, this user already exists.";
                             userExist = true;
                         }
                     }
@@ -197,17 +197,17 @@ public class ClientHandler implements Runnable{
                 if (!userExist) {
                     User user = new User(contentOfMessage);
                     users.add(user);
-                    responseMessage = "* " + currentTimeAsDateString + " You are logged in with username " + contentOfMessage + ".";
+                    responseMessage = "# " + currentTimeAsDateString + " You are logged in with username " + contentOfMessage + ".";
                     setClientName(contentOfMessage);
                 }
             } else {
-                responseMessage = "* " + currentTimeAsDateString + " You are already logged in.";
+                responseMessage = "# " + currentTimeAsDateString + " You are already logged in.";
             }
         } else if (typeOfMessage.equalsIgnoreCase("Signup")) {
             String currentTimeAsDateString = convertTimestampToDate(System.currentTimeMillis());
             if (senderName.equals("0")) {
                 if (!contentOfMessage.contains(" ")) {
-                    responseMessage = "* " + currentTimeAsDateString + " You need a password.";
+                    responseMessage = "# " + currentTimeAsDateString + " You need a password.";
                 } else {
                     boolean userExist = false;
                     int j = contentOfMessage.indexOf(' ');
@@ -216,7 +216,7 @@ public class ClientHandler implements Runnable{
                     if (!users.isEmpty()) {
                         for (User nextUser : users) {
                             if (nextUser.getUserName().equals(username) && nextUser.isLoggedIn()) {
-                                responseMessage = "* " + currentTimeAsDateString + " Cannot sign up, this user already exists.";
+                                responseMessage = "# " + currentTimeAsDateString + " Cannot sign up, this user already exists.";
                                 userExist = true;
                             }
                         }
@@ -225,12 +225,12 @@ public class ClientHandler implements Runnable{
                         User user = new User(username);
                         user.setPassword(password);
                         users.add(user);
-                        responseMessage = "* " + currentTimeAsDateString + " You are logged in with authenticated user, with username of " + username + ".";
+                        responseMessage = "# " + currentTimeAsDateString + " You are logged in with authenticated user, with username of " + username + ".";
                         setClientName(username);
                     }
                 }
             } else {
-                responseMessage = "* " + currentTimeAsDateString + " You are already logged in.";
+                responseMessage = "# " + currentTimeAsDateString + " You are already logged in.";
             }
         } else if (typeOfMessage.equalsIgnoreCase("Request")) {
             String currentTimeAsDateString = convertTimestampToDate(System.currentTimeMillis());
@@ -243,9 +243,9 @@ public class ClientHandler implements Runnable{
                 }
             }
             if (!anyUserLoggedIn) {
-                responseMessage = "* " + currentTimeAsDateString + " There is no user logged in so far.";
+                responseMessage = "# " + currentTimeAsDateString + " There is no user logged in so far.";
             } else {
-                responseMessage = "* " + currentTimeAsDateString + " List of users: \n";
+                responseMessage = "# " + currentTimeAsDateString + " List of users: \n";
                 for (User nextUser : users) {
                     if (nextUser.isLoggedIn()) {
                         responseMessage += (nextUser.getUserName() + " \n");
@@ -256,83 +256,83 @@ public class ClientHandler implements Runnable{
         else if (typeOfMessage.equalsIgnoreCase("Broadcast")) {
             String currentTimeAsDateString = convertTimestampToDate(System.currentTimeMillis());
             if (senderName.equals("0")) {
-                responseMessage = "* " + currentTimeAsDateString + " You need to login first.";
+                responseMessage = "# " + currentTimeAsDateString + " You need to login first.";
             } else {
-                responseMessage = "* " + currentTimeAsDateString + " <" + senderName + "> " + restOfMessage;
+                responseMessage = "# " + currentTimeAsDateString + " <" + senderName + "> " + restOfMessage;
                 outToAllLoggedIn(responseMessage);
-                responseMessage = "* " + currentTimeAsDateString + "Your message has been broadcasted";
+                responseMessage = "# " + currentTimeAsDateString + "Your message has been broadcasted";
             }
         } else if (typeOfMessage.equalsIgnoreCase("Quit")) {
             String currentTimeAsDateString = convertTimestampToDate(System.currentTimeMillis());
             if (senderName.equals("0")) {
-                responseMessage = "* " + currentTimeAsDateString + " You need to login first.";
+                responseMessage = "# " + currentTimeAsDateString + " You need to login first.";
             } else {
-                responseMessage = "* " + currentTimeAsDateString + " You are logged out.";
+                responseMessage = "# " + currentTimeAsDateString + " You are logged out.";
                 changeLoginStatus(senderName);
             }
         } else if (typeOfMessage.equalsIgnoreCase("Join")) {
             String currentTimeAsDateString = convertTimestampToDate(System.currentTimeMillis());
             if (senderName.equals("0")) {
-                responseMessage = "* " + currentTimeAsDateString + " You need to login first.";
+                responseMessage = "# " + currentTimeAsDateString + " You need to login first.";
             } else if (getGroupByName(contentOfMessage) == null){
-                responseMessage = "* " + currentTimeAsDateString + " Such group does not exist.";
+                responseMessage = "# " + currentTimeAsDateString + " Such group does not exist.";
             } else if(getGroupByName(contentOfMessage).addMember(getUserByName(senderName), System.currentTimeMillis())){
-                outToAllLoggedIn("* " + currentTimeAsDateString + " User " + senderName + " joint group " + contentOfMessage + ".");
-                responseMessage = "* " + currentTimeAsDateString + " You joined group " + contentOfMessage;
+                outToAllLoggedIn("# " + currentTimeAsDateString + " User " + senderName + " joint group " + contentOfMessage + ".");
+                responseMessage = "# " + currentTimeAsDateString + " You joined group " + contentOfMessage;
             } else{
-               responseMessage = "* " + currentTimeAsDateString + " Failed to join the group";
+               responseMessage = "# " + currentTimeAsDateString + " Failed to join the group";
             }
         } else if (typeOfMessage.equalsIgnoreCase("Leave")) {
             String currentTimeAsDateString = convertTimestampToDate(System.currentTimeMillis());
             if (senderName.equals("0")) {
-                responseMessage = "* " + currentTimeAsDateString + " You need to login first.";
+                responseMessage = "# " + currentTimeAsDateString + " You need to login first.";
             } else {
                 if (getGroupByName(contentOfMessage) == null) {
-                    responseMessage = "* " + currentTimeAsDateString + " Such group does not exist.";
+                    responseMessage = "# " + currentTimeAsDateString + " Such group does not exist.";
                 } else if (getGroupByName(contentOfMessage).checkIfUserExist(senderName)) {
                     getGroupByName(contentOfMessage).deleteMemberByName(senderName);
-                    responseMessage = "* " + currentTimeAsDateString + " You left group " + contentOfMessage;
+                    responseMessage = "# " + currentTimeAsDateString + " You left group " + contentOfMessage;
                     if (getGroupByName(contentOfMessage).getOwner().getUserName().equals(senderName)) {
                         disbandGroup(contentOfMessage);
                     }
                 } else {
-                    responseMessage = "* " + currentTimeAsDateString + " You cannot leave a group that you have not joint yet.";
+                    responseMessage = "# " + currentTimeAsDateString + " You cannot leave a group that you have not joint yet.";
                 }
             }
         } else if (typeOfMessage.equalsIgnoreCase("Create")) {
             String currentTimeAsDateString = convertTimestampToDate(System.currentTimeMillis());
             if (senderName.equals("0")) {
-                responseMessage = "* " + currentTimeAsDateString + " You need to login first.";
+                responseMessage = "# " + currentTimeAsDateString + " You need to login first.";
             } else {
                 if (checkIfGroupExist(contentOfMessage)) {
-                    responseMessage = "* " + currentTimeAsDateString + " This group already exist.";
+                    responseMessage = "# " + currentTimeAsDateString + " This group already exist.";
                 } else {
                     Group group = new Group(contentOfMessage, getUserByName(senderName));
                     group.addMember(getUserByName(senderName), System.currentTimeMillis());
                     groups.add(group);
-                    outToAllLoggedIn("* " + currentTimeAsDateString + " User " + senderName + " created group " + contentOfMessage + ".");
-                    responseMessage = "* " + currentTimeAsDateString +" Group created.";
+                    outToAllLoggedIn("# " + currentTimeAsDateString + " User " + senderName + " created group " + contentOfMessage + ".");
+                    responseMessage = "# " + currentTimeAsDateString +" Group created.";
                 }
             }
         } else if (typeOfMessage.equalsIgnoreCase("Kick")) {
             String currentTimeAsDateString = convertTimestampToDate(System.currentTimeMillis());
             if (senderName.equals("0")) {
-                responseMessage = "* " + currentTimeAsDateString + " You need to login first.";
+                responseMessage = "# " + currentTimeAsDateString + " You need to login first.";
             } else {
                 int j = contentOfMessage.indexOf(' ');
                 String groupName = contentOfMessage.substring(0, j);
                 String kickedUsername = contentOfMessage.substring(j + 1);
                 if (!checkIfGroupExist(groupName)) {
-                    responseMessage = "* " + currentTimeAsDateString + " This group does not exist.";
+                    responseMessage = "# " + currentTimeAsDateString + " This group does not exist.";
                 } else {
                     if (!getGroupByName(groupName).getOwner().getUserName().equals(senderName)) {
-                        responseMessage = "* " + currentTimeAsDateString + " You are not the owner of group.";
+                        responseMessage = "# " + currentTimeAsDateString + " You are not the owner of group.";
                     } else {
                         if (!getGroupByName(groupName).checkIfUserExist(kickedUsername)) {
-                            responseMessage = "* " + currentTimeAsDateString + " The user does not exist in the group.";
+                            responseMessage = "# " + currentTimeAsDateString + " The user does not exist in the group.";
                         } else {
                             getGroupByName(groupName).deleteMemberByName(kickedUsername);
-                            responseMessage = "* " + currentTimeAsDateString + " The user " + kickedUsername +" was kicked from the group";
+                            responseMessage = "# " + currentTimeAsDateString + " The user " + kickedUsername +" was kicked from the group";
                         }
                     }
                 }
@@ -340,71 +340,79 @@ public class ClientHandler implements Runnable{
         } else if (typeOfMessage.equalsIgnoreCase("Private")) {
             String currentTimeAsDateString = convertTimestampToDate(System.currentTimeMillis());
             if (senderName.equals("0")) {
-                responseMessage = "* " + currentTimeAsDateString + " You need to login first.";
+                responseMessage = "# " + currentTimeAsDateString + " You need to login first.";
             } else {
                 int j = contentOfMessage.indexOf(' ');
                 String receiverName = contentOfMessage.substring(0, j);
                 String messageToReceiver = contentOfMessage.substring(j + 1);
                 if (senderName.equals(receiverName)) {
-                    responseMessage = "* " + currentTimeAsDateString + " You cannot send message to yourself.";
+                    responseMessage = "# " + currentTimeAsDateString + " You cannot send message to yourself.";
                 } else if (!checkIfUserExist(receiverName)) {
-                    responseMessage = "*" + currentTimeAsDateString + "User does not exist.";
+                    responseMessage = "#" + currentTimeAsDateString + " User does not exist.";
                 } else {
                     if (!getUserByName(receiverName).isLoggedIn()) {
-                        responseMessage = "*" + currentTimeAsDateString + "Target user is not online now.";
+                        responseMessage = "# " + currentTimeAsDateString + " Target user is not online now.";
                     } else {
-                        responseMessage = "* " + currentTimeAsDateString + " <" + senderName + ">: " + messageToReceiver;
+                        responseMessage = "# " + currentTimeAsDateString + " <";
+                        if (getUserByName(senderName).userIsAuthenticated()) {
+                            responseMessage += "*";
+                        }
+                        responseMessage += (senderName + ">: " + messageToReceiver);
                         outToPrivate(responseMessage,receiverName);
-                        responseMessage = "* " + currentTimeAsDateString + " Your message has been sent to " + receiverName + ".";
+                        responseMessage = "# " + currentTimeAsDateString + " Your message has been sent to " + receiverName + ".";
                     }
                 }
             }
         } else if (typeOfMessage.equalsIgnoreCase("Group")) {
             String currentTimeAsDateString = convertTimestampToDate(System.currentTimeMillis());
             if (senderName.equals("0")) {
-                responseMessage = "* " + currentTimeAsDateString + " You need to login first.";
+                responseMessage = "# " + currentTimeAsDateString + " You need to login first.";
             } else {
                 int j = contentOfMessage.indexOf(' ');
                 String groupName = contentOfMessage.substring(0, j);
                 String messageToGroup = contentOfMessage.substring(j + 1);
                 if (!checkIfGroupExist(groupName)) {
-                    responseMessage = "* " + currentTimeAsDateString + " This group does not exist.";
+                    responseMessage = "# " + currentTimeAsDateString + " This group does not exist.";
                 } else if (getGroupByName(groupName).checkIfUserExist(senderName)) {
-                    responseMessage = "* " + currentTimeAsDateString + " <" + groupName + ">" + "<" + senderName + "> " + messageToGroup;
+                    responseMessage = "# " + currentTimeAsDateString + " <" + groupName + ">" + "<";
+                    if (getUserByName(senderName).userIsAuthenticated()) {
+                        responseMessage += "*";
+                    }
+                    responseMessage += (senderName + "> " + messageToGroup);
                     outToGroup(responseMessage, groupName);
                     getGroupByName(groupName).addHistoryMessage(responseMessage);
                     getGroupByName(groupName).updateTimeOfLastMessage(senderName, System.currentTimeMillis());
-                    responseMessage = "* " + currentTimeAsDateString + " Your message has been sent to the group.";
+                    responseMessage = "# " + currentTimeAsDateString + " Your message has been sent to the group.";
                 } else {
-                    responseMessage = "* " + currentTimeAsDateString + " You cannot send message to a group that you have not joint.";
+                    responseMessage = "# " + currentTimeAsDateString + " You cannot send message to a group that you have not joint.";
                 }
             }
         } else if (typeOfMessage.equalsIgnoreCase("History")) {
             String currentTimeAsDateString = convertTimestampToDate(System.currentTimeMillis());
             if (senderName.equals("0")) {
-                responseMessage = "* " + currentTimeAsDateString + " You need to login first.";
+                responseMessage = "# " + currentTimeAsDateString + " You need to login first.";
             } else {
                 if (!checkIfGroupExist(contentOfMessage)) {
-                    responseMessage = "* " + currentTimeAsDateString + " This group does not exist.";
+                    responseMessage = "# " + currentTimeAsDateString + " This group does not exist.";
                 } else if (getGroupByName(contentOfMessage).checkIfUserExist(senderName)) {
                     responseMessage = getGroupByName(contentOfMessage).getHistoryMessages();
                 } else {
-                    responseMessage = "* " + currentTimeAsDateString + " You cannot get chatting history of a group that you did not join.";
+                    responseMessage = "# " + currentTimeAsDateString + " You cannot get chatting history of a group that you did not join.";
                 }
             }
         } else if (typeOfMessage.equalsIgnoreCase("Send")){
             String currentTimeAsDateString = convertTimestampToDate(System.currentTimeMillis());
             if (senderName.equals("0")) {
-                responseMessage = "* " + currentTimeAsDateString + " You need to login first.";
+                responseMessage = "# " + currentTimeAsDateString + " You need to login first.";
             } else {
                 int j = contentOfMessage.indexOf(' ');
                 String receiverName = contentOfMessage.substring(0, j);
                 if (!checkIfUserExist(receiverName)) {
-                    responseMessage = "* " + currentTimeAsDateString + " User does not exist.";
+                    responseMessage = "# " + currentTimeAsDateString + " User does not exist.";
                 } else {
                     try {
                         receiveFile(receiverName);
-                        responseMessage = "* " + currentTimeAsDateString + " Your file has been sent successfully";
+                        responseMessage = "# " + currentTimeAsDateString + " Your file has been sent successfully";
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
@@ -414,7 +422,7 @@ public class ClientHandler implements Runnable{
 
         else {
             String currentTimeAsDateString = convertTimestampToDate(System.currentTimeMillis());
-            responseMessage = "* " + currentTimeAsDateString + " It does not match any function.";
+            responseMessage = "# " + currentTimeAsDateString + " It does not match any function.";
         }
         counter = 0;
         return responseMessage;
@@ -481,6 +489,21 @@ public class ClientHandler implements Runnable{
         Date date = new Date(timestamp);
         Format format = new SimpleDateFormat("yyyy MM dd HH:mm:ss");
         return format.format(date);
+    }
+
+    private void kickPeopleWhoAreNotChattingMoreThanTwoMinutesInGroups() {
+        if (!groups.isEmpty()){
+            for (Group nextGroup: groups){
+                for (UserAndTimeOfLastMessage nextUserAndTimeOfLastMessage: nextGroup.getMembersAndTimeOfLastMessage()){
+                    if (System.currentTimeMillis() - nextUserAndTimeOfLastMessage.getTimestampOfLastMessage() > 120000){
+                        nextGroup.deleteMemberByName(nextUserAndTimeOfLastMessage.getUser().getUserName());
+                        String message = "";
+                        message += "# Because of " + nextUserAndTimeOfLastMessage.getUser().getUserName() + "did not talk for more than 2 mins in group " + nextGroup.getGroupName() + ", got kicked out of group.";
+                        outToAll(message);
+                    }
+                }
+            }
+        }
     }
 
 }

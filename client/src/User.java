@@ -23,7 +23,7 @@ public class User {
         return password;
     }
 
-    public boolean checkIfUserIsAuthenticated() {
+    public boolean userIsAuthenticated() {
         return password != null;
     }
 

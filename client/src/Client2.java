@@ -32,7 +32,10 @@ public class Client2
                 String encryptedMessage = AES.encrypt(sendMessage);
                 if (sendMessage.toLowerCase().contains("login") && serverConn.getClientName().equals("0 ")) {
                     serverConn.setClientName(sendMessage.substring(8) + " ");
-                }else if(sendMessage.contains("Quit")){
+                }else if (sendMessage.toLowerCase().contains("signup") && serverConn.getClientName().equals("0 ")) {
+                    String withoutPassword = sendMessage.substring(0, sendMessage.lastIndexOf(" "));
+                    serverConn.setClientName(withoutPassword.substring(9) + " ");
+                } else if(sendMessage.contains("Quit")){
                     serverConn.setClientName("0 ");
                 }
                 pwrite.println(encryptedMessage);       // sending to server

@@ -23,7 +23,7 @@ public class Group {
         this.groupName = groupName;
     }
 
-    public ArrayList<User> getMembersAndTimeOfLastMessage() {
+    public ArrayList<User> getMembers() {
         ArrayList<User> members = new ArrayList<>();
         if (!membersAndTimeOfLastMessage.isEmpty()) {
             for (UserAndTimeOfLastMessage nextUserAndTimeOfLastMessage: membersAndTimeOfLastMessage) {
@@ -31,6 +31,10 @@ public class Group {
             }
         }
         return members;
+    }
+
+    public ArrayList<UserAndTimeOfLastMessage> getMembersAndTimeOfLastMessage() {
+        return membersAndTimeOfLastMessage;
     }
 
     public void setMembersAndTimeOfLastMessage(ArrayList<UserAndTimeOfLastMessage> membersAndTimeOfLastMessage) {

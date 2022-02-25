@@ -135,6 +135,35 @@ public class ClientHandler implements Runnable{
         return listOfGroupsAsString;
     }
 
+    public String getOnlineUsers() {
+        String listOfOnlineUsersAsString = "";
+        boolean anyUserLoggedIn = false;
+        if (!users.isEmpty()) {
+            for (User nextUser : users) {
+                if (nextUser.isLoggedIn()) {
+                    anyUserLoggedIn = true;
+                }
+            }
+        }
+        if (!anyUserLoggedIn) {
+            listOfOnlineUsersAsString = "#There is no user logged in so far.";
+            listOfOnlineUsersAsString += "\n";
+        } else {
+            listOfOnlineUsersAsString = "#List of users:";
+            listOfOnlineUsersAsString += "\n";
+            for (User nextUser : users) {
+                if (nextUser.isLoggedIn()) {
+                    if (nextUser.userIsAuthenticated()){
+                        listOfOnlineUsersAsString += "*";
+                    }
+                    listOfOnlineUsersAsString += nextUser.getUserName();
+                    listOfOnlineUsersAsString += "\n";
+                }
+            }
+        }
+        return listOfOnlineUsersAsString;
+    }
+
     public void disbandGroup(String groupName) {
         groups.removeIf(nextGroup -> nextGroup.getGroupName().equals(groupName));
     }
@@ -156,9 +185,9 @@ public class ClientHandler implements Runnable{
                     "Everything starts with # means message from system. \n" +
                     "Login <username>: Login to the chat server as a guest if <username> isn’t registered before. \n" +
                     "Signup <username> <password>: Register at server if <username> isn't registered before. \n" +
-                    "Request users: Request all users from the server that are currently online. \n" +
+                    "Users: Request all users from the server that are currently online. \n" +
                     "Broadcast <message>: Broadcast a message to all connected(online) users. \n" +
-                    "Quit server: Log out from the server. \n" +
+                    "Quit: Log out from the server. \n" +
                     "# -----Group related-----: \n" +
                     "Groups: Get a list of all groups. \n" +
                     "History: Get chat history of a group. \n" +
@@ -178,6 +207,22 @@ public class ClientHandler implements Runnable{
             } else {
                 responseMessage = getGroups();
             }
+            return responseMessage;
+        } else if (restOfMessage.equalsIgnoreCase("Users")) {
+            if (senderName.equals("0")) {
+                responseMessage = "#You need to login first.";
+            } else {
+                responseMessage = getOnlineUsers();
+            }
+            return responseMessage;
+        } else if (restOfMessage.equalsIgnoreCase("Quit")) {
+            if (senderName.equals("0")) {
+                responseMessage = "# " + currentTimeAsDateString + " You need to login first.";
+            } else {
+                responseMessage = "# " + currentTimeAsDateString + " You are logged out.";
+                changeLoginStatus(senderName);
+            }
+            //TODO: let client set name back to 0
             return responseMessage;
         }
         int x = restOfMessage.indexOf(' ');
@@ -235,40 +280,13 @@ public class ClientHandler implements Runnable{
             } else {
                 responseMessage = "# " + currentTimeAsDateString + " You are already logged in.";
             }
-        } else if (typeOfMessage.equalsIgnoreCase("Request")) {
-            boolean anyUserLoggedIn = false;
-            if (!users.isEmpty()) {
-                for (User nextUser : users) {
-                    if (nextUser.isLoggedIn()) {
-                        anyUserLoggedIn = true;
-                    }
-                }
-            }
-            if (!anyUserLoggedIn) {
-                responseMessage = "# " + currentTimeAsDateString + " There is no user logged in so far.";
-            } else {
-                responseMessage = "# " + currentTimeAsDateString + " List of users: \n";
-                for (User nextUser : users) {
-                    if (nextUser.isLoggedIn()) {
-                        responseMessage += (nextUser.getUserName() + " \n");
-                    }
-                }
-            }
-        }
-        else if (typeOfMessage.equalsIgnoreCase("Broadcast")) {
+        } else if (typeOfMessage.equalsIgnoreCase("Broadcast")) {
             if (senderName.equals("0")) {
                 responseMessage = "# " + currentTimeAsDateString + " You need to login first.";
             } else {
                 responseMessage = "# " + currentTimeAsDateString + " <" + senderName + "> " + restOfMessage;
                 outToAllLoggedIn(responseMessage);
                 responseMessage = "# " + currentTimeAsDateString + "Your message has been broadcasted";
-            }
-        } else if (typeOfMessage.equalsIgnoreCase("Quit")) {
-            if (senderName.equals("0")) {
-                responseMessage = "# " + currentTimeAsDateString + " You need to login first.";
-            } else {
-                responseMessage = "# " + currentTimeAsDateString + " You are logged out.";
-                changeLoginStatus(senderName);
             }
         } else if (typeOfMessage.equalsIgnoreCase("Join")) {
             if (senderName.equals("0")) {

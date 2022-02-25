@@ -153,18 +153,23 @@ public class ClientHandler implements Runnable{
         if (restOfMessage.equals("?")) {
             responseMessage =
                     "# Help list:\n" +
-                    "Login <username>: a command used to login to the chat server or create a new user if <username> isn’t registered before. \n" +
-                    "Request users: a command to request all users from the server that are currently online. \n" +
-                    "Broadcast <message>: a command to broadcast a message to all connected(online) users. \n" +
-                    "Quit server: a command to log out from the server. \n" +
-                    "Join <group name>: a command to join a group that exists. \n" +
-                    "Leave <group name>: a command to leave a group you are in. \n" +
-                    "Create <group name>: a command to create a new group. \n" +
-                    "Kick <username to be kicked> <group name>: a command to kick a user from your group (you have to \n" +
-                    "be the admin/creator of that group) \n" +
-                    "Private <username to message> <message>: a command to send a private message to another user. \n" +
-                    "Group <group name> <message>: a command to send a message to all members of your group. \n" +
-                    "Send < receiver’s username> <file name>: a command to send a file to another user. \n" +
+                    "Everything starts with # means message from system. \n" +
+                    "Login <username>: Login to the chat server as a guest if <username> isn’t registered before. \n" +
+                    "Signup <username> <password>: Register at server if <username> isn't registered before. \n" +
+                    "Request users: Request all users from the server that are currently online. \n" +
+                    "Broadcast <message>: Broadcast a message to all connected(online) users. \n" +
+                    "Quit server: Log out from the server. \n" +
+                    "# -----Group related-----: \n" +
+                    "Groups: Get a list of all groups. \n" +
+                    "History: Get chat history of a group. \n" +
+                    "Join <group name>: Join a group that exists. \n" +
+                    "Leave <group name>: Leave a group that you are in. \n" +
+                    "Create <group name>: Create a new group. \n" +
+                    "Kick <username to be kicked> <group name>: Kick a user from your group (you have to be the admin/creator of that group) \n" +
+                    "Group <group name> <message>: Send a message to all members of your group. \n" +
+                    "# -----Send related-----: \n" +
+                    "Private <username to message> <message>: Send a private message to another user. \n" +
+                    "Send < receiver’s username> <file name>: Send a file to another user. \n" +
                     "Pong: extend the duration of your connection";
             return responseMessage;
         } else if (restOfMessage.equalsIgnoreCase("Groups")) {

@@ -41,7 +41,7 @@ public class ServerConnection implements Runnable{
                  if (receiveMessage.contains("You received a new file")){
                     byte b[] = new byte[2024];
                     InputStream inputStream = server.getInputStream();
-                    FileOutputStream fileOutputStream = new FileOutputStream("receive.txt");
+                    FileOutputStream fileOutputStream = new FileOutputStream("client/receive.txt");
                     inputStream.read(b,0,b.length);
                     fileOutputStream.write(b,0,b.length);
                 }

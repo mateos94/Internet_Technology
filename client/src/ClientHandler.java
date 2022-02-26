@@ -1,8 +1,11 @@
 import java.io.*;
 import java.net.Socket;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.text.Format;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 
 public class ClientHandler implements Runnable{
@@ -168,7 +171,7 @@ public class ClientHandler implements Runnable{
         groups.removeIf(nextGroup -> nextGroup.getGroupName().equals(groupName));
     }
 
-    public String parseMessage (String string) {
+    public String parseMessage (String string) throws IOException {
         String currentTimeAsDateString = convertTimestampToDate(System.currentTimeMillis());
         //if user responds with Pong extend session.
         if (string.contains("Pong")){
@@ -243,6 +246,10 @@ public class ClientHandler implements Runnable{
                         }
                     }
                 }
+                if (usernameAlreadyExistsInFile(contentOfMessage, "client/usernameAndPassword.txt")) {
+                    responseMessage = "# " + currentTimeAsDateString + " Logging in failed, this user already exists.";
+                    userExist = true;
+                }
                 if (!userExist) {
                     User user = new User(contentOfMessage);
                     users.add(user);
@@ -252,7 +259,32 @@ public class ClientHandler implements Runnable{
             } else {
                 responseMessage = "# " + currentTimeAsDateString + " You are already logged in.";
             }
-        } else if (typeOfMessage.equalsIgnoreCase("Signup")) {
+        }
+
+        else if (typeOfMessage.equalsIgnoreCase("Signin")) {
+            if (senderName.equals("0")) {
+                if (!contentOfMessage.contains(" ")) {
+                    responseMessage = "# " + currentTimeAsDateString + " You need a password.";
+                } else {
+                    int j = contentOfMessage.indexOf(' ');
+                    String username = contentOfMessage.substring(0, j);
+                    String password = contentOfMessage.substring(j + 1);
+                    if (usernameAndPasswordCorrect(username, password, "client/usernameAndPassword.txt")) {
+                        User user = new User(contentOfMessage);
+                        users.add(user);
+                        responseMessage = "# " + currentTimeAsDateString + " You are logged in as authenticated user " + contentOfMessage + ".";
+                        setClientName(contentOfMessage);
+                    } else {
+                        responseMessage = "# " + currentTimeAsDateString + " Username/Password wrong.";
+                    }
+
+                }
+            } else {
+                responseMessage = "# " + currentTimeAsDateString + " You are already logged in.";
+            }
+        }
+
+        else if (typeOfMessage.equalsIgnoreCase("Signup")) {
             if (senderName.equals("0")) {
                 if (!contentOfMessage.contains(" ")) {
                     responseMessage = "# " + currentTimeAsDateString + " You need a password.";
@@ -261,6 +293,7 @@ public class ClientHandler implements Runnable{
                     int j = contentOfMessage.indexOf(' ');
                     String username = contentOfMessage.substring(0, j);
                     String password = contentOfMessage.substring(j + 1);
+                    //check with all users including not authenticated users first
                     if (!users.isEmpty()) {
                         for (User nextUser : users) {
                             if (nextUser.getUserName().equals(username) && nextUser.isLoggedIn()) {
@@ -269,18 +302,24 @@ public class ClientHandler implements Runnable{
                             }
                         }
                     }
+                    //check with all authenticated users too
+                    if (usernameAlreadyExistsInFile(username, "client/usernameAndPassword.txt")) {
+                        userExist = true;
+                    }
                     if (!userExist) {
                         User user = new User(username);
                         user.setPassword(password);
                         users.add(user);
-                        responseMessage = "# " + currentTimeAsDateString + " You are logged in with authenticated user, with username of " + username + ".";
+                        storeUsernamePasswordInFile(username, password, "client/usernameAndPassword.txt");
+                        responseMessage = "# " + currentTimeAsDateString + " You are registered and logged in with authenticated user, with username of " + username + ".";
                         setClientName(username);
                     }
                 }
             } else {
                 responseMessage = "# " + currentTimeAsDateString + " You are already logged in.";
             }
-        } else if (typeOfMessage.equalsIgnoreCase("Broadcast")) {
+        }
+        else if (typeOfMessage.equalsIgnoreCase("Broadcast")) {
             if (senderName.equals("0")) {
                 responseMessage = "# " + currentTimeAsDateString + " You need to login first.";
             } else {
@@ -481,13 +520,13 @@ public class ClientHandler implements Runnable{
     private void receiveFile(String name) throws IOException {
         byte b[] = new byte[2024];
         InputStream inputStream = client.getInputStream();
-        FileOutputStream fileOutputStream = new FileOutputStream("server.txt");
+        FileOutputStream fileOutputStream = new FileOutputStream("client/server.txt");
         inputStream.read(b,0,b.length);
         fileOutputStream.write(b,0,b.length);
         for( ClientHandler clientHandlers : clients){
             if (getByClientName(name).equals(clientHandlers)) {
                 clientHandlers.out.println(AES.encrypt("You received a new file"));
-                FileSender fileSender = new FileSender(clientHandlers.getClient(),"server.txt");
+                FileSender fileSender = new FileSender(clientHandlers.getClient(),"client/server.txt");
                 new Thread(fileSender).start();
             }
         }
@@ -513,6 +552,45 @@ public class ClientHandler implements Runnable{
                 }
             }
         }
+    }
+
+    public void storeUsernamePasswordInFile(String username, String password, String file) throws IOException {
+        BufferedWriter out = new BufferedWriter(new FileWriter(file, true));
+        out.append(username).append(" ").append(password);
+        out.newLine();
+        out.close();
+    }
+
+    public ArrayList<String> getAllUsernameAndPasswordFromFileAsArray(String file) throws IOException {
+        String content = new String(Files.readAllBytes(Paths.get(file)));
+        return new ArrayList<>(Arrays.asList(content.split("\\r?\\n")));
+    }
+
+    public boolean usernameAlreadyExistsInFile(String username, String file) throws IOException {
+        boolean usernameAlreadyExist = false;
+        for (String usernameAndPassword : getAllUsernameAndPasswordFromFileAsArray(file)) {
+            String[] parts = usernameAndPassword.split(" ");
+            String usernameOfFile = parts[0];
+            if (username.equals(usernameOfFile)) {
+                usernameAlreadyExist = true;
+            }
+        }
+        return usernameAlreadyExist;
+    }
+
+    public boolean usernameAndPasswordCorrect(String username, String password, String file) throws IOException {
+        boolean usernameExistsAndMatchPassword = false;
+        for (String usernameAndPassword : getAllUsernameAndPasswordFromFileAsArray(file)) {
+            String[] parts = usernameAndPassword.split(" ");
+            String usernameOfFile = parts[0];
+            String passwordOfFile = parts[1];
+            if (username.equals(usernameOfFile)) {
+                if (passwordOfFile.equals(password)) {
+                    usernameExistsAndMatchPassword = true;
+                }
+            }
+        }
+        return usernameExistsAndMatchPassword;
     }
 
 }

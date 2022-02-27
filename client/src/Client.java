@@ -1,5 +1,10 @@
 import java.io.*;
 import java.net.Socket;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Client
 {
@@ -31,7 +36,10 @@ public class Client
             } else {
                 String encryptedMessage = AES.encrypt(sendMessage);
                 if (sendMessage.toLowerCase().contains("login") && serverConn.getClientName().equals("0 ")) {
-                    serverConn.setClientName(sendMessage.substring(8) + " ");
+
+                    if(!ClientHandler.usernameAlreadyExists(sendMessage.substring(8),"client/users.txt")) {
+                        serverConn.setClientName(sendMessage.substring(8) + " ");
+                    }
                 } else if (sendMessage.toLowerCase().contains("signup") && serverConn.getClientName().equals("0 ")) {
                     String withoutPassword = sendMessage.substring(0, sendMessage.lastIndexOf(" "));
                     serverConn.setClientName(withoutPassword.substring(9) + " ");
@@ -46,4 +54,16 @@ public class Client
             }
         }
     }
+
+    public static List<String> readFileIntoList(String file) {
+        List<String> lines = new ArrayList<String>();
+        try {
+            lines = Files.readAllLines(Paths.get(file), StandardCharsets.UTF_8);
+            }
+        catch (IOException e) {
+            e.printStackTrace();
+        }
+        return lines;
+    }
+
 }   

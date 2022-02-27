@@ -7,6 +7,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
+import java.util.Scanner;
 
 public class ClientHandler implements Runnable{
 
@@ -20,6 +21,7 @@ public class ClientHandler implements Runnable{
     private static ArrayList<ClientHandler> clients;
     private String clientName;
     private int counter;
+    public User user;
 
     public int getCounter() {
         return counter;
@@ -76,7 +78,9 @@ public class ClientHandler implements Runnable{
             }
             System.err.println("IO exception in client handler");
             return;
-        }finally {
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
             out.close();
             try {
                 in.close();
@@ -171,7 +175,7 @@ public class ClientHandler implements Runnable{
         groups.removeIf(nextGroup -> nextGroup.getGroupName().equals(groupName));
     }
 
-    public String parseMessage (String string) throws IOException {
+    public String parseMessage (String string) throws Exception {
         String currentTimeAsDateString = convertTimestampToDate(System.currentTimeMillis());
         //if user responds with Pong extend session.
         if (string.contains("Pong")){
@@ -222,6 +226,8 @@ public class ClientHandler implements Runnable{
             if (senderName.equals("0")) {
                 responseMessage = "# " + currentTimeAsDateString + " You need to login first.";
             } else {
+                System.out.println(user.getUserName());
+                RemoveUsernameInFile(user.getUserName(),"client/users.txt");
                 responseMessage = "# " + currentTimeAsDateString + " You are logged out.";
                 changeLoginStatus(senderName);
             }
@@ -250,11 +256,16 @@ public class ClientHandler implements Runnable{
                     responseMessage = "# " + currentTimeAsDateString + " Logging in failed, this user already exists.";
                     userExist = true;
                 }
+                if(usernameAlreadyExists(contentOfMessage,"client/users.txt")){
+                    responseMessage = "# " + currentTimeAsDateString + " This name is already in use please try a different name.";
+                    userExist = true;
+                }
                 if (!userExist) {
-                    User user = new User(contentOfMessage);
-                    users.add(user);
-                    responseMessage = "# " + currentTimeAsDateString + " You are logged in with username " + contentOfMessage + ".";
-                    setClientName(contentOfMessage);
+                        user = new User(contentOfMessage);
+                        users.add(user);
+                        storeUsernameInFile(user.getUserName(), "client/users.txt");
+                        responseMessage = "# " + currentTimeAsDateString + " You are logged in with username " + contentOfMessage + ".";
+                        setClientName(contentOfMessage);
                 }
             } else {
                 responseMessage = "# " + currentTimeAsDateString + " You are already logged in.";
@@ -561,9 +572,12 @@ public class ClientHandler implements Runnable{
         out.close();
     }
 
-    public ArrayList<String> getAllUsernameAndPasswordFromFileAsArray(String file) throws IOException {
-        String content = new String(Files.readAllBytes(Paths.get(file)));
-        return new ArrayList<>(Arrays.asList(content.split("\\r?\\n")));
+
+    public void storeUsernameInFile(String username, String file) throws IOException {
+        BufferedWriter out = new BufferedWriter(new FileWriter(file, true));
+        out.append(username).append(" ");
+        out.newLine();
+        out.close();
     }
 
     public boolean usernameAlreadyExistsInFile(String username, String file) throws IOException {
@@ -577,6 +591,42 @@ public class ClientHandler implements Runnable{
         }
         return usernameAlreadyExist;
     }
+
+    public static boolean usernameAlreadyExists(String username, String file) throws IOException {
+        boolean usernameAlreadyExist = false;
+        for (String usernameAndPassword : getAllUsernameAndPasswordFromFileAsArray(file)) {
+            if (username.equals(usernameAndPassword)) {
+                usernameAlreadyExist = true;
+            }
+        }
+        return usernameAlreadyExist;
+    }
+
+    public static String fileToString(String filePath) throws Exception{
+        String input = null;
+        Scanner sc = new Scanner(new File(filePath));
+        StringBuffer sb = new StringBuffer();
+        while (sc.hasNextLine()) {
+            input = sc.nextLine();
+            sb.append(input);
+        }
+        return sb.toString();
+    }
+
+    public void RemoveUsernameInFile(String username, String file) throws Exception {
+        BufferedWriter out = new BufferedWriter(new FileWriter(file, true));
+        String result = fileToString(file);
+        result = result.replaceAll( username , "");
+        PrintWriter writer = new PrintWriter(new File(file));
+        writer.append(result);
+        writer.flush();
+    }
+
+    public static ArrayList<String> getAllUsernameAndPasswordFromFileAsArray(String file) throws IOException {
+        String content = new String(Files.readAllBytes(Paths.get(file)));
+        return new ArrayList<>(Arrays.asList(content.split("\\r?\\n")));
+    }
+
 
     public boolean usernameAndPasswordCorrect(String username, String password, String file) throws IOException {
         boolean usernameExistsAndMatchPassword = false;

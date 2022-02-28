@@ -46,7 +46,7 @@ public class Client
                 } else if (sendMessage.toLowerCase().contains("signin") && serverConn.getClientName().equals("0 ")) {
                     String withoutPassword = sendMessage.substring(0, sendMessage.lastIndexOf(" "));
                     serverConn.setClientName(withoutPassword.substring(9) + " ");
-                } else if(sendMessage.contains("Quit")){
+                } else if(sendMessage.contains("quit")){
                     serverConn.setClientName("0 ");
                 }
                 pwrite.println(encryptedMessage);       // sending to server

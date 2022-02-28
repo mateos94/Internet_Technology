@@ -616,11 +616,12 @@ public class ClientHandler implements Runnable{
     public void RemoveUsernameInFile(String username, String file) throws Exception {
         BufferedWriter out = new BufferedWriter(new FileWriter(file, true));
         String result = fileToString(file);
-        result = result.replaceAll( username , "");
+        result = result.replaceAll("\\b" +username +"\\b", " ");
         PrintWriter writer = new PrintWriter(new File(file));
         writer.append(result);
         writer.flush();
     }
+
 
     public static ArrayList<String> getAllUsernameAndPasswordFromFileAsArray(String file) throws IOException {
         String content = new String(Files.readAllBytes(Paths.get(file)));

@@ -37,7 +37,7 @@ public class Client
                 String encryptedMessage = AES.encrypt(sendMessage);
                 if (sendMessage.toLowerCase().contains("login") && serverConn.getClientName().equals("0 ")) {
 
-                    if(!ClientHandler.usernameAlreadyExists(sendMessage.substring(8),"client/users.txt")) {
+                    if(!ClientHandler.usernameAlreadyExists(sendMessage.substring(8))) {
                         serverConn.setClientName(sendMessage.substring(8) + " ");
                     }
                 } else if (sendMessage.toLowerCase().contains("signup") && serverConn.getClientName().equals("0 ")) {

@@ -244,28 +244,16 @@ public class ClientHandler implements Runnable{
         if (typeOfMessage.equalsIgnoreCase("Login")) {
             if (senderName.equals("0")) {
                 boolean userExist = false;
-                if (!users.isEmpty()) {
-                    for (User nextUser : users) {
-                        if (nextUser.getUserName().equals(contentOfMessage) && nextUser.isLoggedIn()) {
-                            responseMessage = "# " + currentTimeAsDateString + " Logging in failed, this user already exists.";
-                            userExist = true;
-                        }
-                    }
-                }
-                if (usernameAlreadyExistsInFile(contentOfMessage, "client/usernameAndPassword.txt")) {
-                    responseMessage = "# " + currentTimeAsDateString + " Logging in failed, this user already exists.";
-                    userExist = true;
-                }
-                if(usernameAlreadyExists(contentOfMessage,"client/users.txt")){
+                if(ClientHandler.usernameAlreadyExists(contentOfMessage)){
                     responseMessage = "# " + currentTimeAsDateString + " This name is already in use please try a different name.";
                     userExist = true;
                 }
                 if (!userExist) {
-                        user = new User(contentOfMessage);
-                        users.add(user);
-                        storeUsernameInFile(user.getUserName(), "client/users.txt");
-                        responseMessage = "# " + currentTimeAsDateString + " You are logged in with username " + contentOfMessage + ".";
-                        setClientName(contentOfMessage);
+                    user = new User(contentOfMessage);
+                    users.add(user);
+                    storeUsernameInFile(user.getUserName(), "client/users.txt");
+                    responseMessage = "# " + currentTimeAsDateString + " You are logged in with username " + contentOfMessage + ".";
+                    setClientName(contentOfMessage);
                 }
             } else {
                 responseMessage = "# " + currentTimeAsDateString + " You are already logged in.";
@@ -280,7 +268,7 @@ public class ClientHandler implements Runnable{
                     int j = contentOfMessage.indexOf(' ');
                     String username = contentOfMessage.substring(0, j);
                     String password = contentOfMessage.substring(j + 1);
-                    if (usernameAndPasswordCorrect(username, password, "client/usernameAndPassword.txt")) {
+                    if (usernameAndPasswordCorrect(username, password, "client/authenticatedUsers.txt")) {
                         User user = new User(contentOfMessage);
                         users.add(user);
                         responseMessage = "# " + currentTimeAsDateString + " You are logged in as authenticated user " + contentOfMessage + ".";
@@ -304,24 +292,15 @@ public class ClientHandler implements Runnable{
                     int j = contentOfMessage.indexOf(' ');
                     String username = contentOfMessage.substring(0, j);
                     String password = contentOfMessage.substring(j + 1);
-                    //check with all users including not authenticated users first
-                    if (!users.isEmpty()) {
-                        for (User nextUser : users) {
-                            if (nextUser.getUserName().equals(username) && nextUser.isLoggedIn()) {
-                                responseMessage = "# " + currentTimeAsDateString + " Cannot sign up, this user already exists.";
-                                userExist = true;
-                            }
-                        }
-                    }
-                    //check with all authenticated users too
-                    if (usernameAlreadyExistsInFile(username, "client/usernameAndPassword.txt")) {
+                    if (usernameAlreadyExists(username)) {
+                        responseMessage = "# " + currentTimeAsDateString + " Cannot sign up, this user already exists.";
                         userExist = true;
                     }
                     if (!userExist) {
                         User user = new User(username);
                         user.setPassword(password);
                         users.add(user);
-                        storeUsernamePasswordInFile(username, password, "client/usernameAndPassword.txt");
+                        storeUsernamePasswordInFile(username, password, "client/authenticatedUsers.txt");
                         responseMessage = "# " + currentTimeAsDateString + " You are registered and logged in with authenticated user, with username of " + username + ".";
                         setClientName(username);
                     }
@@ -580,7 +559,11 @@ public class ClientHandler implements Runnable{
         out.close();
     }
 
-    public boolean usernameAlreadyExistsInFile(String username, String file) throws IOException {
+    public static boolean usernameAlreadyExists(String username) throws IOException {
+        return usernameAlreadyExistsAsGuest(username, "client/users.txt") || usernameAlreadyExistsAsAuthenticatedUser(username, "client/authenticatedUsers.txt");
+    }
+
+    public static boolean usernameAlreadyExistsAsAuthenticatedUser(String username, String file) throws IOException {
         boolean usernameAlreadyExist = false;
         for (String usernameAndPassword : getAllUsernameAndPasswordFromFileAsArray(file)) {
             String[] parts = usernameAndPassword.split(" ");
@@ -592,7 +575,7 @@ public class ClientHandler implements Runnable{
         return usernameAlreadyExist;
     }
 
-    public static boolean usernameAlreadyExists(String username, String file) throws IOException {
+    public static boolean usernameAlreadyExistsAsGuest(String username, String file) throws IOException {
         boolean usernameAlreadyExist = false;
         for (String usernameAndPassword : getAllUsernameAndPasswordFromFileAsArray(file)) {
             if (username.equals(usernameAndPassword)) {

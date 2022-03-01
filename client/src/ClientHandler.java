@@ -2,12 +2,13 @@ import java.io.*;
 import java.net.Socket;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.nio.file.StandardOpenOption;
 import java.text.Format;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Date;
-import java.util.Scanner;
+import java.util.*;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+import java.util.stream.Collectors;
 
 public class ClientHandler implements Runnable{
 
@@ -554,7 +555,7 @@ public class ClientHandler implements Runnable{
 
     public void storeUsernameInFile(String username, String file) throws IOException {
         BufferedWriter out = new BufferedWriter(new FileWriter(file, true));
-        out.append(username).append(" ");
+        out.append(username);
         out.newLine();
         out.close();
     }
@@ -585,24 +586,12 @@ public class ClientHandler implements Runnable{
         return usernameAlreadyExist;
     }
 
-    public static String fileToString(String filePath) throws Exception{
-        String input = null;
-        Scanner sc = new Scanner(new File(filePath));
-        StringBuffer sb = new StringBuffer();
-        while (sc.hasNextLine()) {
-            input = sc.nextLine();
-            sb.append(input);
-        }
-        return sb.toString();
-    }
-
     public void RemoveUsernameInFile(String username, String file) throws Exception {
-        BufferedWriter out = new BufferedWriter(new FileWriter(file, true));
-        String result = fileToString(file);
-        result = result.replaceAll("\\b" +username +"\\b", " ");
-        PrintWriter writer = new PrintWriter(new File(file));
-        writer.append(result);
-        writer.flush();
+        File targetFile = new File(file);
+        List<String> out = Files.lines(targetFile.toPath())
+                .filter(line -> !line.contains(username))
+                .collect(Collectors.toList());
+        Files.write(targetFile.toPath(), out, StandardOpenOption.WRITE, StandardOpenOption.TRUNCATE_EXISTING);
     }
 
 

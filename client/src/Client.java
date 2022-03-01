@@ -5,6 +5,8 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class Client
 {
@@ -36,7 +38,6 @@ public class Client
             } else {
                 String encryptedMessage = AES.encrypt(sendMessage);
                 if (sendMessage.toLowerCase().contains("login") && serverConn.getClientName().equals("0 ")) {
-
                     if(!ClientHandler.usernameAlreadyExists(sendMessage.substring(8))) {
                         serverConn.setClientName(sendMessage.substring(8) + " ");
                     }
@@ -49,10 +50,15 @@ public class Client
                 } else if(sendMessage.contains("quit")){
                     serverConn.setClientName("0 ");
                 }
-                pwrite.println(encryptedMessage);       // sending to server
-                pwrite.flush();                    // flush the data
+
             }
         }
+    }
+
+    public static boolean formatIsOnlyNumberAndAlphabet(String stringThatNeedToBeChecked){
+        Pattern pattern = Pattern.compile("^[a-zA-Z0-9]+$");
+        Matcher matcher = pattern.matcher(stringThatNeedToBeChecked);
+        return matcher.matches();
     }
 
     public static List<String> readFileIntoList(String file) {

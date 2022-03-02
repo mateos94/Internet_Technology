@@ -228,11 +228,12 @@ public class ClientHandler implements Runnable{
                 responseMessage = "# " + currentTimeAsDateString + " You need to login first.";
             } else {
                 System.out.println(user.getUserName());
-                RemoveUsernameInFile(user.getUserName(),"client/users.txt");
+                if (!user.userIsAuthenticated()) {
+                    RemoveUsernameInFile(user.getUserName(),"client/users.txt");
+                }
                 responseMessage = "# " + currentTimeAsDateString + " You are logged out.";
                 changeLoginStatus(senderName);
             }
-            //TODO: let client set name back to 0
             return responseMessage;
         }
         int x = restOfMessage.indexOf(' ');
@@ -243,221 +244,29 @@ public class ClientHandler implements Runnable{
         String typeOfMessage = restOfMessage.substring(0, x);
         String contentOfMessage = restOfMessage.substring(x + 1);
         if (typeOfMessage.equalsIgnoreCase("Login")) {
-            if (senderName.equals("0")) {
-                boolean userExist = false;
-                if(ClientHandler.usernameAlreadyExists(contentOfMessage)){
-                    responseMessage = "# " + currentTimeAsDateString + " This name is already in use please try a different name.";
-                    userExist = true;
-                }
-                if (!userExist) {
-                    user = new User(contentOfMessage);
-                    users.add(user);
-                    storeUsernameInFile(user.getUserName(), "client/users.txt");
-                    responseMessage = "# " + currentTimeAsDateString + " You are logged in with username " + contentOfMessage + ".";
-                    setClientName(contentOfMessage);
-                }
-            } else {
-                responseMessage = "# " + currentTimeAsDateString + " You are already logged in.";
-            }
-        }
-
-        else if (typeOfMessage.equalsIgnoreCase("Signin")) {
-            if (senderName.equals("0")) {
-                if (!contentOfMessage.contains(" ")) {
-                    responseMessage = "# " + currentTimeAsDateString + " You need a password.";
-                } else {
-                    int j = contentOfMessage.indexOf(' ');
-                    String username = contentOfMessage.substring(0, j);
-                    String password = contentOfMessage.substring(j + 1);
-                    if (usernameAndPasswordCorrect(username, password, "client/authenticatedUsers.txt")) {
-                        User user = new User(contentOfMessage);
-                        users.add(user);
-                        responseMessage = "# " + currentTimeAsDateString + " You are logged in as authenticated user " + contentOfMessage + ".";
-                        setClientName(contentOfMessage);
-                    } else {
-                        responseMessage = "# " + currentTimeAsDateString + " Username/Password wrong.";
-                    }
-
-                }
-            } else {
-                responseMessage = "# " + currentTimeAsDateString + " You are already logged in.";
-            }
-        }
-
-        else if (typeOfMessage.equalsIgnoreCase("Signup")) {
-            if (senderName.equals("0")) {
-                if (!contentOfMessage.contains(" ")) {
-                    responseMessage = "# " + currentTimeAsDateString + " You need a password.";
-                } else {
-                    boolean userExist = false;
-                    int j = contentOfMessage.indexOf(' ');
-                    String username = contentOfMessage.substring(0, j);
-                    String password = contentOfMessage.substring(j + 1);
-                    if (usernameAlreadyExists(username)) {
-                        responseMessage = "# " + currentTimeAsDateString + " Cannot sign up, this user already exists.";
-                        userExist = true;
-                    }
-                    if (!userExist) {
-                        User user = new User(username);
-                        user.setPassword(password);
-                        users.add(user);
-                        storeUsernamePasswordInFile(username, password, "client/authenticatedUsers.txt");
-                        responseMessage = "# " + currentTimeAsDateString + " You are registered and logged in with authenticated user, with username of " + username + ".";
-                        setClientName(username);
-                    }
-                }
-            } else {
-                responseMessage = "# " + currentTimeAsDateString + " You are already logged in.";
-            }
-        }
-        else if (typeOfMessage.equalsIgnoreCase("Broadcast")) {
-            if (senderName.equals("0")) {
-                responseMessage = "# " + currentTimeAsDateString + " You need to login first.";
-            } else {
-                responseMessage = "# " + currentTimeAsDateString + " <" + senderName + "> " + restOfMessage;
-                outToAllLoggedIn(responseMessage);
-                responseMessage = "# " + currentTimeAsDateString + "Your message has been broadcasted";
-            }
+            responseMessage = login(senderName, currentTimeAsDateString, contentOfMessage);
+        } else if (typeOfMessage.equalsIgnoreCase("Signin")) {
+            responseMessage = signin(senderName, currentTimeAsDateString, contentOfMessage);
+        } else if (typeOfMessage.equalsIgnoreCase("Signup")) {
+            responseMessage = signup(senderName, currentTimeAsDateString, contentOfMessage);
+        } else if (typeOfMessage.equalsIgnoreCase("Broadcast")) {
+            responseMessage = broadcastMessage(senderName, currentTimeAsDateString, restOfMessage);
         } else if (typeOfMessage.equalsIgnoreCase("Join")) {
-            if (senderName.equals("0")) {
-                responseMessage = "# " + currentTimeAsDateString + " You need to login first.";
-            } else if (getGroupByName(contentOfMessage) == null){
-                responseMessage = "# " + currentTimeAsDateString + " Such group does not exist.";
-            } else if(getGroupByName(contentOfMessage).addMember(getUserByName(senderName), System.currentTimeMillis())){
-                outToAllLoggedIn("# " + currentTimeAsDateString + " User " + senderName + " joint group " + contentOfMessage + ".");
-                responseMessage = "# " + currentTimeAsDateString + " You joined group " + contentOfMessage;
-            } else{
-               responseMessage = "# " + currentTimeAsDateString + " Failed to join the group";
-            }
+            responseMessage = joinGroup(senderName, currentTimeAsDateString, contentOfMessage);
         } else if (typeOfMessage.equalsIgnoreCase("Leave")) {
-            if (senderName.equals("0")) {
-                responseMessage = "# " + currentTimeAsDateString + " You need to login first.";
-            } else {
-                if (getGroupByName(contentOfMessage) == null) {
-                    responseMessage = "# " + currentTimeAsDateString + " Such group does not exist.";
-                } else if (getGroupByName(contentOfMessage).checkIfUserExist(senderName)) {
-                    getGroupByName(contentOfMessage).deleteMemberByName(senderName);
-                    responseMessage = "# " + currentTimeAsDateString + " You left group " + contentOfMessage;
-                    if (getGroupByName(contentOfMessage).getOwner().getUserName().equals(senderName)) {
-                        disbandGroup(contentOfMessage);
-                    }
-                } else {
-                    responseMessage = "# " + currentTimeAsDateString + " You cannot leave a group that you have not joint yet.";
-                }
-            }
+            responseMessage = leaveGroup(senderName, currentTimeAsDateString, contentOfMessage);
         } else if (typeOfMessage.equalsIgnoreCase("Create")) {
-            if (senderName.equals("0")) {
-                responseMessage = "# " + currentTimeAsDateString + " You need to login first.";
-            } else {
-                if (checkIfGroupExist(contentOfMessage)) {
-                    responseMessage = "# " + currentTimeAsDateString + " This group already exist.";
-                } else {
-                    Group group = new Group(contentOfMessage, getUserByName(senderName));
-                    group.addMember(getUserByName(senderName), System.currentTimeMillis());
-                    groups.add(group);
-                    outToAllLoggedIn("# " + currentTimeAsDateString + " User " + senderName + " created group " + contentOfMessage + ".");
-                    responseMessage = "# " + currentTimeAsDateString +" Group created.";
-                }
-            }
+            responseMessage = createGroup(senderName, currentTimeAsDateString, contentOfMessage);
         } else if (typeOfMessage.equalsIgnoreCase("Kick")) {
-            if (senderName.equals("0")) {
-                responseMessage = "# " + currentTimeAsDateString + " You need to login first.";
-            } else {
-                int j = contentOfMessage.indexOf(' ');
-                String groupName = contentOfMessage.substring(0, j);
-                String kickedUsername = contentOfMessage.substring(j + 1);
-                if (!checkIfGroupExist(groupName)) {
-                    responseMessage = "# " + currentTimeAsDateString + " This group does not exist.";
-                } else {
-                    if (!getGroupByName(groupName).getOwner().getUserName().equals(senderName)) {
-                        responseMessage = "# " + currentTimeAsDateString + " You are not the owner of group.";
-                    } else {
-                        if (!getGroupByName(groupName).checkIfUserExist(kickedUsername)) {
-                            responseMessage = "# " + currentTimeAsDateString + " The user does not exist in the group.";
-                        } else {
-                            getGroupByName(groupName).deleteMemberByName(kickedUsername);
-                            responseMessage = "# " + currentTimeAsDateString + " The user " + kickedUsername +" was kicked from the group";
-                        }
-                    }
-                }
-            }
+            responseMessage = kickPersonOutOfGroup(senderName, currentTimeAsDateString, contentOfMessage);
         } else if (typeOfMessage.equalsIgnoreCase("Private")) {
-            if (senderName.equals("0")) {
-                responseMessage = "# " + currentTimeAsDateString + " You need to login first.";
-            } else {
-                int j = contentOfMessage.indexOf(' ');
-                String receiverName = contentOfMessage.substring(0, j);
-                String messageToReceiver = contentOfMessage.substring(j + 1);
-                if (senderName.equals(receiverName)) {
-                    responseMessage = "# " + currentTimeAsDateString + " You cannot send message to yourself.";
-                } else if (!checkIfUserExist(receiverName)) {
-                    responseMessage = "#" + currentTimeAsDateString + " User does not exist.";
-                } else {
-                    if (!getUserByName(receiverName).isLoggedIn()) {
-                        responseMessage = "# " + currentTimeAsDateString + " Target user is not online now.";
-                    } else {
-                        responseMessage = "# " + currentTimeAsDateString + " <";
-                        if (getUserByName(senderName).userIsAuthenticated()) {
-                            responseMessage += "*";
-                        }
-                        responseMessage += (senderName + ">: " + messageToReceiver);
-                        outToPrivate(responseMessage,receiverName);
-                        responseMessage = "# " + currentTimeAsDateString + " Your message has been sent to " + receiverName + ".";
-                    }
-                }
-            }
+            responseMessage = sendPrivateMessage(senderName, currentTimeAsDateString, contentOfMessage);
         } else if (typeOfMessage.equalsIgnoreCase("Group")) {
-            if (senderName.equals("0")) {
-                responseMessage = "# " + currentTimeAsDateString + " You need to login first.";
-            } else {
-                int j = contentOfMessage.indexOf(' ');
-                String groupName = contentOfMessage.substring(0, j);
-                String messageToGroup = contentOfMessage.substring(j + 1);
-                if (!checkIfGroupExist(groupName)) {
-                    responseMessage = "# " + currentTimeAsDateString + " This group does not exist.";
-                } else if (getGroupByName(groupName).checkIfUserExist(senderName)) {
-                    responseMessage = "# " + currentTimeAsDateString + " <" + groupName + ">" + "<";
-                    if (getUserByName(senderName).userIsAuthenticated()) {
-                        responseMessage += "*";
-                    }
-                    responseMessage += (senderName + "> " + messageToGroup);
-                    outToGroup(responseMessage, groupName);
-                    getGroupByName(groupName).addHistoryMessage(responseMessage);
-                    getGroupByName(groupName).updateTimeOfLastMessage(senderName, System.currentTimeMillis());
-                    responseMessage = "# " + currentTimeAsDateString + " Your message has been sent to the group.";
-                } else {
-                    responseMessage = "# " + currentTimeAsDateString + " You cannot send message to a group that you have not joint.";
-                }
-            }
+            responseMessage = sendGroupMessage(senderName, currentTimeAsDateString, contentOfMessage);
         } else if (typeOfMessage.equalsIgnoreCase("History")) {
-            if (senderName.equals("0")) {
-                responseMessage = "# " + currentTimeAsDateString + " You need to login first.";
-            } else {
-                if (!checkIfGroupExist(contentOfMessage)) {
-                    responseMessage = "# " + currentTimeAsDateString + " This group does not exist.";
-                } else if (getGroupByName(contentOfMessage).checkIfUserExist(senderName)) {
-                    responseMessage = getGroupByName(contentOfMessage).getHistoryMessages();
-                } else {
-                    responseMessage = "# " + currentTimeAsDateString + " You cannot get chatting history of a group that you did not join.";
-                }
-            }
+            responseMessage = checkHistoryOfGroup(senderName, currentTimeAsDateString, contentOfMessage);
         } else if (typeOfMessage.equalsIgnoreCase("Send")){
-            if (senderName.equals("0")) {
-                responseMessage = "# " + currentTimeAsDateString + " You need to login first.";
-            } else {
-                int j = contentOfMessage.indexOf(' ');
-                String receiverName = contentOfMessage.substring(0, j);
-                if (!checkIfUserExist(receiverName)) {
-                    responseMessage = "# " + currentTimeAsDateString + " User does not exist.";
-                } else {
-                    try {
-                        receiveFile(receiverName);
-                        responseMessage = "# " + currentTimeAsDateString + " Your file has been sent successfully";
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-                }
-            }
+            responseMessage = send(senderName, currentTimeAsDateString, contentOfMessage);
         }
 
         else {
@@ -466,6 +275,253 @@ public class ClientHandler implements Runnable{
         counter = 0;
         return responseMessage;
 
+    }
+
+    private String login(String senderName, String currentTimeAsDateString, String contentOfMessage) throws IOException {
+        if (senderName.equals("0")) {
+            boolean userExist = false;
+            if(ClientHandler.usernameAlreadyExists(contentOfMessage)){
+                responseMessage = "# " + currentTimeAsDateString + " This name is already in use please try a different name.";
+                userExist = true;
+            }
+            if (!userExist) {
+                user = new User(contentOfMessage);
+                users.add(user);
+                storeUsernameInFile(user.getUserName(), "client/users.txt");
+                responseMessage = "# " + currentTimeAsDateString + " You are logged in with username " + contentOfMessage + ".";
+                setClientName(contentOfMessage);
+            }
+        } else {
+            responseMessage = "# " + currentTimeAsDateString + " You are already logged in.";
+        }
+        return responseMessage;
+    }
+
+    private String signin(String senderName, String currentTimeAsDateString, String contentOfMessage) throws IOException {
+        if (senderName.equals("0")) {
+            if (!contentOfMessage.contains(" ")) {
+                responseMessage = "# " + currentTimeAsDateString + " You need a password.";
+            } else {
+                int j = contentOfMessage.indexOf(' ');
+                String username = contentOfMessage.substring(0, j);
+                String password = contentOfMessage.substring(j + 1);
+                if (usernameAndPasswordCorrect(username, password, "client/authenticatedUsers.txt")) {
+                    User user = new User(contentOfMessage);
+                    users.add(user);
+                    responseMessage = "# " + currentTimeAsDateString + " You are logged in as authenticated user " + contentOfMessage + ".";
+                    setClientName(contentOfMessage);
+                } else {
+                    responseMessage = "# " + currentTimeAsDateString + " Username/Password wrong.";
+                }
+
+            }
+        } else {
+            responseMessage = "# " + currentTimeAsDateString + " You are already logged in.";
+        }
+        return responseMessage;
+    }
+
+    private String signup(String senderName, String currentTimeAsDateString, String contentOfMessage) throws IOException {
+        if (senderName.equals("0")) {
+            if (!contentOfMessage.contains(" ")) {
+                responseMessage = "# " + currentTimeAsDateString + " You need a password.";
+            } else {
+                boolean userExist = false;
+                int j = contentOfMessage.indexOf(' ');
+                String username = contentOfMessage.substring(0, j);
+                String password = contentOfMessage.substring(j + 1);
+                if (usernameAlreadyExists(username)) {
+                    responseMessage = "# " + currentTimeAsDateString + " Cannot sign up, this user already exists.";
+                    userExist = true;
+                }
+                if (!userExist) {
+                    User user = new User(username);
+                    user.setPassword(password);
+                    users.add(user);
+                    storeUsernamePasswordInFile(username, password, "client/authenticatedUsers.txt");
+                    responseMessage = "# " + currentTimeAsDateString + " You are registered and logged in with authenticated user, with username of " + username + ".";
+                    setClientName(username);
+                }
+            }
+        } else {
+            responseMessage = "# " + currentTimeAsDateString + " You are already logged in.";
+        }
+        return responseMessage;
+    }
+
+    private String broadcastMessage(String senderName, String currentTimeAsDateString, String restOfMessage){
+        if (senderName.equals("0")) {
+            responseMessage = "# " + currentTimeAsDateString + " You need to login first.";
+        } else {
+            responseMessage = "# " + currentTimeAsDateString + " <" + senderName + "> " + restOfMessage;
+            outToAllLoggedIn(responseMessage);
+            responseMessage = "# " + currentTimeAsDateString + "Your message has been broadcasted";
+        }
+        return responseMessage;
+    }
+
+    private String joinGroup(String senderName, String currentTimeAsDateString, String contentOfMessage){
+        if (senderName.equals("0")) {
+            responseMessage = "# " + currentTimeAsDateString + " You need to login first.";
+        } else if (getGroupByName(contentOfMessage) == null){
+            responseMessage = "# " + currentTimeAsDateString + " Such group does not exist.";
+        } else if(getGroupByName(contentOfMessage).addMember(getUserByName(senderName), System.currentTimeMillis())){
+            outToAllLoggedIn("# " + currentTimeAsDateString + " User " + senderName + " joint group " + contentOfMessage + ".");
+            responseMessage = "# " + currentTimeAsDateString + " You joined group " + contentOfMessage;
+        } else{
+            responseMessage = "# " + currentTimeAsDateString + " Failed to join the group";
+        }
+        return responseMessage;
+    }
+
+    private String leaveGroup(String senderName, String currentTimeAsDateString, String contentOfMessage){
+        if (senderName.equals("0")) {
+            responseMessage = "# " + currentTimeAsDateString + " You need to login first.";
+        } else {
+            if (getGroupByName(contentOfMessage) == null) {
+                responseMessage = "# " + currentTimeAsDateString + " Such group does not exist.";
+            } else if (getGroupByName(contentOfMessage).checkIfUserExist(senderName)) {
+                getGroupByName(contentOfMessage).deleteMemberByName(senderName);
+                responseMessage = "# " + currentTimeAsDateString + " You left group " + contentOfMessage;
+                if (getGroupByName(contentOfMessage).getOwner().getUserName().equals(senderName)) {
+                    disbandGroup(contentOfMessage);
+                }
+            } else {
+                responseMessage = "# " + currentTimeAsDateString + " You cannot leave a group that you have not joint yet.";
+            }
+        }
+        return responseMessage;
+    }
+
+    private String createGroup(String senderName, String currentTimeAsDateString, String contentOfMessage){
+        if (senderName.equals("0")) {
+            responseMessage = "# " + currentTimeAsDateString + " You need to login first.";
+        } else {
+            if (checkIfGroupExist(contentOfMessage)) {
+                responseMessage = "# " + currentTimeAsDateString + " This group already exist.";
+            } else {
+                Group group = new Group(contentOfMessage, getUserByName(senderName));
+                group.addMember(getUserByName(senderName), System.currentTimeMillis());
+                groups.add(group);
+                outToAllLoggedIn("# " + currentTimeAsDateString + " User " + senderName + " created group " + contentOfMessage + ".");
+                responseMessage = "# " + currentTimeAsDateString +" Group created.";
+            }
+        }
+        return responseMessage;
+    }
+
+    private String kickPersonOutOfGroup(String senderName, String currentTimeAsDateString, String contentOfMessage){
+        if (senderName.equals("0")) {
+            responseMessage = "# " + currentTimeAsDateString + " You need to login first.";
+        } else {
+            int j = contentOfMessage.indexOf(' ');
+            String groupName = contentOfMessage.substring(0, j);
+            String kickedUsername = contentOfMessage.substring(j + 1);
+            if (!checkIfGroupExist(groupName)) {
+                responseMessage = "# " + currentTimeAsDateString + " This group does not exist.";
+            } else {
+                if (!getGroupByName(groupName).getOwner().getUserName().equals(senderName)) {
+                    responseMessage = "# " + currentTimeAsDateString + " You are not the owner of group.";
+                } else {
+                    if (!getGroupByName(groupName).checkIfUserExist(kickedUsername)) {
+                        responseMessage = "# " + currentTimeAsDateString + " The user does not exist in the group.";
+                    } else {
+                        getGroupByName(groupName).deleteMemberByName(kickedUsername);
+                        responseMessage = "# " + currentTimeAsDateString + " The user " + kickedUsername +" was kicked from the group";
+                    }
+                }
+            }
+        }
+        return responseMessage;
+    }
+
+    private String sendPrivateMessage(String senderName, String currentTimeAsDateString, String contentOfMessage){
+        if (senderName.equals("0")) {
+            responseMessage = "# " + currentTimeAsDateString + " You need to login first.";
+        } else {
+            int j = contentOfMessage.indexOf(' ');
+            String receiverName = contentOfMessage.substring(0, j);
+            String messageToReceiver = contentOfMessage.substring(j + 1);
+            if (senderName.equals(receiverName)) {
+                responseMessage = "# " + currentTimeAsDateString + " You cannot send message to yourself.";
+            } else if (!checkIfUserExist(receiverName)) {
+                responseMessage = "#" + currentTimeAsDateString + " User does not exist.";
+            } else {
+                if (!getUserByName(receiverName).isLoggedIn()) {
+                    responseMessage = "# " + currentTimeAsDateString + " Target user is not online now.";
+                } else {
+                    responseMessage = "# " + currentTimeAsDateString + " <";
+                    if (getUserByName(senderName).userIsAuthenticated()) {
+                        responseMessage += "*";
+                    }
+                    responseMessage += (senderName + ">: " + messageToReceiver);
+                    outToPrivate(responseMessage,receiverName);
+                    responseMessage = "# " + currentTimeAsDateString + " Your message has been sent to " + receiverName + ".";
+                }
+            }
+        }
+        return responseMessage;
+    }
+
+    private String sendGroupMessage(String senderName, String currentTimeAsDateString, String contentOfMessage){
+        if (senderName.equals("0")) {
+            responseMessage = "# " + currentTimeAsDateString + " You need to login first.";
+        } else {
+            int j = contentOfMessage.indexOf(' ');
+            String groupName = contentOfMessage.substring(0, j);
+            String messageToGroup = contentOfMessage.substring(j + 1);
+            if (!checkIfGroupExist(groupName)) {
+                responseMessage = "# " + currentTimeAsDateString + " This group does not exist.";
+            } else if (getGroupByName(groupName).checkIfUserExist(senderName)) {
+                responseMessage = "# " + currentTimeAsDateString + " <" + groupName + ">" + "<";
+                if (getUserByName(senderName).userIsAuthenticated()) {
+                    responseMessage += "*";
+                }
+                responseMessage += (senderName + "> " + messageToGroup);
+                outToGroup(responseMessage, groupName);
+                getGroupByName(groupName).addHistoryMessage(responseMessage);
+                getGroupByName(groupName).updateTimeOfLastMessage(senderName, System.currentTimeMillis());
+                responseMessage = "# " + currentTimeAsDateString + " Your message has been sent to the group.";
+            } else {
+                responseMessage = "# " + currentTimeAsDateString + " You cannot send message to a group that you have not joint.";
+            }
+        }
+        return responseMessage;
+    }
+
+    private String checkHistoryOfGroup(String senderName, String currentTimeAsDateString, String contentOfMessage){
+        if (senderName.equals("0")) {
+            responseMessage = "# " + currentTimeAsDateString + " You need to login first.";
+        } else {
+            if (!checkIfGroupExist(contentOfMessage)) {
+                responseMessage = "# " + currentTimeAsDateString + " This group does not exist.";
+            } else if (getGroupByName(contentOfMessage).checkIfUserExist(senderName)) {
+                responseMessage = getGroupByName(contentOfMessage).getHistoryMessages();
+            } else {
+                responseMessage = "# " + currentTimeAsDateString + " You cannot get chatting history of a group that you did not join.";
+            }
+        }
+        return responseMessage;
+    }
+
+    private String send(String senderName, String currentTimeAsDateString, String contentOfMessage){
+        if (senderName.equals("0")) {
+            responseMessage = "# " + currentTimeAsDateString + " You need to login first.";
+        } else {
+            int j = contentOfMessage.indexOf(' ');
+            String receiverName = contentOfMessage.substring(0, j);
+            if (!checkIfUserExist(receiverName)) {
+                responseMessage = "# " + currentTimeAsDateString + " User does not exist.";
+            } else {
+                try {
+                    receiveFile(receiverName);
+                    responseMessage = "# " + currentTimeAsDateString + " Your file has been sent successfully";
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+        return responseMessage;
     }
 
     private void outToAll(String responseMessage) {
@@ -606,11 +662,15 @@ public class ClientHandler implements Runnable{
         boolean usernameExistsAndMatchPassword = false;
         for (String usernameAndPassword : getAllUsernameAndPasswordFromFileAsArray(file)) {
             String[] parts = usernameAndPassword.split(" ");
-            String usernameOfFile = parts[0];
-            String passwordOfFile = parts[1];
-            if (username.equals(usernameOfFile)) {
-                if (passwordOfFile.equals(password)) {
-                    usernameExistsAndMatchPassword = true;
+            if (!parts[0].equals("")) {
+                String usernameOfFile = parts[0];
+                String passwordOfFile = parts[1];
+                String passwordOfFileAfterDecryption = AES.decrypt(passwordOfFile);
+                if (username.equals(usernameOfFile)) {
+                    assert passwordOfFileAfterDecryption != null;
+                    if (passwordOfFileAfterDecryption.equals(password)) {
+                        usernameExistsAndMatchPassword = true;
+                    }
                 }
             }
         }

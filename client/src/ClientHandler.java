@@ -546,8 +546,9 @@ public class ClientHandler implements Runnable{
     }
 
     public void storeUsernamePasswordInFile(String username, String password, String file) throws IOException {
+        String passwordAfterEncryption = AES.encrypt(password);
         BufferedWriter out = new BufferedWriter(new FileWriter(file, true));
-        out.append(username).append(" ").append(password);
+        out.append(username).append(" ").append(passwordAfterEncryption);
         out.newLine();
         out.close();
     }

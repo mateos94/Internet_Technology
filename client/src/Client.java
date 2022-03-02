@@ -50,7 +50,8 @@ public class Client
                 } else if(sendMessage.contains("quit")){
                     serverConn.setClientName("0 ");
                 }
-
+                pwrite.println(encryptedMessage);       // sending to server
+                pwrite.flush();                    // flush the data
             }
         }
     }

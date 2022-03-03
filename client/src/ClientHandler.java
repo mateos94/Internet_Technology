@@ -658,7 +658,7 @@ public class ClientHandler implements Runnable{
     }
 
 
-    public boolean usernameAndPasswordCorrect(String username, String password, String file) throws IOException {
+    public static boolean usernameAndPasswordCorrect(String username, String password, String file) throws IOException {
         boolean usernameExistsAndMatchPassword = false;
         for (String usernameAndPassword : getAllUsernameAndPasswordFromFileAsArray(file)) {
             String[] parts = usernameAndPassword.split(" ");

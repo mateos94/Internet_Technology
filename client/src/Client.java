@@ -43,10 +43,17 @@ public class Client
                     }
                 } else if (sendMessage.toLowerCase().contains("signup") && serverConn.getClientName().equals("0 ")) {
                     String withoutPassword = sendMessage.substring(0, sendMessage.lastIndexOf(" "));
-                    serverConn.setClientName(withoutPassword.substring(9) + " ");
+                    String username = withoutPassword.substring(9);
+                    if (!ClientHandler.usernameAlreadyExists(username)){
+                        serverConn.setClientName(username + " ");
+                    }
                 } else if (sendMessage.toLowerCase().contains("signin") && serverConn.getClientName().equals("0 ")) {
+                    String password = sendMessage.substring(sendMessage.lastIndexOf(" ") + 1);
                     String withoutPassword = sendMessage.substring(0, sendMessage.lastIndexOf(" "));
-                    serverConn.setClientName(withoutPassword.substring(9) + " ");
+                    String username = withoutPassword.substring(9);
+                    if (ClientHandler.usernameAndPasswordCorrect(username, password, "client/authenticatedUsers.txt")){
+                        serverConn.setClientName(username + " ");
+                    }
                 } else if(sendMessage.contains("quit")){
                     serverConn.setClientName("0 ");
                 }

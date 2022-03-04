@@ -12,6 +12,7 @@ public class Server {
     private static ArrayList<ClientHandler> clients = new ArrayList<>();
     private static ExecutorService pool = Executors.newFixedThreadPool(LIMIT_OF_CLIENTS);
     private static ExecutorService pool2 = Executors.newFixedThreadPool(LIMIT_OF_CLIENTS);
+    private static int lastAssignedNumber = 0;
 
     public static void main(String args[]) throws InterruptedException, IOException {
 
@@ -20,12 +21,12 @@ public class Server {
         while (true) {
             Socket client = serverSocket.accept();
 
-            System.out.println("a new client has been connected");
-            ClientHandler clientThread = new ClientHandler(client, clients);
+            ClientHandler clientThread = new ClientHandler(client, clients, lastAssignedNumber++);
             TimerThread timerThread = new TimerThread(client,clientThread);
             clients.add(clientThread);
             pool.execute(clientThread);
             pool2.execute(timerThread);
+            System.out.println("a new client has been connected");
         }
     }
 }

@@ -23,6 +23,8 @@ public class ClientHandler implements Runnable{
     private String clientName;
     private int counter;
     public User user;
+    private boolean clientLoggedIn = false;
+    private int clientHandlerId = 0;
 
     public int getCounter() {
         return counter;
@@ -57,7 +59,24 @@ public class ClientHandler implements Runnable{
         return null;
     }
 
-    public ClientHandler(Socket clientSocket, ArrayList<ClientHandler> clients) throws IOException {
+    public void clientLogIn(){
+        clientLoggedIn = true;
+    }
+
+    public void clientLogOut(){
+        clientLoggedIn = false;
+    }
+
+    public boolean clientIsLoggedIn() {
+        return clientLoggedIn;
+    }
+
+    public int getClientHandlerId() {
+        return clientHandlerId;
+    }
+
+    public ClientHandler(Socket clientSocket, ArrayList<ClientHandler> clients, int clientHandlerId) throws IOException {
+        this.clientHandlerId = clientHandlerId;
         this.client = clientSocket;
         this.clients = clients;
         this.in = new BufferedReader(new InputStreamReader(client.getInputStream()));
@@ -279,16 +298,15 @@ public class ClientHandler implements Runnable{
 
     private String login(String senderName, String currentTimeAsDateString, String contentOfMessage) throws IOException {
         if (senderName.equals("0")) {
-            boolean userExist = false;
-            if(ClientHandler.usernameAlreadyExists(contentOfMessage)){
+            if (!validUsernameFormat(contentOfMessage)){
+                responseMessage = "# " + currentTimeAsDateString + " This username has an invalid format (only characters, numbers and underscores are allowed).";
+            } else if(ClientHandler.usernameAlreadyExists(contentOfMessage)){
                 responseMessage = "# " + currentTimeAsDateString + " This name is already in use please try a different name.";
-                userExist = true;
-            }
-            if (!userExist) {
+            } else {
                 user = new User(contentOfMessage);
                 users.add(user);
                 storeUsernameInFile(user.getUserName(), "client/users.txt");
-                responseMessage = "# " + currentTimeAsDateString + " You are logged in with username " + contentOfMessage + ".";
+                responseMessage = "#In: " + currentTimeAsDateString + " You are logged in with username " + contentOfMessage + ".";
                 setClientName(contentOfMessage);
             }
         } else {
@@ -308,7 +326,7 @@ public class ClientHandler implements Runnable{
                 if (usernameAndPasswordCorrect(username, password, "client/authenticatedUsers.txt")) {
                     User user = new User(contentOfMessage);
                     users.add(user);
-                    responseMessage = "# " + currentTimeAsDateString + " You are logged in as authenticated user " + contentOfMessage + ".";
+                    responseMessage = "#In: " + currentTimeAsDateString + " You are logged in as authenticated user " + contentOfMessage + ".";
                     setClientName(contentOfMessage);
                 } else {
                     responseMessage = "# " + currentTimeAsDateString + " Username/Password wrong.";
@@ -546,6 +564,14 @@ public class ClientHandler implements Runnable{
         }
     }
 
+    private void outToSenderById(String responseMessage, int clientHandlerId){
+        for ( ClientHandler clientHandlers : clients){
+            if (clientHandlers.clientHandlerId == clientHandlerId){
+                clientHandlers.out.println(AES.encrypt(responseMessage));
+            }
+        }
+    }
+
     private void outToGroup(String responseMessage, String groupName){
         for( ClientHandler clientHandlers : clients){
             for (Group group : groups){
@@ -657,6 +683,11 @@ public class ClientHandler implements Runnable{
         return new ArrayList<>(Arrays.asList(content.split("\\r?\\n")));
     }
 
+    public static boolean validUsernameFormat(String username) {
+        Pattern pattern = Pattern.compile("^[a-zA-Z0-9_]{3,14}$");
+        Matcher matcher = pattern.matcher(username);
+        return matcher.matches();
+    }
 
     public static boolean usernameAndPasswordCorrect(String username, String password, String file) throws IOException {
         boolean usernameExistsAndMatchPassword = false;

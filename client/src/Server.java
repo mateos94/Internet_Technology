@@ -19,6 +19,7 @@ public class Server {
         ServerSocket  serverSocket = new ServerSocket(PORT);
         while (true) {
             Socket client = serverSocket.accept();
+
             System.out.println("a new client has been connected");
             ClientHandler clientThread = new ClientHandler(client, clients);
             TimerThread timerThread = new TimerThread(client,clientThread);

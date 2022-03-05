@@ -190,9 +190,7 @@ public class ClientHandler implements Runnable{
             return responseMessage;
         }
         int i = string.indexOf(' ');
-        String senderName = string.substring(0, i);
-        String restOfMessage = string.substring(i + 1);
-        if (restOfMessage.equals("?")) {
+        if (string.equals("?")) {
             responseMessage =
                     "# Help list: \n" +
                     "Everything starts with # means message from system. \n" +
@@ -214,22 +212,28 @@ public class ClientHandler implements Runnable{
                     "Send < receiver’s username> <file name>: Send a file to another user. \n" +
                     "Pong: extend the duration of your connection";
             return responseMessage;
-        } else if (restOfMessage.equalsIgnoreCase("Groups")) {
-            if (!user.isLoggedIn()) {
+        } else if (string.equalsIgnoreCase("Groups")) {
+            if (user == null){
+                responseMessage = "# " + currentTimeAsDateString + " You need to login first.";
+            } else if (!user.isLoggedIn()) {
                 responseMessage = "#You need to login first.";
             } else {
                 responseMessage = getGroups();
             }
             return responseMessage;
-        } else if (restOfMessage.equalsIgnoreCase("Users")) {
-            if (!user.isLoggedIn()) {
+        } else if (string.equalsIgnoreCase("Users")) {
+            if (user == null){
+                responseMessage = "# " + currentTimeAsDateString + " You need to login first.";
+            } else if (!user.isLoggedIn()) {
                 responseMessage = "#You need to login first.";
             } else {
                 responseMessage = getOnlineUsers();
             }
             return responseMessage;
-        } else if (restOfMessage.equalsIgnoreCase("Quit")) {
-            if (!user.isLoggedIn()) {
+        } else if (string.equalsIgnoreCase("Quit")) {
+            if (user == null){
+                responseMessage = "# " + currentTimeAsDateString + " You need to login first.";
+            } else if (!user.isLoggedIn()) {
                 responseMessage = "# " + currentTimeAsDateString + " You need to login first.";
             } else {
                 System.out.println(user.getUserName());
@@ -243,13 +247,13 @@ public class ClientHandler implements Runnable{
             }
             return responseMessage;
         }
-        int x = restOfMessage.indexOf(' ');
+        int x = string.indexOf(' ');
         if(x<0) {
             responseMessage = "#Please enter the full command";
             return responseMessage;
         }
-        String typeOfMessage = restOfMessage.substring(0, x);
-        String contentOfMessage = restOfMessage.substring(x + 1);
+        String typeOfMessage = string.substring(0, x);
+        String contentOfMessage = string.substring(x + 1);
         if (typeOfMessage.equalsIgnoreCase("Login")) {
             responseMessage = login(currentTimeAsDateString, contentOfMessage);
         } else if (typeOfMessage.equalsIgnoreCase("Signin")) {
@@ -257,7 +261,7 @@ public class ClientHandler implements Runnable{
         } else if (typeOfMessage.equalsIgnoreCase("Signup")) {
             responseMessage = signup(currentTimeAsDateString, contentOfMessage);
         } else if (typeOfMessage.equalsIgnoreCase("Broadcast")) {
-            responseMessage = broadcastMessage(currentTimeAsDateString, restOfMessage);
+            responseMessage = broadcastMessage(currentTimeAsDateString, string);
         } else if (typeOfMessage.equalsIgnoreCase("Join")) {
             responseMessage = joinGroup(currentTimeAsDateString, contentOfMessage);
         } else if (typeOfMessage.equalsIgnoreCase("Leave")) {
@@ -352,11 +356,13 @@ public class ClientHandler implements Runnable{
         return responseMessage;
     }
 
-    private String broadcastMessage(String currentTimeAsDateString, String restOfMessage){
-        if (!user.isLoggedIn()) {
+    private String broadcastMessage(String currentTimeAsDateString, String string){
+        if (user == null){
+            responseMessage = "# " + currentTimeAsDateString + " You need to login first.";
+        } else if (!user.isLoggedIn()) {
             responseMessage = "# " + currentTimeAsDateString + " You need to login first.";
         } else {
-            responseMessage = "# " + currentTimeAsDateString + " <" + getUserOfClientHandler().getUserName() + "> " + restOfMessage;
+            responseMessage = "# " + currentTimeAsDateString + " <" + getUserOfClientHandler().getUserName() + "> " + string;
             outToAllLoggedIn(responseMessage);
             responseMessage = "# " + currentTimeAsDateString + "Your message has been broadcasted";
         }
@@ -364,7 +370,9 @@ public class ClientHandler implements Runnable{
     }
 
     private String joinGroup(String currentTimeAsDateString, String contentOfMessage){
-        if (!user.isLoggedIn()) {
+        if (user == null){
+            responseMessage = "# " + currentTimeAsDateString + " You need to login first.";
+        } else if (!user.isLoggedIn()) {
             responseMessage = "# " + currentTimeAsDateString + " You need to login first.";
         } else if (getGroupByName(contentOfMessage) == null){
             responseMessage = "# " + currentTimeAsDateString + " Such group does not exist.";
@@ -378,7 +386,9 @@ public class ClientHandler implements Runnable{
     }
 
     private String leaveGroup(String currentTimeAsDateString, String contentOfMessage){
-        if (!user.isLoggedIn()) {
+        if (user == null){
+            responseMessage = "# " + currentTimeAsDateString + " You need to login first.";
+        } else if (!user.isLoggedIn()) {
             responseMessage = "# " + currentTimeAsDateString + " You need to login first.";
         } else {
             if (getGroupByName(contentOfMessage) == null) {
@@ -397,7 +407,9 @@ public class ClientHandler implements Runnable{
     }
 
     private String createGroup(String currentTimeAsDateString, String contentOfMessage){
-        if (!user.isLoggedIn()) {
+        if (user == null){
+            responseMessage = "# " + currentTimeAsDateString + " You need to login first.";
+        } else if (!user.isLoggedIn()) {
             responseMessage = "# " + currentTimeAsDateString + " You need to login first.";
         } else {
             if (checkIfGroupExist(contentOfMessage)) {
@@ -414,7 +426,9 @@ public class ClientHandler implements Runnable{
     }
 
     private String kickPersonOutOfGroup(String currentTimeAsDateString, String contentOfMessage){
-        if (!user.isLoggedIn()) {
+        if (user == null){
+            responseMessage = "# " + currentTimeAsDateString + " You need to login first.";
+        } else if (!user.isLoggedIn()) {
             responseMessage = "# " + currentTimeAsDateString + " You need to login first.";
         } else {
             int j = contentOfMessage.indexOf(' ');
@@ -439,7 +453,9 @@ public class ClientHandler implements Runnable{
     }
 
     private String sendPrivateMessage(String currentTimeAsDateString, String contentOfMessage){
-        if (!user.isLoggedIn()) {
+        if (user == null){
+            responseMessage = "# " + currentTimeAsDateString + " You need to login first.";
+        } else if (!user.isLoggedIn()) {
             responseMessage = "# " + currentTimeAsDateString + " You need to login first.";
         } else {
             int j = contentOfMessage.indexOf(' ');
@@ -467,7 +483,9 @@ public class ClientHandler implements Runnable{
     }
 
     private String sendGroupMessage(String currentTimeAsDateString, String contentOfMessage){
-        if (!user.isLoggedIn()) {
+        if (user == null){
+            responseMessage = "# " + currentTimeAsDateString + " You need to login first.";
+        } else if (!user.isLoggedIn()) {
             responseMessage = "# " + currentTimeAsDateString + " You need to login first.";
         } else {
             int j = contentOfMessage.indexOf(' ');
@@ -493,7 +511,9 @@ public class ClientHandler implements Runnable{
     }
 
     private String checkHistoryOfGroup(String currentTimeAsDateString, String contentOfMessage){
-        if (!user.isLoggedIn()) {
+        if (user == null){
+            responseMessage = "# " + currentTimeAsDateString + " You need to login first.";
+        } else if (!user.isLoggedIn()) {
             responseMessage = "# " + currentTimeAsDateString + " You need to login first.";
         } else {
             if (!checkIfGroupExist(contentOfMessage)) {

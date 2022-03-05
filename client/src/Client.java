@@ -26,7 +26,7 @@ public class Client
 
         while(true)
         {
-            sendMessage = (serverConn.getClientName() +keyRead.readLine());  // keyboard reading   clientName is at the beginning of every message
+            sendMessage = keyRead.readLine();  // keyboard reading   clientName is at the beginning of every message
             if (sendMessage.contains("Send")){
                 sendMessage = AES.encrypt(sendMessage);
                 pwrite.println(sendMessage);       // sending to server
@@ -35,26 +35,7 @@ public class Client
                 new Thread(fileSender).start();
             } else {
                 String encryptedMessage = AES.encrypt(sendMessage);
-                if (sendMessage.toLowerCase().contains("login") && serverConn.getClientName().equals("0 ")) {
-                    if(!ClientHandler.usernameAlreadyExists(sendMessage.substring(8)) && ClientHandler.validUsernameFormat(sendMessage.substring(8))) {
-                        serverConn.setClientName(sendMessage.substring(8) + " ");
-                    }
-                } else if (sendMessage.toLowerCase().contains("signup") && serverConn.getClientName().equals("0 ")) {
-                    String withoutPassword = sendMessage.substring(0, sendMessage.lastIndexOf(" "));
-                    String username = withoutPassword.substring(9);
-                    if (!ClientHandler.usernameAlreadyExists(username) && ClientHandler.validUsernameFormat(sendMessage.substring(8))){
-                        serverConn.setClientName(username + " ");
-                    }
-                } else if (sendMessage.toLowerCase().contains("signin") && serverConn.getClientName().equals("0 ")) {
-                    String password = sendMessage.substring(sendMessage.lastIndexOf(" ") + 1);
-                    String withoutPassword = sendMessage.substring(0, sendMessage.lastIndexOf(" "));
-                    String username = withoutPassword.substring(9);
-                    if (ClientHandler.usernameAndPasswordCorrect(username, password, "client/authenticatedUsers.txt") && ClientHandler.validUsernameFormat(sendMessage.substring(8))){
-                        serverConn.setClientName(username + " ");
-                    }
-                } else if(sendMessage.contains("quit")){
-                    serverConn.setClientName("0 ");
-                }
+
                 pwrite.println(encryptedMessage);       // sending to server
                 pwrite.flush();                    // flush the data
             }

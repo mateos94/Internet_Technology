@@ -12,7 +12,6 @@ public class Server {
     private static ArrayList<ClientHandler> clients = new ArrayList<>();
     private static ExecutorService pool = Executors.newFixedThreadPool(LIMIT_OF_CLIENTS);
     private static ExecutorService pool2 = Executors.newFixedThreadPool(LIMIT_OF_CLIENTS);
-    private static int lastAssignedNumber = 0;
 
     public static void main(String args[]) throws InterruptedException, IOException {
 

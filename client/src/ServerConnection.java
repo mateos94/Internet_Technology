@@ -4,19 +4,10 @@ import java.net.Socket;
 public class ServerConnection implements Runnable{
     private Socket server;
     private BufferedReader in;
-    private String clientName = "0 ";
     private boolean loggedIn = false;
 
     public boolean isLoggedIn() {
         return loggedIn;
-    }
-
-    public String getClientName() {
-        return clientName;
-    }
-
-    public void setClientName(String clientName) {
-        this.clientName = clientName;
     }
 
     public ServerConnection(Socket socket) throws IOException {

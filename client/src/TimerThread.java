@@ -42,7 +42,7 @@ public class TimerThread extends Thread{
                         }
                             else if (clientThread.getCounter() == 10 && clientThread.getResponseMessage().equals("")) { //if no response within 10 seconds terminate connection
                                 out.println(AES.encrypt("Timer has reached 10 connection will now be terminated"));
-                                clientThread.changeLoginStatus(clientThread.getClientName());
+                                clientThread.getUserOfClientHandler().changeLoginStatus();
                                 socket.close();
                                 timer.cancel();//end the timer
                                 break;//end this loop

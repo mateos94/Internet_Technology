@@ -20,11 +20,8 @@ public class ClientHandler implements Runnable{
     public static ArrayList<User> users = new ArrayList<>();
     private static ArrayList<Group> groups = new ArrayList<>();
     private static ArrayList<ClientHandler> clients;
-    private String clientName;
     private int counter;
-    public User user;
-    private boolean clientLoggedIn = false;
-    private int clientHandlerId = 0;
+    private User user;
 
     public int getCounter() {
         return counter;
@@ -42,41 +39,24 @@ public class ClientHandler implements Runnable{
         return client;
     }
 
-    public void setClientName(String clientName) {
-        this.clientName = clientName;
-    }
-
-    public String getClientName() {
-        return clientName;
-    }
-
-    public ClientHandler getByClientName(String clientName) {
+    public ClientHandler getByUserName(String clientName) {
         for (ClientHandler nextClient : clients) {
-            if (nextClient.getClientName().equals(clientName)) {
+            if (nextClient.getUserOfClientHandler().getUserName().equals(clientName)) {
                 return nextClient;
             }
         }
         return null;
     }
 
-    public void clientLogIn(){
-        clientLoggedIn = true;
+    public User getUserOfClientHandler() {
+        return user;
     }
 
-    public void clientLogOut(){
-        clientLoggedIn = false;
+    public void removeUserByName(String userName){
+        users.removeIf(user -> user.getUserName().equals(userName));
     }
 
-    public boolean clientIsLoggedIn() {
-        return clientLoggedIn;
-    }
-
-    public int getClientHandlerId() {
-        return clientHandlerId;
-    }
-
-    public ClientHandler(Socket clientSocket, ArrayList<ClientHandler> clients, int clientHandlerId) throws IOException {
-        this.clientHandlerId = clientHandlerId;
+    public ClientHandler(Socket clientSocket, ArrayList<ClientHandler> clients) throws IOException {
         this.client = clientSocket;
         this.clients = clients;
         this.in = new BufferedReader(new InputStreamReader(client.getInputStream()));
@@ -93,8 +73,14 @@ public class ClientHandler implements Runnable{
             responseMessage = "";
     }
         } catch (IOException e) {
-            if (clientName != null) {
-                changeLoginStatus(clientName);
+            if (user.getUserName() != null) {
+                try {
+                    removeUsernameInFile(user.getUserName(), "client/users.txt");
+                } catch (Exception exception) {
+                    exception.printStackTrace();
+                }
+                removeUserByName(user.getUserName());
+                user = null;
             }
             System.err.println("IO exception in client handler");
             return;
@@ -208,7 +194,7 @@ public class ClientHandler implements Runnable{
         String restOfMessage = string.substring(i + 1);
         if (restOfMessage.equals("?")) {
             responseMessage =
-                    "# Help list:\n" +
+                    "# Help list: \n" +
                     "Everything starts with # means message from system. \n" +
                     "Login <username>: Login to the chat server as a guest if <username> isn’t registered before. \n" +
                     "Signup <username> <password>: Register at server if <username> isn't registered before. \n" +
@@ -229,29 +215,31 @@ public class ClientHandler implements Runnable{
                     "Pong: extend the duration of your connection";
             return responseMessage;
         } else if (restOfMessage.equalsIgnoreCase("Groups")) {
-            if (senderName.equals("0")) {
+            if (!user.isLoggedIn()) {
                 responseMessage = "#You need to login first.";
             } else {
                 responseMessage = getGroups();
             }
             return responseMessage;
         } else if (restOfMessage.equalsIgnoreCase("Users")) {
-            if (senderName.equals("0")) {
+            if (!user.isLoggedIn()) {
                 responseMessage = "#You need to login first.";
             } else {
                 responseMessage = getOnlineUsers();
             }
             return responseMessage;
         } else if (restOfMessage.equalsIgnoreCase("Quit")) {
-            if (senderName.equals("0")) {
+            if (!user.isLoggedIn()) {
                 responseMessage = "# " + currentTimeAsDateString + " You need to login first.";
             } else {
                 System.out.println(user.getUserName());
                 if (!user.userIsAuthenticated()) {
-                    RemoveUsernameInFile(user.getUserName(),"client/users.txt");
+                    removeUsernameInFile(user.getUserName(),"client/users.txt");
                 }
                 responseMessage = "# " + currentTimeAsDateString + " You are logged out.";
-                changeLoginStatus(senderName);
+                removeUsernameInFile(user.getUserName(), "client/users.txt");
+                removeUserByName(user.getUserName());
+                user = null;
             }
             return responseMessage;
         }
@@ -263,29 +251,29 @@ public class ClientHandler implements Runnable{
         String typeOfMessage = restOfMessage.substring(0, x);
         String contentOfMessage = restOfMessage.substring(x + 1);
         if (typeOfMessage.equalsIgnoreCase("Login")) {
-            responseMessage = login(senderName, currentTimeAsDateString, contentOfMessage);
+            responseMessage = login(currentTimeAsDateString, contentOfMessage);
         } else if (typeOfMessage.equalsIgnoreCase("Signin")) {
-            responseMessage = signin(senderName, currentTimeAsDateString, contentOfMessage);
+            responseMessage = signin(currentTimeAsDateString, contentOfMessage);
         } else if (typeOfMessage.equalsIgnoreCase("Signup")) {
-            responseMessage = signup(senderName, currentTimeAsDateString, contentOfMessage);
+            responseMessage = signup(currentTimeAsDateString, contentOfMessage);
         } else if (typeOfMessage.equalsIgnoreCase("Broadcast")) {
-            responseMessage = broadcastMessage(senderName, currentTimeAsDateString, restOfMessage);
+            responseMessage = broadcastMessage(currentTimeAsDateString, restOfMessage);
         } else if (typeOfMessage.equalsIgnoreCase("Join")) {
-            responseMessage = joinGroup(senderName, currentTimeAsDateString, contentOfMessage);
+            responseMessage = joinGroup(currentTimeAsDateString, contentOfMessage);
         } else if (typeOfMessage.equalsIgnoreCase("Leave")) {
-            responseMessage = leaveGroup(senderName, currentTimeAsDateString, contentOfMessage);
+            responseMessage = leaveGroup(currentTimeAsDateString, contentOfMessage);
         } else if (typeOfMessage.equalsIgnoreCase("Create")) {
-            responseMessage = createGroup(senderName, currentTimeAsDateString, contentOfMessage);
+            responseMessage = createGroup(currentTimeAsDateString, contentOfMessage);
         } else if (typeOfMessage.equalsIgnoreCase("Kick")) {
-            responseMessage = kickPersonOutOfGroup(senderName, currentTimeAsDateString, contentOfMessage);
+            responseMessage = kickPersonOutOfGroup(currentTimeAsDateString, contentOfMessage);
         } else if (typeOfMessage.equalsIgnoreCase("Private")) {
-            responseMessage = sendPrivateMessage(senderName, currentTimeAsDateString, contentOfMessage);
+            responseMessage = sendPrivateMessage(currentTimeAsDateString, contentOfMessage);
         } else if (typeOfMessage.equalsIgnoreCase("Group")) {
-            responseMessage = sendGroupMessage(senderName, currentTimeAsDateString, contentOfMessage);
+            responseMessage = sendGroupMessage(currentTimeAsDateString, contentOfMessage);
         } else if (typeOfMessage.equalsIgnoreCase("History")) {
-            responseMessage = checkHistoryOfGroup(senderName, currentTimeAsDateString, contentOfMessage);
+            responseMessage = checkHistoryOfGroup(currentTimeAsDateString, contentOfMessage);
         } else if (typeOfMessage.equalsIgnoreCase("Send")){
-            responseMessage = send(senderName, currentTimeAsDateString, contentOfMessage);
+            responseMessage = send(currentTimeAsDateString, contentOfMessage);
         }
 
         else {
@@ -296,8 +284,8 @@ public class ClientHandler implements Runnable{
 
     }
 
-    private String login(String senderName, String currentTimeAsDateString, String contentOfMessage) throws IOException {
-        if (senderName.equals("0")) {
+    private String login(String currentTimeAsDateString, String contentOfMessage) throws IOException {
+        if (user == null) {
             if (!validUsernameFormat(contentOfMessage)){
                 responseMessage = "# " + currentTimeAsDateString + " This username has an invalid format (only characters, numbers and underscores are allowed).";
             } else if(ClientHandler.usernameAlreadyExists(contentOfMessage)){
@@ -307,7 +295,6 @@ public class ClientHandler implements Runnable{
                 users.add(user);
                 storeUsernameInFile(user.getUserName(), "client/users.txt");
                 responseMessage = "#In: " + currentTimeAsDateString + " You are logged in with username " + contentOfMessage + ".";
-                setClientName(contentOfMessage);
             }
         } else {
             responseMessage = "# " + currentTimeAsDateString + " You are already logged in.";
@@ -315,8 +302,8 @@ public class ClientHandler implements Runnable{
         return responseMessage;
     }
 
-    private String signin(String senderName, String currentTimeAsDateString, String contentOfMessage) throws IOException {
-        if (senderName.equals("0")) {
+    private String signin(String currentTimeAsDateString, String contentOfMessage) throws IOException {
+        if (user == null) {
             if (!contentOfMessage.contains(" ")) {
                 responseMessage = "# " + currentTimeAsDateString + " You need a password.";
             } else {
@@ -324,10 +311,9 @@ public class ClientHandler implements Runnable{
                 String username = contentOfMessage.substring(0, j);
                 String password = contentOfMessage.substring(j + 1);
                 if (usernameAndPasswordCorrect(username, password, "client/authenticatedUsers.txt")) {
-                    User user = new User(contentOfMessage);
+                    user = new User(contentOfMessage);
                     users.add(user);
                     responseMessage = "#In: " + currentTimeAsDateString + " You are logged in as authenticated user " + contentOfMessage + ".";
-                    setClientName(contentOfMessage);
                 } else {
                     responseMessage = "# " + currentTimeAsDateString + " Username/Password wrong.";
                 }
@@ -339,8 +325,8 @@ public class ClientHandler implements Runnable{
         return responseMessage;
     }
 
-    private String signup(String senderName, String currentTimeAsDateString, String contentOfMessage) throws IOException {
-        if (senderName.equals("0")) {
+    private String signup(String currentTimeAsDateString, String contentOfMessage) throws IOException {
+        if (user == null) {
             if (!contentOfMessage.contains(" ")) {
                 responseMessage = "# " + currentTimeAsDateString + " You need a password.";
             } else {
@@ -353,12 +339,11 @@ public class ClientHandler implements Runnable{
                     userExist = true;
                 }
                 if (!userExist) {
-                    User user = new User(username);
+                    user = new User(username);
                     user.setPassword(password);
                     users.add(user);
                     storeUsernamePasswordInFile(username, password, "client/authenticatedUsers.txt");
                     responseMessage = "# " + currentTimeAsDateString + " You are registered and logged in with authenticated user, with username of " + username + ".";
-                    setClientName(username);
                 }
             }
         } else {
@@ -367,24 +352,24 @@ public class ClientHandler implements Runnable{
         return responseMessage;
     }
 
-    private String broadcastMessage(String senderName, String currentTimeAsDateString, String restOfMessage){
-        if (senderName.equals("0")) {
+    private String broadcastMessage(String currentTimeAsDateString, String restOfMessage){
+        if (!user.isLoggedIn()) {
             responseMessage = "# " + currentTimeAsDateString + " You need to login first.";
         } else {
-            responseMessage = "# " + currentTimeAsDateString + " <" + senderName + "> " + restOfMessage;
+            responseMessage = "# " + currentTimeAsDateString + " <" + getUserOfClientHandler().getUserName() + "> " + restOfMessage;
             outToAllLoggedIn(responseMessage);
             responseMessage = "# " + currentTimeAsDateString + "Your message has been broadcasted";
         }
         return responseMessage;
     }
 
-    private String joinGroup(String senderName, String currentTimeAsDateString, String contentOfMessage){
-        if (senderName.equals("0")) {
+    private String joinGroup(String currentTimeAsDateString, String contentOfMessage){
+        if (!user.isLoggedIn()) {
             responseMessage = "# " + currentTimeAsDateString + " You need to login first.";
         } else if (getGroupByName(contentOfMessage) == null){
             responseMessage = "# " + currentTimeAsDateString + " Such group does not exist.";
-        } else if(getGroupByName(contentOfMessage).addMember(getUserByName(senderName), System.currentTimeMillis())){
-            outToAllLoggedIn("# " + currentTimeAsDateString + " User " + senderName + " joint group " + contentOfMessage + ".");
+        } else if(getGroupByName(contentOfMessage).addMember(getUserByName(user.getUserName()), System.currentTimeMillis())){
+            outToAllLoggedIn("# " + currentTimeAsDateString + " User " + user.getUserName() + " joint group " + contentOfMessage + ".");
             responseMessage = "# " + currentTimeAsDateString + " You joined group " + contentOfMessage;
         } else{
             responseMessage = "# " + currentTimeAsDateString + " Failed to join the group";
@@ -392,16 +377,16 @@ public class ClientHandler implements Runnable{
         return responseMessage;
     }
 
-    private String leaveGroup(String senderName, String currentTimeAsDateString, String contentOfMessage){
-        if (senderName.equals("0")) {
+    private String leaveGroup(String currentTimeAsDateString, String contentOfMessage){
+        if (!user.isLoggedIn()) {
             responseMessage = "# " + currentTimeAsDateString + " You need to login first.";
         } else {
             if (getGroupByName(contentOfMessage) == null) {
                 responseMessage = "# " + currentTimeAsDateString + " Such group does not exist.";
-            } else if (getGroupByName(contentOfMessage).checkIfUserExist(senderName)) {
-                getGroupByName(contentOfMessage).deleteMemberByName(senderName);
+            } else if (getGroupByName(contentOfMessage).checkIfUserExist(user.getUserName())) {
+                getGroupByName(contentOfMessage).deleteMemberByName(user.getUserName());
                 responseMessage = "# " + currentTimeAsDateString + " You left group " + contentOfMessage;
-                if (getGroupByName(contentOfMessage).getOwner().getUserName().equals(senderName)) {
+                if (getGroupByName(contentOfMessage).getOwner().getUserName().equals(user.getUserName())) {
                     disbandGroup(contentOfMessage);
                 }
             } else {
@@ -411,25 +396,25 @@ public class ClientHandler implements Runnable{
         return responseMessage;
     }
 
-    private String createGroup(String senderName, String currentTimeAsDateString, String contentOfMessage){
-        if (senderName.equals("0")) {
+    private String createGroup(String currentTimeAsDateString, String contentOfMessage){
+        if (!user.isLoggedIn()) {
             responseMessage = "# " + currentTimeAsDateString + " You need to login first.";
         } else {
             if (checkIfGroupExist(contentOfMessage)) {
                 responseMessage = "# " + currentTimeAsDateString + " This group already exist.";
             } else {
-                Group group = new Group(contentOfMessage, getUserByName(senderName));
-                group.addMember(getUserByName(senderName), System.currentTimeMillis());
+                Group group = new Group(contentOfMessage, getUserByName(user.getUserName()));
+                group.addMember(getUserByName(user.getUserName()), System.currentTimeMillis());
                 groups.add(group);
-                outToAllLoggedIn("# " + currentTimeAsDateString + " User " + senderName + " created group " + contentOfMessage + ".");
+                outToAllLoggedIn("# " + currentTimeAsDateString + " User " + user.getUserName() + " created group " + contentOfMessage + ".");
                 responseMessage = "# " + currentTimeAsDateString +" Group created.";
             }
         }
         return responseMessage;
     }
 
-    private String kickPersonOutOfGroup(String senderName, String currentTimeAsDateString, String contentOfMessage){
-        if (senderName.equals("0")) {
+    private String kickPersonOutOfGroup(String currentTimeAsDateString, String contentOfMessage){
+        if (!user.isLoggedIn()) {
             responseMessage = "# " + currentTimeAsDateString + " You need to login first.";
         } else {
             int j = contentOfMessage.indexOf(' ');
@@ -438,7 +423,7 @@ public class ClientHandler implements Runnable{
             if (!checkIfGroupExist(groupName)) {
                 responseMessage = "# " + currentTimeAsDateString + " This group does not exist.";
             } else {
-                if (!getGroupByName(groupName).getOwner().getUserName().equals(senderName)) {
+                if (!getGroupByName(groupName).getOwner().getUserName().equals(user.getUserName())) {
                     responseMessage = "# " + currentTimeAsDateString + " You are not the owner of group.";
                 } else {
                     if (!getGroupByName(groupName).checkIfUserExist(kickedUsername)) {
@@ -453,14 +438,14 @@ public class ClientHandler implements Runnable{
         return responseMessage;
     }
 
-    private String sendPrivateMessage(String senderName, String currentTimeAsDateString, String contentOfMessage){
-        if (senderName.equals("0")) {
+    private String sendPrivateMessage(String currentTimeAsDateString, String contentOfMessage){
+        if (!user.isLoggedIn()) {
             responseMessage = "# " + currentTimeAsDateString + " You need to login first.";
         } else {
             int j = contentOfMessage.indexOf(' ');
             String receiverName = contentOfMessage.substring(0, j);
             String messageToReceiver = contentOfMessage.substring(j + 1);
-            if (senderName.equals(receiverName)) {
+            if (user.getUserName().equals(receiverName)) {
                 responseMessage = "# " + currentTimeAsDateString + " You cannot send message to yourself.";
             } else if (!checkIfUserExist(receiverName)) {
                 responseMessage = "#" + currentTimeAsDateString + " User does not exist.";
@@ -469,10 +454,10 @@ public class ClientHandler implements Runnable{
                     responseMessage = "# " + currentTimeAsDateString + " Target user is not online now.";
                 } else {
                     responseMessage = "# " + currentTimeAsDateString + " <";
-                    if (getUserByName(senderName).userIsAuthenticated()) {
+                    if (getUserByName(user.getUserName()).userIsAuthenticated()) {
                         responseMessage += "*";
                     }
-                    responseMessage += (senderName + ">: " + messageToReceiver);
+                    responseMessage += (user.getUserName() + ">: " + messageToReceiver);
                     outToPrivate(responseMessage,receiverName);
                     responseMessage = "# " + currentTimeAsDateString + " Your message has been sent to " + receiverName + ".";
                 }
@@ -481,8 +466,8 @@ public class ClientHandler implements Runnable{
         return responseMessage;
     }
 
-    private String sendGroupMessage(String senderName, String currentTimeAsDateString, String contentOfMessage){
-        if (senderName.equals("0")) {
+    private String sendGroupMessage(String currentTimeAsDateString, String contentOfMessage){
+        if (!user.isLoggedIn()) {
             responseMessage = "# " + currentTimeAsDateString + " You need to login first.";
         } else {
             int j = contentOfMessage.indexOf(' ');
@@ -490,15 +475,15 @@ public class ClientHandler implements Runnable{
             String messageToGroup = contentOfMessage.substring(j + 1);
             if (!checkIfGroupExist(groupName)) {
                 responseMessage = "# " + currentTimeAsDateString + " This group does not exist.";
-            } else if (getGroupByName(groupName).checkIfUserExist(senderName)) {
+            } else if (getGroupByName(groupName).checkIfUserExist(user.getUserName())) {
                 responseMessage = "# " + currentTimeAsDateString + " <" + groupName + ">" + "<";
-                if (getUserByName(senderName).userIsAuthenticated()) {
+                if (getUserByName(user.getUserName()).userIsAuthenticated()) {
                     responseMessage += "*";
                 }
-                responseMessage += (senderName + "> " + messageToGroup);
+                responseMessage += (user.getUserName() + "> " + messageToGroup);
                 outToGroup(responseMessage, groupName);
                 getGroupByName(groupName).addHistoryMessage(responseMessage);
-                getGroupByName(groupName).updateTimeOfLastMessage(senderName, System.currentTimeMillis());
+                getGroupByName(groupName).updateTimeOfLastMessage(user.getUserName(), System.currentTimeMillis());
                 responseMessage = "# " + currentTimeAsDateString + " Your message has been sent to the group.";
             } else {
                 responseMessage = "# " + currentTimeAsDateString + " You cannot send message to a group that you have not joint.";
@@ -507,13 +492,13 @@ public class ClientHandler implements Runnable{
         return responseMessage;
     }
 
-    private String checkHistoryOfGroup(String senderName, String currentTimeAsDateString, String contentOfMessage){
-        if (senderName.equals("0")) {
+    private String checkHistoryOfGroup(String currentTimeAsDateString, String contentOfMessage){
+        if (!user.isLoggedIn()) {
             responseMessage = "# " + currentTimeAsDateString + " You need to login first.";
         } else {
             if (!checkIfGroupExist(contentOfMessage)) {
                 responseMessage = "# " + currentTimeAsDateString + " This group does not exist.";
-            } else if (getGroupByName(contentOfMessage).checkIfUserExist(senderName)) {
+            } else if (getGroupByName(contentOfMessage).checkIfUserExist(user.getUserName())) {
                 responseMessage = getGroupByName(contentOfMessage).getHistoryMessages();
             } else {
                 responseMessage = "# " + currentTimeAsDateString + " You cannot get chatting history of a group that you did not join.";
@@ -522,8 +507,8 @@ public class ClientHandler implements Runnable{
         return responseMessage;
     }
 
-    private String send(String senderName, String currentTimeAsDateString, String contentOfMessage){
-        if (senderName.equals("0")) {
+    private String send(String currentTimeAsDateString, String contentOfMessage){
+        if (user.getUserName().equals("0")) {
             responseMessage = "# " + currentTimeAsDateString + " You need to login first.";
         } else {
             int j = contentOfMessage.indexOf(' ');
@@ -550,7 +535,7 @@ public class ClientHandler implements Runnable{
 
     private void outToAllLoggedIn(String responseMessage) {
         for( ClientHandler clientHandlers : clients){
-            if (clientHandlers.getClientName() != null){
+            if (clientHandlers.getUserOfClientHandler().getUserName() != null){
                 clientHandlers.out.println(AES.encrypt(responseMessage));
             }
         }
@@ -558,15 +543,7 @@ public class ClientHandler implements Runnable{
 
     private void outToPrivate(String responseMessage, String name){
         for( ClientHandler clientHandlers : clients){
-            if (getByClientName(name).equals(clientHandlers)) {
-                clientHandlers.out.println(AES.encrypt(responseMessage));
-            }
-        }
-    }
-
-    private void outToSenderById(String responseMessage, int clientHandlerId){
-        for ( ClientHandler clientHandlers : clients){
-            if (clientHandlers.clientHandlerId == clientHandlerId){
+            if (getByUserName(name).equals(clientHandlers)) {
                 clientHandlers.out.println(AES.encrypt(responseMessage));
             }
         }
@@ -575,16 +552,16 @@ public class ClientHandler implements Runnable{
     private void outToGroup(String responseMessage, String groupName){
         for( ClientHandler clientHandlers : clients){
             for (Group group : groups){
-                if(group.checkIfUserExist(clientHandlers.getClientName()) && groupName.equals(group.getGroupName())){
+                if(group.checkIfUserExist(clientHandlers.getUserOfClientHandler().getUserName()) && groupName.equals(group.getGroupName())){
                     clientHandlers.out.println(AES.encrypt(responseMessage));
                 }
             }
         }
     }
 
-    public void changeLoginStatus(String senderName){
+    public void changeLoginStatus(){
         for (User nextUser : users) {
-            if (nextUser.getUserName().equals(senderName)) {
+            if (nextUser.getUserName().equals(user.getUserName())) {
                 nextUser.changeLoginStatus();
             }
         }
@@ -597,7 +574,7 @@ public class ClientHandler implements Runnable{
         inputStream.read(b,0,b.length);
         fileOutputStream.write(b,0,b.length);
         for( ClientHandler clientHandlers : clients){
-            if (getByClientName(name).equals(clientHandlers)) {
+            if (getByUserName(name).equals(clientHandlers)) {
                 clientHandlers.out.println(AES.encrypt("You received a new file"));
                 FileSender fileSender = new FileSender(clientHandlers.getClient(),"client/server.txt");
                 new Thread(fileSender).start();
@@ -669,7 +646,7 @@ public class ClientHandler implements Runnable{
         return usernameAlreadyExist;
     }
 
-    public void RemoveUsernameInFile(String username, String file) throws Exception {
+    public void removeUsernameInFile(String username, String file) throws Exception {
         File targetFile = new File(file);
         List<String> out = Files.lines(targetFile.toPath())
                 .filter(line -> !line.contains(username))

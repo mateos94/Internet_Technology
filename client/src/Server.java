@@ -21,7 +21,7 @@ public class Server {
         while (true) {
             Socket client = serverSocket.accept();
 
-            ClientHandler clientThread = new ClientHandler(client, clients, lastAssignedNumber++);
+            ClientHandler clientThread = new ClientHandler(client, clients);
             TimerThread timerThread = new TimerThread(client,clientThread);
             clients.add(clientThread);
             pool.execute(clientThread);

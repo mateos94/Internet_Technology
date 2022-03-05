@@ -73,14 +73,10 @@ public class ClientHandler implements Runnable{
             responseMessage = "";
     }
         } catch (IOException e) {
-            if (user.getUserName() != null) {
-                try {
-                    removeUsernameInFile(user.getUserName(), "client/users.txt");
-                } catch (Exception exception) {
-                    exception.printStackTrace();
-                }
-                removeUserByName(user.getUserName());
-                user = null;
+            try {
+                removeNotOnlineGuestFromFile("client/users.txt");
+            } catch (Exception exception) {
+                exception.printStackTrace();
             }
             System.err.println("IO exception in client handler");
             return;
@@ -237,7 +233,6 @@ public class ClientHandler implements Runnable{
             } else if (!user.isLoggedIn()) {
                 responseMessage = "# " + currentTimeAsDateString + " You need to login first.";
             } else {
-                System.out.println(user.getUserName());
                 if (!user.userIsAuthenticated()) {
                     removeUsernameInFile(user.getUserName(),"client/users.txt");
                 }
@@ -673,6 +668,21 @@ public class ClientHandler implements Runnable{
                 .filter(line -> !line.contains(username))
                 .collect(Collectors.toList());
         Files.write(targetFile.toPath(), out, StandardOpenOption.WRITE, StandardOpenOption.TRUNCATE_EXISTING);
+    }
+
+    public void removeNotOnlineGuestFromFile(String file) throws Exception {
+        ArrayList<String> onlineUsers = new ArrayList<>();
+        for (User nextUser: users) {
+            if (nextUser.getUserName().equals("") && nextUser.getUserName() != null) {
+                onlineUsers.add(nextUser.getUserName());
+            }
+        }
+
+        for (String nextUsernameInFile: getAllUsernameAndPasswordFromFileAsArray(file)){
+            if (!onlineUsers.contains(nextUsernameInFile)) {
+                removeUsernameInFile(nextUsernameInFile, file);
+            }
+        }
     }
 
 

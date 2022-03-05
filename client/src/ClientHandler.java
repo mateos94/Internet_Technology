@@ -196,12 +196,13 @@ public class ClientHandler implements Runnable{
                     "Everything starts with # means message from system. \n" +
                     "Login <username>: Login to the chat server as a guest if <username> isn’t registered before. \n" +
                     "Signup <username> <password>: Register at server if <username> isn't registered before. \n" +
+                    "Signin <username> <password>: Sign in using already existing authenticated user. \n" +
                     "Users: Request all users from the server that are currently online. \n" +
                     "Broadcast <message>: Broadcast a message to all connected(online) users. \n" +
                     "Quit: Log out from the server. \n" +
                     "# -----Group related-----: \n" +
                     "Groups: Get a list of all groups. \n" +
-                    "History: Get chat history of a group. \n" +
+                    "History <group name>: Get chat history of a group. \n" +
                     "Join <group name>: Join a group that exists. \n" +
                     "Leave <group name>: Leave a group that you are in. \n" +
                     "Create <group name>: Create a new group. \n" +

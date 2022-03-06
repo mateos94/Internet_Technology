@@ -128,7 +128,11 @@ public class ClientHandler implements Runnable{
         return false;
     }
 
-    public String getGroups() {
+    public static ArrayList<Group> getGroups() {
+        return groups;
+    }
+
+    public String getGroupsAsString() {
         String listOfGroupsAsString = "";
         if (groups.size() == 0) {
             listOfGroupsAsString = "#There is no group.";
@@ -215,7 +219,7 @@ public class ClientHandler implements Runnable{
             } else if (!user.isLoggedIn()) {
                 responseMessage = "#You need to login first.";
             } else {
-                responseMessage = getGroups();
+                responseMessage = getGroupsAsString();
             }
             return responseMessage;
         } else if (string.equalsIgnoreCase("Users")) {
@@ -543,7 +547,7 @@ public class ClientHandler implements Runnable{
         return responseMessage;
     }
 
-    private void outToAll(String responseMessage) {
+    static void outToAll(String responseMessage) {
         for( ClientHandler clientHandlers : clients){
             clientHandlers.out.println(AES.encrypt(responseMessage));
         }
@@ -605,7 +609,7 @@ public class ClientHandler implements Runnable{
         return format.format(date);
     }
 
-    private void kickPeopleWhoAreNotChattingMoreThanTwoMinutesInGroups() {
+    public void kickPeopleWhoAreNotChattingMoreThanTwoMinutesInGroups() {
         if (!groups.isEmpty()){
             for (Group nextGroup: groups){
                 for (UserAndTimeOfLastMessage nextUserAndTimeOfLastMessage: nextGroup.getMembersAndTimeOfLastMessage()){

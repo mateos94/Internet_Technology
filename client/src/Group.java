@@ -1,9 +1,11 @@
 import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
 
 public class Group {
     private String groupName;
     private User owner;
-    private ArrayList<UserAndTimeOfLastMessage> membersAndTimeOfLastMessage = new ArrayList<>();
+    private static ArrayList<UserAndTimeOfLastMessage> membersAndTimeOfLastMessage = new ArrayList<>();
     private ArrayList<String> historyMessages = new ArrayList<>();
 
     public Group(String groupName, User owner) {
@@ -60,12 +62,7 @@ public class Group {
     }
 
     public void deleteMemberByName(String name){
-        for (UserAndTimeOfLastMessage userAndTimeOfLastMessage: membersAndTimeOfLastMessage){
-            if (userAndTimeOfLastMessage.getUser().getUserName().equals(name)){
-                membersAndTimeOfLastMessage.remove(userAndTimeOfLastMessage);
-                return;
-            }
-        }
+        membersAndTimeOfLastMessage.removeIf(userAndTimeOfLastMessage -> userAndTimeOfLastMessage.getUser().getUserName().equals(name));
     }
 
     public User getMemberByName(String name){

@@ -68,8 +68,8 @@ public class ClientHandler implements Runnable{
     public void run() {
         try {
         while (true) {
-            receiveMessage = AES.decrypt(in.readLine());
-            out.println(AES.encrypt(parseMessage(receiveMessage)));
+            receiveMessage = in.readLine();
+            out.println(parseMessage(receiveMessage));
             out.flush();
             responseMessage = "";
     }
@@ -376,6 +376,7 @@ public class ClientHandler implements Runnable{
         if (user == null){
             responseMessage = "# " + currentTimeAsDateString + " You need to login first.";
         } else if (!user.isLoggedIn()) {
+
             responseMessage = "# " + currentTimeAsDateString + " You need to login first.";
         } else if (getGroupByName(contentOfMessage) == null){
             responseMessage = "# " + currentTimeAsDateString + " Such group does not exist.";
@@ -606,14 +607,14 @@ public class ClientHandler implements Runnable{
 
     static void outToAll(String responseMessage) {
         for( ClientHandler clientHandlers : clients){
-            clientHandlers.out.println(AES.encrypt(responseMessage));
+            clientHandlers.out.println(responseMessage);
         }
     }
 
     private void outToAllLoggedIn(String responseMessage) {
         for( ClientHandler clientHandlers : clients){
             if (clientHandlers.getUserOfClientHandler().getUserName() != null){
-                clientHandlers.out.println(AES.encrypt(responseMessage));
+                clientHandlers.out.println(responseMessage);
             }
         }
     }
@@ -621,7 +622,7 @@ public class ClientHandler implements Runnable{
     private void outToPrivate(String responseMessage, String name){
         for( ClientHandler clientHandlers : clients){
             if (getByUserName(name).equals(clientHandlers)) {
-                clientHandlers.out.println(AES.encrypt(responseMessage));
+                clientHandlers.out.println(responseMessage);
             }
         }
     }
@@ -630,7 +631,7 @@ public class ClientHandler implements Runnable{
         for( ClientHandler clientHandlers : clients){
             for (Group group : groups){
                 if(group.checkIfUserExist(clientHandlers.getUserOfClientHandler().getUserName()) && groupName.equals(group.getGroupName())){
-                    clientHandlers.out.println(AES.encrypt(responseMessage));
+                    clientHandlers.out.println(responseMessage);
                 }
             }
         }
@@ -645,14 +646,14 @@ public class ClientHandler implements Runnable{
     }
 
     private void receiveFile(String name) throws IOException {
-        byte b[] = new byte[2024];
+        byte b[] = new byte[1024];
         InputStream inputStream = client.getInputStream();
         FileOutputStream fileOutputStream = new FileOutputStream("client/server.txt");
         inputStream.read(b,0,b.length);
         fileOutputStream.write(b,0,b.length);
         for( ClientHandler clientHandlers : clients){
             if (getByUserName(name).equals(clientHandlers)) {
-                clientHandlers.out.println(AES.encrypt("You received a new file"));
+                clientHandlers.out.println("You received a new file");
                 FileSender fileSender = new FileSender(clientHandlers.getClient(),"client/server.txt");
                 new Thread(fileSender).start();
             }

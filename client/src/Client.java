@@ -28,13 +28,12 @@ public class Client
         {
             sendMessage = keyRead.readLine();  // keyboard reading   clientName is at the beginning of every message
             if (sendMessage.contains("Send")){
-                sendMessage = AES.encrypt(sendMessage);
                 pwrite.println(sendMessage);       // sending to server
                 pwrite.flush();                    // flush the data
                 FileSender fileSender = new FileSender(sock,"client.txt");
                 new Thread(fileSender).start();
             } else {
-                String encryptedMessage = AES.encrypt(sendMessage);
+                String encryptedMessage = sendMessage;
 
                 pwrite.println(encryptedMessage);       // sending to server
                 pwrite.flush();                    // flush the data

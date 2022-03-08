@@ -1,3 +1,4 @@
+
 public class UserAndTimeOfLastMessage {
     private User user;
     private Long timestampOfLastMessage;

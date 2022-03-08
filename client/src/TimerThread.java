@@ -37,11 +37,11 @@ public class TimerThread extends Thread{
                 try {
                 while (true) {
                         if (clientThread.getCounter() == 3) {
-                            out.println(AES.encrypt("Ping"));
+                            out.println("Ping");
                             clientThread.setCounter(); //increase counter by 1 so it doesn't ping multiple times
                         }
                             else if (clientThread.getCounter() == 10 && clientThread.getResponseMessage().equals("")) { //if no response within 10 seconds terminate connection
-                                out.println(AES.encrypt("Timer has reached 10 connection will now be terminated"));
+                                out.println("Timer has reached 10 connection will now be terminated");
                                 clientThread.getUserOfClientHandler().changeLoginStatus();
                                 socket.close();
                                 timer.cancel();//end the timer

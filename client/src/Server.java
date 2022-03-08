@@ -8,7 +8,7 @@ import java.util.concurrent.Executors;
 public class Server {
 
     static final int LIMIT_OF_CLIENTS = 20;
-    static final int PORT = 3000;
+    static final int PORT = 1337;
     private static ArrayList<ClientHandler> clients = new ArrayList<>();
     private static ExecutorService pool = Executors.newFixedThreadPool(LIMIT_OF_CLIENTS);
     private static ExecutorService pool2 = Executors.newFixedThreadPool(LIMIT_OF_CLIENTS);

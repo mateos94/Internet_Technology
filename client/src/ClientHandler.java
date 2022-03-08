@@ -1,6 +1,7 @@
 import java.io.*;
 import java.net.Socket;
 import java.nio.file.Files;
+import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
 import java.text.Format;
@@ -278,6 +279,8 @@ public class ClientHandler implements Runnable{
             responseMessage = checkHistoryOfGroup(currentTimeAsDateString, contentOfMessage);
         } else if (typeOfMessage.equalsIgnoreCase("Send")){
             responseMessage = send(currentTimeAsDateString, contentOfMessage);
+        } else if (typeOfMessage.equalsIgnoreCase("File")){
+            responseMessage = askToSendFile(currentTimeAsDateString, contentOfMessage);
         }
 
         else {
@@ -528,7 +531,9 @@ public class ClientHandler implements Runnable{
     }
 
     private String send(String currentTimeAsDateString, String contentOfMessage){
-        if (user.getUserName().equals("0")) {
+        if (user == null){
+            responseMessage = "# " + currentTimeAsDateString + " You need to login first.";
+        } else if (!user.isLoggedIn()) {
             responseMessage = "# " + currentTimeAsDateString + " You need to login first.";
         } else {
             int j = contentOfMessage.indexOf(' ');
@@ -542,6 +547,58 @@ public class ClientHandler implements Runnable{
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
+            }
+        }
+        return responseMessage;
+    }
+
+    private String askToSendFile(String currentTimeAsDateString, String contentOfMessage) throws IOException {
+        if (user == null){
+            responseMessage = "# " + currentTimeAsDateString + " You need to login first.";
+        } else if (!user.isLoggedIn()) {
+            responseMessage = "# " + currentTimeAsDateString + " You need to login first.";
+        } else {
+            int j = contentOfMessage.indexOf(' ');
+            String receiverName = contentOfMessage.substring(0, j);
+            String filePath = contentOfMessage.substring(j + 1);
+            File file = new File(filePath);
+
+            FileInputStream fis;
+            DataOutputStream dos;
+
+            if (file.exists()) {
+                try {
+                        fis = new FileInputStream(file);
+                        dos = new DataOutputStream(client.getOutputStream());
+
+                        dos.writeUTF(file.getName());
+                        dos.flush();
+                        dos.writeLong(file.length());
+                        dos.flush();
+
+                        byte[] bytes = new byte[1024];
+                        int length = 0;
+                        long progress = 0;
+                        while((length = fis.read(bytes, 0, bytes.length)) != -1) {
+                            dos.write(bytes, 0, length);
+                            dos.flush();
+                            progress += length;
+                            System.out.print("| " + (100*progress/file.length()) + "% |");
+                        }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                } finally {
+                    client.close();
+                }
+            }
+
+            if (!file.isFile()) {
+                responseMessage = "# " + currentTimeAsDateString + " File path is wrong.";
+            } else if (!checkIfUserExist(receiverName)) {
+                responseMessage = "# " + currentTimeAsDateString + " User does not exist.";
+            } else {
+                outToPrivate("# <" + user.getUserName() + "> want to send you a file, do you allow? type file to save it.", receiverName);
+                responseMessage = "# " + currentTimeAsDateString + " Your file has been sent successfully, if the receiver allows, he/she will receive";
             }
         }
         return responseMessage;

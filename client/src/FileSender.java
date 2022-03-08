@@ -6,7 +6,7 @@ import java.net.Socket;
 
 public class FileSender implements Runnable{
     private Socket server;
-    private  String filePath;
+    private String filePath;
     private FileInputStream fileInputStream;
     private OutputStream ostream;
     public FileSender(Socket socket, String filePath) throws IOException {

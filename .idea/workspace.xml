@@ -1,8 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="0b2b46a1-6066-452f-b965-97d7e6559bc4" name="Default Changelist" comment="" />
-    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
+    <list default="true" id="0b2b46a1-6066-452f-b965-97d7e6559bc4" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/client/client.txt" beforeDir="false" afterPath="$PROJECT_DIR$/client/client/client.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/client/server.txt" beforeDir="false" afterPath="$PROJECT_DIR$/client/client/server.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/client/users.txt" beforeDir="false" afterPath="$PROJECT_DIR$/client/client/users.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/AES.java" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/server/AES.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/Client.java" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/client/Client.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/ClientHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/server/ClientHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/FileSender.java" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/server/FileSender.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/Group.java" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/server/Group.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/Server.java" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/server/Server.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/ServerConnection.java" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/client/ServerConnection.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/TimerThread.java" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/server/TimerThread.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/server/User.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/UserAndTimeOfLastMessage.java" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/server/UserAndTimeOfLastMessage.java" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -17,6 +31,7 @@
     <option name="width" value="1936" />
     <option name="height" value="1056" />
   </component>
+  <component name="ProjectId" id="26A1AdJUHNDDkqkxmiBQUH3T5Mm" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
     <navigator proportions="" version="1">
@@ -50,21 +65,75 @@
       </pane>
     </panes>
   </component>
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
   <component name="PropertiesComponent">
-    <property name="last_opened_file_path" value="D:/torrent" />
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="aspect.path.notification.shown" value="true" />
+    <property name="jdk.selected.JAVA_MODULE" value="15" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../server test1.1/server_tests" />
+    <property name="node.js.detected.package.eslint" value="true" />
+    <property name="node.js.detected.package.tslint" value="true" />
+    <property name="node.js.path.for.package.eslint" value="project" />
+    <property name="node.js.path.for.package.tslint" value="project" />
+    <property name="node.js.selected.package.eslint" value="(autodetect)" />
+    <property name="node.js.selected.package.tslint" value="(autodetect)" />
+    <property name="project.structure.last.edited" value="Modules" />
+    <property name="project.structure.proportion" value="0.15" />
+    <property name="project.structure.side.proportion" value="0.2" />
   </component>
-  <component name="RunDashboard">
-    <option name="ruleStates">
+  <component name="RunManager" selected="Application.Client 2">
+    <configuration name="Client 1" type="Application" factoryName="Application" temporary="true">
+      <option name="MAIN_CLASS_NAME" value="client.Client" />
+      <module name="client" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="Client 2" type="Application" factoryName="Application">
+      <option name="MAIN_CLASS_NAME" value="client.Client" />
+      <module name="client" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="Server" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="server.Server" />
+      <module name="client" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="ArquillianTestNG" factoryName="" nameIsGenerated="true">
+      <option name="arquillianRunConfiguration">
+        <value>
+          <option name="containerStateName" value="" />
+        </value>
+      </option>
+      <option name="TEST_OBJECT" value="CLASS" />
+      <properties />
+      <listeners />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <list>
+      <item itemvalue="Application.Client 2" />
+      <item itemvalue="Application.Client 1" />
+      <item itemvalue="Application.Server" />
+    </list>
+    <recent_temporary>
       <list>
-        <RuleState>
-          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
-        </RuleState>
-        <RuleState>
-          <option name="name" value="StatusDashboardGroupingRule" />
-        </RuleState>
+        <item itemvalue="Application.Server" />
+        <item itemvalue="Application.Client 1" />
       </list>
-    </option>
+    </recent_temporary>
   </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="SvnConfiguration">
     <configuration />
   </component>
@@ -75,6 +144,20 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1646753581509</updated>
+      <workItem from="1646851436265" duration="851000" />
+      <workItem from="1646852310994" duration="4012000" />
+      <workItem from="1646947138969" duration="7658000" />
+      <workItem from="1646956351574" duration="64000" />
+      <workItem from="1647016012791" duration="6797000" />
+      <workItem from="1647080550070" duration="1646000" />
+      <workItem from="1647082759156" duration="930000" />
+      <workItem from="1647085150837" duration="754000" />
+      <workItem from="1647086161558" duration="664000" />
+      <workItem from="1647092964800" duration="720000" />
+      <workItem from="1647096070665" duration="3470000" />
+      <workItem from="1647100267478" duration="268000" />
+      <workItem from="1647100775871" duration="1665000" />
+      <workItem from="1647104112572" duration="9876000" />
     </task>
     <servers />
   </component>
@@ -112,5 +195,20 @@
       <window_info anchor="right" id="Palette&#9;" order="6" />
       <window_info anchor="right" id="Theme Preview" order="7" />
     </layout>
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+    <option name="oldMeFiltersMigrated" value="true" />
   </component>
 </project>

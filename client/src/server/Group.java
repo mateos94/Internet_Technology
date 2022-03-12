@@ -1,6 +1,9 @@
+package server;
+
+import server.User;
+import server.UserAndTimeOfLastMessage;
+
 import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
 
 public class Group {
     private String groupName;

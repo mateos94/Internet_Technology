@@ -1,3 +1,3 @@
 client.txt is the file we want to send from client1 to client2 through the server.
-Server.txt is the server getting the content of client.txt and save it.
+server.Server.txt is the server getting the content of client.txt and save it.
 receive.txt is the file clinet2 received from client 1.

@@ -1,3 +1,5 @@
+package server;
+
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
@@ -49,9 +51,12 @@ public class Server {
                 for (UserAndTimeOfLastMessage nextUserAndTimeOfLastMessage: nextGroup.getMembersAndTimeOfLastMessage()){
                     if (System.currentTimeMillis() - nextUserAndTimeOfLastMessage.getTimestampOfLastMessage() > 10000){
                         nextGroup.deleteMemberByName(nextUserAndTimeOfLastMessage.getUser().getUserName());
+                        if (nextGroup.getOwner().getUserName().equals(nextUserAndTimeOfLastMessage.getUser().getUserName())) {
+                            ClientHandler.disbandGroup(nextGroup.getGroupName());
+                        }
                         String message = "";
                         message += "# Because of " + nextUserAndTimeOfLastMessage.getUser().getUserName() + " did not talk for more than 2 mins in group " + nextGroup.getGroupName() + ", got kicked out of group.";
-                        ClientHandler.outToAll(message);
+                        ClientHandler.outToPrivate(message, nextUserAndTimeOfLastMessage.getUser().getUserName());
                     }
                 }
             }

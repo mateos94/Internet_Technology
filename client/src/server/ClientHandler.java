@@ -76,7 +76,7 @@ public class ClientHandler implements Runnable{
     }
         } catch (IOException e) {
             try {
-                removeNotOnlineGuestFromFile("client/client/users.txt");
+                removeUserByName(user.getUserName());
             } catch (Exception exception) {
                 exception.printStackTrace();
             }
@@ -239,11 +239,7 @@ public class ClientHandler implements Runnable{
             } else if (!user.isLoggedIn()) {
                 responseMessage = "ER03 Please log in first";
             } else {
-                if (!user.userIsAuthenticated()) {
-                    removeUsernameInFile(user.getUserName(),"client/client/users.txt");
-                }
                 responseMessage = "# " + currentTimeAsDateString + " You are logged out";
-                removeUsernameInFile(user.getUserName(), "client/client/users.txt");
                 removeUserByName(user.getUserName());
                 user = null;
             }
@@ -301,7 +297,6 @@ public class ClientHandler implements Runnable{
             } else {
                 user = new User(contentOfMessage);
                 users.add(user);
-                storeUsernameInFile(user.getUserName(), "client/client/users.txt");
                 responseMessage = "You are logged in with username " + contentOfMessage;
             }
         } else {
@@ -691,16 +686,8 @@ public class ClientHandler implements Runnable{
         out.close();
     }
 
-
-    public void storeUsernameInFile(String username, String file) throws IOException {
-        BufferedWriter out = new BufferedWriter(new FileWriter(file, true));
-        out.append(username);
-        out.newLine();
-        out.close();
-    }
-
     public static boolean usernameAlreadyExists(String username) throws IOException {
-        return usernameAlreadyExistsAsGuest(username, "client/client/users.txt") || usernameAlreadyExistsAsAuthenticatedUser(username, "client/client/authenticatedUsers.txt");
+        return usernameAlreadyExistsAsGuest(username) || usernameAlreadyExistsAsAuthenticatedUser(username, "client/client/authenticatedUsers.txt");
     }
 
     public static boolean usernameAlreadyExistsAsAuthenticatedUser(String username, String file) throws IOException {
@@ -715,10 +702,10 @@ public class ClientHandler implements Runnable{
         return usernameAlreadyExist;
     }
 
-    public static boolean usernameAlreadyExistsAsGuest(String username, String file) throws IOException {
+    public static boolean usernameAlreadyExistsAsGuest(String username) {
         boolean usernameAlreadyExist = false;
-        for (String usernameAndPassword : getAllUsernameAndPasswordFromFileAsArray(file)) {
-            if (username.equals(usernameAndPassword)) {
+        for (User user : users) {
+            if (username.equals(user.getUserName())) {
                 usernameAlreadyExist = true;
             }
         }
@@ -731,21 +718,6 @@ public class ClientHandler implements Runnable{
                 .filter(line -> !line.contains(username))
                 .collect(Collectors.toList());
         Files.write(targetFile.toPath(), out, StandardOpenOption.WRITE, StandardOpenOption.TRUNCATE_EXISTING);
-    }
-
-    public void removeNotOnlineGuestFromFile(String file) throws Exception {
-        ArrayList<String> onlineUsers = new ArrayList<>();
-        for (User nextUser: users) {
-            if (nextUser.getUserName().equals("") && nextUser.getUserName() != null) {
-                onlineUsers.add(nextUser.getUserName());
-            }
-        }
-
-        for (String nextUsernameInFile: getAllUsernameAndPasswordFromFileAsArray(file)){
-            if (!onlineUsers.contains(nextUsernameInFile)) {
-                removeUsernameInFile(nextUsernameInFile, file);
-            }
-        }
     }
 
 

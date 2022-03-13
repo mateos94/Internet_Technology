@@ -1,21 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="0b2b46a1-6066-452f-b965-97d7e6559bc4" name="Default Changelist" comment="">
+    <list default="true" id="0b2b46a1-6066-452f-b965-97d7e6559bc4" name="Default Changelist" comment="bug fixed">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/client/client.txt" beforeDir="false" afterPath="$PROJECT_DIR$/client/client/client.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/client/server.txt" beforeDir="false" afterPath="$PROJECT_DIR$/client/client/server.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/client/users.txt" beforeDir="false" afterPath="$PROJECT_DIR$/client/client/users.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/AES.java" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/server/AES.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/Client.java" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/client/Client.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/ClientHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/server/ClientHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/FileSender.java" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/server/FileSender.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/Group.java" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/server/Group.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/Server.java" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/server/Server.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/ServerConnection.java" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/client/ServerConnection.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/TimerThread.java" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/server/TimerThread.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/server/User.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/UserAndTimeOfLastMessage.java" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/server/UserAndTimeOfLastMessage.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/server/ClientHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/server/ClientHandler.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -157,8 +145,16 @@
       <workItem from="1647096070665" duration="3470000" />
       <workItem from="1647100267478" duration="268000" />
       <workItem from="1647100775871" duration="1665000" />
-      <workItem from="1647104112572" duration="9876000" />
+      <workItem from="1647104112572" duration="11376000" />
     </task>
+    <task id="LOCAL-00001" summary="bug fixed">
+      <created>1647128816152</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1647128816152</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -210,5 +206,9 @@
       </map>
     </option>
     <option name="oldMeFiltersMigrated" value="true" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="bug fixed" />
+    <option name="LAST_COMMIT_MESSAGE" value="bug fixed" />
   </component>
 </project>

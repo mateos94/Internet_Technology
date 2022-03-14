@@ -15,7 +15,7 @@ public class Client
 
     private static final String SERVER_IP = "127.0.0.1";
     private static final int SERVER_PORT = 1337;
-    private static final String PATH = "client/client.txt";
+    //private static final String PATH = "client/client.txt";
 
 
     public static void main(String[] args) throws Exception
@@ -37,9 +37,9 @@ public class Client
         {
             sendMessage = keyRead.readLine();  // keyboard reading   clientName is at the beginning of every message
             if (containsIgnoreCase(sendMessage,"Send")){
-                System.out.println(sendMessage);
+                String fileLocation = sendMessage.substring(sendMessage.lastIndexOf(" ")+1);
                 try {
-                    FileInputStream fis = new FileInputStream(PATH);
+                    FileInputStream fis = new FileInputStream(fileLocation);
                     byte b[] = new byte[2002];
                     fis.read(b, 0, b.length);
                     OutputStream os = socket.getOutputStream();

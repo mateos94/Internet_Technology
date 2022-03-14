@@ -1,10 +1,13 @@
 package server;
 
+
 import java.io.*;
+import java.net.ServerSocket;
 import java.net.Socket;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
+import java.text.DecimalFormat;
 import java.text.Format;
 import java.text.SimpleDateFormat;
 import java.util.*;
@@ -24,6 +27,7 @@ public class ClientHandler implements Runnable{
     private static ArrayList<ClientHandler> clients;
     private int counter;
     private User user;
+    private String typeOfMessage;
 
     public int getCounter() {
         return counter;
@@ -76,7 +80,7 @@ public class ClientHandler implements Runnable{
     }
         } catch (IOException e) {
             try {
-                removeUserByName(user.getUserName());
+               // removeUserByName(user.getUserName());
             } catch (Exception exception) {
                 exception.printStackTrace();
             }
@@ -250,7 +254,7 @@ public class ClientHandler implements Runnable{
             responseMessage = "#Please enter the full command";
             return responseMessage;
         }
-        String typeOfMessage = string.substring(0, x);
+        typeOfMessage = string.substring(0, x);
         String contentOfMessage = string.substring(x + 1);
         if (typeOfMessage.equalsIgnoreCase("CONN")) {
             responseMessage = login(contentOfMessage);
@@ -313,7 +317,7 @@ public class ClientHandler implements Runnable{
                 int j = contentOfMessage.indexOf(' ');
                 String username = contentOfMessage.substring(0, j);
                 String password = contentOfMessage.substring(j + 1);
-                if (usernameAndPasswordCorrect(username, password, "client/client/authenticatedUsers.txt")) {
+                if (usernameAndPasswordCorrect(username, password, "client/authenticatedUsers.txt")) {
                     user = new User(contentOfMessage);
                     users.add(user);
                     responseMessage = "You are logged in as authenticated user " + contentOfMessage;
@@ -345,7 +349,7 @@ public class ClientHandler implements Runnable{
                     user = new User(username);
                     user.setPassword(password);
                     users.add(user);
-                    storeUsernamePasswordInFile(username, password, "client/client/authenticatedUsers.txt");
+                    storeUsernamePasswordInFile(username, password, "client/authenticatedUsers.txt");
                     responseMessage = "You are registered and logged in with authenticated user, with username of " + username;
                 }
             }
@@ -538,12 +542,7 @@ public class ClientHandler implements Runnable{
             if (!checkIfUserExist(receiverName)) {
                 responseMessage = "ER04 Such user doesn't exist";
             } else {
-                try {
-                    receiveFile(receiverName);
-                    responseMessage = "Your file has been sent successfully";
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
+                responseMessage = "Your file has been sent successfully";
             }
         }
         return responseMessage;
@@ -644,14 +643,13 @@ public class ClientHandler implements Runnable{
     private void receiveFile(String name) throws IOException {
         byte b[] = new byte[1024];
         InputStream inputStream = client.getInputStream();
-        FileOutputStream fileOutputStream = new FileOutputStream("client/client/server.txt");
+        FileOutputStream fileOutputStream = new FileOutputStream("client/server.txt");
         inputStream.read(b,0,b.length);
         fileOutputStream.write(b,0,b.length);
         for( ClientHandler clientHandlers : clients){
             if (getByUserName(name).equals(clientHandlers)) {
                 clientHandlers.out.println("You received a new file");
-                FileSender fileSender = new FileSender(clientHandlers.getClient(),"client/client/server.txt");
-                new Thread(fileSender).start();
+                //new Thread(fileSender).start();
             }
         }
     }
@@ -687,7 +685,7 @@ public class ClientHandler implements Runnable{
     }
 
     public static boolean usernameAlreadyExists(String username) throws IOException {
-        return usernameAlreadyExistsAsGuest(username) || usernameAlreadyExistsAsAuthenticatedUser(username, "client/client/authenticatedUsers.txt");
+        return usernameAlreadyExistsAsGuest(username) || usernameAlreadyExistsAsAuthenticatedUser(username, "client/authenticatedUsers.txt");
     }
 
     public static boolean usernameAlreadyExistsAsAuthenticatedUser(String username, String file) throws IOException {

@@ -14,6 +14,7 @@ public class Server {
     private static ArrayList<ClientHandler> clients = new ArrayList<>();
     private static ExecutorService pool = Executors.newFixedThreadPool(LIMIT_OF_CLIENTS);
     private static ExecutorService pool2 = Executors.newFixedThreadPool(LIMIT_OF_CLIENTS);
+    private static ExecutorService pool3 = Executors.newFixedThreadPool(LIMIT_OF_CLIENTS);
 
     public static void main(String args[]) throws InterruptedException, IOException {
 
@@ -38,11 +39,15 @@ public class Server {
             Socket client = serverSocket.accept();
             ClientHandler clientThread = new ClientHandler(client, clients);
             TimerThread timerThread = new TimerThread(client,clientThread);
+            FileReceiverServer fileReceiverServer = new FileReceiverServer(client);
             clients.add(clientThread);
             pool.execute(clientThread);
             pool2.execute(timerThread);
+            pool3.execute(fileReceiverServer);
+
             System.out.println("a new client has been connected");
         }
+
     }
 
     public static void kickPeopleWhoAreNotChattingMoreThanTwoMinutesInGroups() throws ConcurrentModificationException {
@@ -62,5 +67,7 @@ public class Server {
             }
         }
     }
+
+
 
 }

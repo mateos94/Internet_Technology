@@ -31,12 +31,12 @@ public class ServerConnection implements Runnable{
                     server.close(); // cut connection if user exists already
                 }
                  if (receiveMessage.contains("You received a new file")){
-                    byte b[] = new byte[1024];
-                    InputStream inputStream = server.getInputStream();
-                    FileOutputStream fileOutputStream = new FileOutputStream("client/receive.txt");
-                    inputStream.read(b,0,b.length);
-                    fileOutputStream.write(b,0,b.length);
-                }
+                     byte [] b = new byte[20002];
+                     InputStream is = server.getInputStream();
+                     FileOutputStream fos = new FileOutputStream("client/receive.txt");
+                     is.read(b,0,b.length);
+                     fos.write(b,0,b.length);
+                 }
                 System.out.println(receiveMessage); // displaying at DOS prompt
             }
         } catch (IOException e) {

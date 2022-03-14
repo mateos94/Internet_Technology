@@ -3,11 +3,11 @@ package client;
 import java.io.*;
 import java.net.Socket;
 
+
 public class ServerConnection implements Runnable{
     private Socket server;
     private BufferedReader in;
     private boolean loggedIn = false;
-
     public boolean isLoggedIn() {
         return loggedIn;
     }
@@ -31,10 +31,12 @@ public class ServerConnection implements Runnable{
                     server.close(); // cut connection if user exists already
                 }
                  if (receiveMessage.contains("You received a new file")){
-                     byte [] b = new byte[20002];
-                     InputStream is = server.getInputStream();
-                     FileOutputStream fos = new FileOutputStream("client/receive.txt");
-                     is.read(b,0,b.length);
+                     byte [] b = new byte[2002];
+                     //InputStream is = server.getInputStream();
+                     FileInputStream fis = new FileInputStream("client/receive.txt");
+                     FileOutputStream fos = new FileOutputStream("client/receivedFromServer.txt");
+                     //is.read(b,0,b.length);
+                     fis.read(b,0,b.length);
                      fos.write(b,0,b.length);
                  }
                 System.out.println(receiveMessage); // displaying at DOS prompt

@@ -37,6 +37,7 @@ public class Client
         {
             sendMessage = keyRead.readLine();  // keyboard reading   clientName is at the beginning of every message
             if (containsIgnoreCase(sendMessage,"Send")){
+                System.out.println(sendMessage);
                 try {
                     FileInputStream fis = new FileInputStream(PATH);
                     byte b[] = new byte[2002];
@@ -59,16 +60,6 @@ public class Client
         }
     }
 
-    public static List<String> readFileIntoList(String file) {
-        List<String> lines = new ArrayList<String>();
-        try {
-            lines = Files.readAllLines(Paths.get(file), StandardCharsets.UTF_8);
-            }
-        catch (IOException e) {
-            e.printStackTrace();
-        }
-        return lines;
-    }
     public static boolean containsIgnoreCase(String str, String searchStr)     {
         if(str == null || searchStr == null) return false;
 

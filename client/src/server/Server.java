@@ -15,6 +15,7 @@ public class Server {
     private static ExecutorService pool = Executors.newFixedThreadPool(LIMIT_OF_CLIENTS);
     private static ExecutorService pool2 = Executors.newFixedThreadPool(LIMIT_OF_CLIENTS);
     private static ExecutorService pool3 = Executors.newFixedThreadPool(LIMIT_OF_CLIENTS);
+    private static ExecutorService pool4 = Executors.newFixedThreadPool(LIMIT_OF_CLIENTS);
 
     public static void main(String args[]) throws InterruptedException, IOException {
 
@@ -40,10 +41,13 @@ public class Server {
             ClientHandler clientThread = new ClientHandler(client, clients);
             TimerThread timerThread = new TimerThread(client,clientThread);
             FileReceiverServer fileReceiverServer = new FileReceiverServer(client);
+            FileSenderServer fileSenderServer = new FileSenderServer(client);
             clients.add(clientThread);
             pool.execute(clientThread);
             pool2.execute(timerThread);
             pool3.execute(fileReceiverServer);
+            pool4.execute(fileSenderServer);
+
 
             System.out.println("a new client has been connected");
         }

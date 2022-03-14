@@ -3,7 +3,17 @@
   <component name="issues">
     <option name="index">
       <map>
+        <entry key="/fragment.java">
+          <value>
+            <set />
+          </value>
+        </entry>
         <entry key="$PROJECT_DIR$/client/receive.txt">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/client/receivedFromServer.txt">
           <value>
             <set />
           </value>
@@ -58,7 +68,17 @@
             <set />
           </value>
         </entry>
+        <entry key="$PROJECT_DIR$/src/client/FileReceiverClient.java">
+          <value>
+            <set />
+          </value>
+        </entry>
         <entry key="$PROJECT_DIR$/src/client/FileSender.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/src/client/FileSenderClient.java">
           <value>
             <set />
           </value>
@@ -94,6 +114,11 @@
           </value>
         </entry>
         <entry key="$PROJECT_DIR$/src/server/FileSender.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/src/server/FileSenderServer.java">
           <value>
             <set />
           </value>

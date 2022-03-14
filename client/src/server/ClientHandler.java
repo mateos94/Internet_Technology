@@ -543,6 +543,11 @@ public class ClientHandler implements Runnable{
                 responseMessage = "ER04 Such user doesn't exist";
             } else {
                 responseMessage = "Your file has been sent successfully";
+                for( ClientHandler clientHandlers : clients){
+                    if (getByUserName(receiverName).equals(clientHandlers)) {
+                        clientHandlers.out.println("You received a new file");
+                    }
+                }
             }
         }
         return responseMessage;
@@ -641,11 +646,11 @@ public class ClientHandler implements Runnable{
     }
 
     private void receiveFile(String name) throws IOException {
-        byte b[] = new byte[1024];
-        InputStream inputStream = client.getInputStream();
-        FileOutputStream fileOutputStream = new FileOutputStream("client/server.txt");
-        inputStream.read(b,0,b.length);
-        fileOutputStream.write(b,0,b.length);
+//        byte b[] = new byte[1024];
+//        InputStream inputStream = client.getInputStream();
+//        FileOutputStream fileOutputStream = new FileOutputStream("client/server.txt");
+//        inputStream.read(b,0,b.length);
+//        fileOutputStream.write(b,0,b.length);
         for( ClientHandler clientHandlers : clients){
             if (getByUserName(name).equals(clientHandlers)) {
                 clientHandlers.out.println("You received a new file");

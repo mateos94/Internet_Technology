@@ -12,9 +12,9 @@ public class FileReceiverServer implements Runnable {
 
     public void receive() {
         try {
-            byte [] b = new byte[20002];
+            byte [] b = new byte[2002];
             InputStream is = socket.getInputStream();
-            FileOutputStream fos = new FileOutputStream("client/receive.txt");
+            FileOutputStream fos = new FileOutputStream("client/client/receive.txt");
             is.read(b,0,b.length);
             fos.write(b,0,b.length);
         }

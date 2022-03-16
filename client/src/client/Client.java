@@ -1,6 +1,5 @@
 package client;
 
-
 import java.io.*;
 import java.net.Socket;
 import java.nio.charset.StandardCharsets;
@@ -36,7 +35,7 @@ public class Client
         while(true)
         {
             sendMessage = keyRead.readLine();  // keyboard reading   clientName is at the beginning of every message
-            if (containsIgnoreCase(sendMessage,"Send")){
+            if (startsWithIgnoreCase("Send ", sendMessage)){
                 String fileLocation = sendMessage.substring(sendMessage.lastIndexOf(" ")+1);
                 try {
                     FileInputStream fis = new FileInputStream(fileLocation);
@@ -50,28 +49,26 @@ public class Client
                 }
                 pwrite.println(sendMessage);       // sending to server
                 pwrite.flush();                    // flush the data
-
+            } else if (startsWithIgnoreCase("Private ", sendMessage)) {
+                if (sendMessage.length() > 8) {
+                    String restOfMessage = sendMessage.substring(8);
+                    String restOfMessageEncrypted = AES.encrypt(restOfMessage);
+                    sendMessage = "PRIVATE " + restOfMessageEncrypted;
+                }
+                pwrite.println(sendMessage);       // sending to server
+                pwrite.flush();                    // flush the data
             } else {
-                String encryptedMessage = sendMessage;
-
-                pwrite.println(encryptedMessage);       // sending to server
+                pwrite.println(sendMessage);       // sending to server
                 pwrite.flush();                    // flush the data
             }
+
         }
     }
 
-    public static boolean containsIgnoreCase(String str, String searchStr)     {
-        if(str == null || searchStr == null) return false;
-
-        final int length = searchStr.length();
-        if (length == 0)
-            return true;
-
-        for (int i = str.length() - length; i >= 0; i--) {
-            if (str.regionMatches(true, i, searchStr, 0, length))
-                return true;
-        }
-        return false;
+    public static boolean startsWithIgnoreCase(String targetOfStartWith, String string) {
+        String lowerCasedTargetOfStartWith = targetOfStartWith.toLowerCase();
+        String lowerCasedString = string.toLowerCase();
+        return lowerCasedString.startsWith(lowerCasedTargetOfStartWith);
     }
 
 }   

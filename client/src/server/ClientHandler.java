@@ -195,7 +195,6 @@ public class ClientHandler implements Runnable{
             counter = 0;
             return responseMessage;
         }
-        int i = string.indexOf(' ');
         if (string.equals("?")) {
             responseMessage =
                     "# Help list: \n" +
@@ -317,7 +316,7 @@ public class ClientHandler implements Runnable{
                 int j = contentOfMessage.indexOf(' ');
                 String username = contentOfMessage.substring(0, j);
                 String password = contentOfMessage.substring(j + 1);
-                if (usernameAndPasswordCorrect(username, password, "client/authenticatedUsers.txt")) {
+                if (usernameAndPasswordCorrect(username, password, "client/client/authenticatedUsers.txt")) {
                     user = new User(contentOfMessage);
                     users.add(user);
                     responseMessage = "You are logged in as authenticated user " + contentOfMessage;
@@ -349,7 +348,7 @@ public class ClientHandler implements Runnable{
                     user = new User(username);
                     user.setPassword(password);
                     users.add(user);
-                    storeUsernamePasswordInFile(username, password, "client/authenticatedUsers.txt");
+                    storeUsernamePasswordInFile(username, password, "client/client/authenticatedUsers.txt");
                     responseMessage = "You are registered and logged in with authenticated user, with username of " + username;
                 }
             }
@@ -457,6 +456,7 @@ public class ClientHandler implements Runnable{
     }
 
     private String sendPrivateMessage(String contentOfMessage){
+        contentOfMessage = AES.decrypt(contentOfMessage);
         if (user == null){
             responseMessage = "ER03 Please log in first";
         } else if (!user.isLoggedIn()) {
@@ -690,7 +690,7 @@ public class ClientHandler implements Runnable{
     }
 
     public static boolean usernameAlreadyExists(String username) throws IOException {
-        return usernameAlreadyExistsAsGuest(username) || usernameAlreadyExistsAsAuthenticatedUser(username, "client/authenticatedUsers.txt");
+        return usernameAlreadyExistsAsGuest(username) || usernameAlreadyExistsAsAuthenticatedUser(username, "client/client/authenticatedUsers.txt");
     }
 
     public static boolean usernameAlreadyExistsAsAuthenticatedUser(String username, String file) throws IOException {

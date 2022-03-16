@@ -2,10 +2,16 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="0b2b46a1-6066-452f-b965-97d7e6559bc4" name="Default Changelist" comment="bug fixed">
+      <change afterPath="$PROJECT_DIR$/client/src/client/AES.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/client/authenticatedUsers.txt" beforeDir="false" afterPath="$PROJECT_DIR$/client/client/authenticatedUsers.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/client/receive.txt" beforeDir="false" afterPath="$PROJECT_DIR$/client/client/receive.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/client/Client.java" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/client/Client.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/server/AES.java" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/server/AES.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/client/src/server/ClientHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/server/ClientHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/server/FileReceiverServer.java" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/server/FileReceiverServer.java" afterDir="false" />
     </list>
-    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -85,51 +91,87 @@
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
     <property name="jdk.selected.JAVA_MODULE" value="15" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../server test1.1/server_tests" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../Aaaa/Internet_Technology-main" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
     <property name="node.js.path.for.package.tslint" value="project" />
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
     <property name="node.js.selected.package.tslint" value="(autodetect)" />
-    <property name="project.structure.last.edited" value="Modules" />
+    <property name="project.structure.last.edited" value="Project" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
   </component>
-  <component name="RunDashboard">
-    <option name="ruleStates">
-      <list>
-        <RuleState>
-          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
-        </RuleState>
-        <RuleState>
-          <option name="name" value="StatusDashboardGroupingRule" />
-        </RuleState>
-      </list>
-    </option>
+  <component name="RecentsManager">
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="client" />
+    </key>
   </component>
-  <component name="RunManager" selected="Application.Client 2">
-    <configuration default="true" type="ArquillianTestNG" factoryName="" nameIsGenerated="true">
-      <option name="arquillianRunConfiguration">
-        <value>
-          <option name="containerStateName" value="" />
-        </value>
-      </option>
-      <option name="TEST_OBJECT" value="CLASS" />
-      <properties />
-      <listeners />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="Client 1" type="Application" factoryName="Application" temporary="true">
+  <component name="RunManager" selected="Application.Client 1">
+    <configuration name="Client 1" type="Application" factoryName="Application">
       <option name="MAIN_CLASS_NAME" value="client.Client" />
       <module name="client" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="Client 2" type="Application" factoryName="Application">
+    <configuration name="Client 10" type="Application" factoryName="Application">
+      <option name="MAIN_CLASS_NAME" value="client.Client" />
+      <module name="client" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="Client 2" type="Application" factoryName="Application" temporary="true">
+      <option name="MAIN_CLASS_NAME" value="client.Client" />
+      <module name="client" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="Client 3" type="Application" factoryName="Application">
+      <option name="MAIN_CLASS_NAME" value="client.Client" />
+      <module name="client" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="Client 4" type="Application" factoryName="Application">
+      <option name="MAIN_CLASS_NAME" value="client.Client" />
+      <module name="client" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="Client 5" type="Application" factoryName="Application">
+      <option name="MAIN_CLASS_NAME" value="client.Client" />
+      <module name="client" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="Client 6" type="Application" factoryName="Application">
+      <option name="MAIN_CLASS_NAME" value="client.Client" />
+      <module name="client" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="Client 7" type="Application" factoryName="Application">
+      <option name="MAIN_CLASS_NAME" value="client.Client" />
+      <module name="client" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="Client 8" type="Application" factoryName="Application">
+      <option name="MAIN_CLASS_NAME" value="client.Client" />
+      <module name="client" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="Client 9" type="Application" factoryName="Application">
       <option name="MAIN_CLASS_NAME" value="client.Client" />
       <module name="client" />
       <method v="2">
@@ -143,15 +185,34 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration default="true" type="ArquillianJUnit" factoryName="" nameIsGenerated="true">
+      <option name="arquillianRunConfiguration">
+        <value>
+          <option name="containerStateName" value="" />
+        </value>
+      </option>
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <list>
       <item itemvalue="Application.Client 1" />
+      <item itemvalue="Application.Client 3" />
+      <item itemvalue="Application.Client 4" />
+      <item itemvalue="Application.Client 5" />
+      <item itemvalue="Application.Client 6" />
+      <item itemvalue="Application.Client 7" />
+      <item itemvalue="Application.Client 8" />
+      <item itemvalue="Application.Client 9" />
+      <item itemvalue="Application.Client 10" />
       <item itemvalue="Application.Client 2" />
       <item itemvalue="Application.Server" />
     </list>
     <recent_temporary>
       <list>
         <item itemvalue="Application.Server" />
-        <item itemvalue="Application.Client 1" />
+        <item itemvalue="Application.Client 2" />
       </list>
     </recent_temporary>
   </component>
@@ -180,6 +241,14 @@
       <workItem from="1647100267478" duration="268000" />
       <workItem from="1647100775871" duration="1665000" />
       <workItem from="1647104112572" duration="11376000" />
+      <workItem from="1647276288250" duration="644000" />
+      <workItem from="1647276956414" duration="5144000" />
+      <workItem from="1647350407217" duration="3535000" />
+      <workItem from="1647373345910" duration="306000" />
+      <workItem from="1647373976927" duration="393000" />
+      <workItem from="1647378657692" duration="2012000" />
+      <workItem from="1647441150654" duration="17042000" />
+      <workItem from="1647464643440" duration="747000" />
     </task>
     <task id="LOCAL-00001" summary="bug fixed">
       <created>1647128816152</created>
@@ -234,14 +303,7 @@
       <map>
         <entry key="MAIN">
           <value>
-            <State>
-              <option name="RECENTLY_FILTERED_USER_GROUPS">
-                <collection />
-              </option>
-              <option name="RECENTLY_FILTERED_BRANCH_GROUPS">
-                <collection />
-              </option>
-            </State>
+            <State />
           </value>
         </entry>
       </map>
@@ -260,6 +322,7 @@
         </entry>
       </map>
     </option>
+    <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="bug fixed" />

@@ -2,15 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="0b2b46a1-6066-452f-b965-97d7e6559bc4" name="Default Changelist" comment="bug fixed">
-      <change afterPath="$PROJECT_DIR$/client/src/client/AES.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/client/authenticatedUsers.txt" beforeDir="false" afterPath="$PROJECT_DIR$/client/client/authenticatedUsers.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/client/receive.txt" beforeDir="false" afterPath="$PROJECT_DIR$/client/client/receive.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/client/Client.java" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/client/Client.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/server/AES.java" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/server/AES.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/server/ClientHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/server/ClientHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/server/FileReceiverServer.java" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/server/FileReceiverServer.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -248,7 +240,8 @@
       <workItem from="1647373976927" duration="393000" />
       <workItem from="1647378657692" duration="2012000" />
       <workItem from="1647441150654" duration="17042000" />
-      <workItem from="1647464643440" duration="747000" />
+      <workItem from="1647464643440" duration="1533000" />
+      <workItem from="1647522903243" duration="1814000" />
     </task>
     <task id="LOCAL-00001" summary="bug fixed">
       <created>1647128816152</created>
@@ -257,7 +250,14 @@
       <option name="project" value="LOCAL" />
       <updated>1647128816152</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="bug fixed">
+      <created>1647465558342</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1647465558342</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="ToolWindowManager">

@@ -8,7 +8,7 @@ import java.net.Socket;
 public class FileSenderServer implements Runnable{
 
     private Socket socket;
-    private static final String PATH = "client/receive.txt";
+    private static final String PATH = "client/client/receive.txt";
     public FileSenderServer(Socket socket) {
         this.socket = socket;
     }
@@ -17,7 +17,7 @@ public class FileSenderServer implements Runnable{
         sendFile();
     }
 
-    private void sendFile(){
+    public void sendFile(){
         try {
             FileInputStream fis = new FileInputStream(PATH);
             byte b[] = new byte[2002];

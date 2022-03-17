@@ -1,8 +1,5 @@
 package server;
 
-import server.User;
-import server.UserAndTimeOfLastMessage;
-
 import java.util.ArrayList;
 
 public class Group {

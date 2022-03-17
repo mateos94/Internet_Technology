@@ -1,7 +1,6 @@
 package server;
 
 import java.io.*;
-import java.net.ServerSocket;
 import java.net.Socket;
 
 public class FileReceiverServer implements Runnable {
@@ -10,12 +9,12 @@ public class FileReceiverServer implements Runnable {
         this.socket = socket;
     }
 
-    public void receive() {
+    public void receive(){
         try {
             byte [] b = new byte[2002];
             InputStream is = socket.getInputStream();
-            FileOutputStream fos = new FileOutputStream("client/client/receive.txt");
             is.read(b,0,b.length);
+            FileOutputStream fos = new FileOutputStream("client/client/receive.txt");
             fos.write(b,0,b.length);
         }
         catch (IOException e) {
@@ -25,6 +24,6 @@ public class FileReceiverServer implements Runnable {
 
     @Override
     public void run() {
-        receive();
+            receive();
     }
 }

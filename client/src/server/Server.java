@@ -40,13 +40,21 @@ public class Server {
             Socket client = serverSocket.accept();
             ClientHandler clientThread = new ClientHandler(client, clients);
             TimerThread timerThread = new TimerThread(client,clientThread);
-            FileReceiverServer fileReceiverServer = new FileReceiverServer(client);
-            FileSenderServer fileSenderServer = new FileSenderServer(client);
+
+
             clients.add(clientThread);
             pool.execute(clientThread);
             pool2.execute(timerThread);
-            pool3.execute(fileReceiverServer);
-            pool4.execute(fileSenderServer);
+
+            if(clientThread.getResponseMessage().equals("Your file has been sent successfully")){
+                FileReceiverServer fileReceiverServer = new FileReceiverServer(client);
+                pool3.execute(fileReceiverServer);
+            }
+            if(clientThread.getResponseMessage().equals("You received a new file")){
+                FileSenderServer fileSenderServer = new FileSenderServer(client);
+                pool4.execute(fileSenderServer);
+            }
+
 
 
             System.out.println("a new client has been connected");

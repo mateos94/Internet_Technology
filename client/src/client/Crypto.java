@@ -8,7 +8,7 @@ import java.security.NoSuchAlgorithmException;
 import java.util.Arrays;
 import java.util.Base64;
 
-public class AES {
+public class Crypto {
     final static String theKey = "key";
     private static SecretKeySpec secretKey;
     private static byte[] key;

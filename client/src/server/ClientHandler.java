@@ -456,7 +456,6 @@ public class ClientHandler implements Runnable{
     }
 
     private String sendPrivateMessage(String contentOfMessage){
-        contentOfMessage = AES.decrypt(contentOfMessage);
         if (user == null){
             responseMessage = "ER03 Please log in first";
         } else if (!user.isLoggedIn()) {
@@ -473,7 +472,7 @@ public class ClientHandler implements Runnable{
                 if (!getUserByName(receiverName).isLoggedIn()) {
                     responseMessage = "ER05 Target user is not online";
                 } else {
-                    responseMessage = "<";
+                    responseMessage = "###<";
                     if (getUserByName(user.getUserName()).userIsAuthenticated()) {
                         responseMessage += "*";
                     }

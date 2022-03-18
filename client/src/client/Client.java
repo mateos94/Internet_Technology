@@ -2,11 +2,6 @@ package client;
 
 import java.io.*;
 import java.net.Socket;
-import java.nio.charset.StandardCharsets;
-import java.nio.file.Files;
-import java.nio.file.Paths;
-import java.util.ArrayList;
-import java.util.List;
 
 public class Client
 {
@@ -14,7 +9,7 @@ public class Client
 
     private static final String SERVER_IP = "127.0.0.1";
     private static final int SERVER_PORT = 1337;
-    //private static final String PATH = "client/client.txt";
+    private static final String PATH = "client/client/client.txt";
 
 
     public static void main(String[] args) throws Exception
@@ -38,7 +33,7 @@ public class Client
             if (startsWithIgnoreCase("Send ", sendMessage)){
                 String fileLocation = sendMessage.substring(sendMessage.lastIndexOf(" ")+1);
                 try {
-                    FileInputStream fis = new FileInputStream(fileLocation);
+                    FileInputStream fis = new FileInputStream(PATH);
                     byte b[] = new byte[2002];
                     fis.read(b, 0, b.length);
                     OutputStream os = socket.getOutputStream();
@@ -52,8 +47,12 @@ public class Client
             } else if (startsWithIgnoreCase("Private ", sendMessage)) {
                 if (sendMessage.length() > 8) {
                     String restOfMessage = sendMessage.substring(8);
-                    String restOfMessageEncrypted = AES.encrypt(restOfMessage);
-                    sendMessage = "PRIVATE " + restOfMessageEncrypted;
+                    if (restOfMessage.contains(" ")) {
+                        String receiverName = restOfMessage.split(" ", 2)[0];
+                        String message = restOfMessage.split(" ", 2)[1];
+                        String encryptedMessage = message;
+                        sendMessage = "PRIVATE " + receiverName + " " + Crypto.encrypt(encryptedMessage);
+                    }
                 }
                 pwrite.println(sendMessage);       // sending to server
                 pwrite.flush();                    // flush the data

@@ -1,7 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="0b2b46a1-6066-452f-b965-97d7e6559bc4" name="Default Changelist" comment="bug fixed" />
+    <list default="true" id="0b2b46a1-6066-452f-b965-97d7e6559bc4" name="Default Changelist" comment="bug fixed">
+      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/client/authenticatedUsers.txt" beforeDir="false" afterPath="$PROJECT_DIR$/client/client/authenticatedUsers.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/out/production/client/client/Client.class" beforeDir="false" afterPath="$PROJECT_DIR$/client/out/production/client/client/Client.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/out/production/client/client/ServerConnection.class" beforeDir="false" afterPath="$PROJECT_DIR$/client/out/production/client/client/ServerConnection.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/out/production/client/server/AES.class" beforeDir="false" afterPath="$PROJECT_DIR$/client/out/production/client/server/AES.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/out/production/client/server/ClientHandler.class" beforeDir="false" afterPath="$PROJECT_DIR$/client/out/production/client/server/ClientHandler.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/out/production/client/server/FileReceiverServer.class" beforeDir="false" afterPath="$PROJECT_DIR$/client/out/production/client/server/FileReceiverServer.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/out/production/client/server/FileSenderServer.class" beforeDir="false" afterPath="$PROJECT_DIR$/client/out/production/client/server/FileSenderServer.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/out/production/client/server/Group.class" beforeDir="false" afterPath="$PROJECT_DIR$/client/out/production/client/server/Group.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/out/production/client/server/Server.class" beforeDir="false" afterPath="$PROJECT_DIR$/client/out/production/client/server/Server.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/client/AES.java" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/client/Crypto.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/client/Client.java" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/client/Client.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/client/ServerConnection.java" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/client/ServerConnection.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/server/ClientHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/server/ClientHandler.java" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -78,17 +94,18 @@
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
     <property name="jdk.selected.JAVA_MODULE" value="15" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../Aaaa/Internet_Technology-main" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../test use/Internet_Technology-ba766afaaa4d17c1048722fca60f60e5159be421" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
     <property name="node.js.path.for.package.tslint" value="project" />
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
     <property name="node.js.selected.package.tslint" value="(autodetect)" />
-    <property name="project.structure.last.edited" value="Project" />
+    <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
   </component>
@@ -97,7 +114,7 @@
       <recent name="client" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.Client 1">
+  <component name="RunManager" selected="Application.Client 2">
     <configuration name="Client 1" type="Application" factoryName="Application">
       <option name="MAIN_CLASS_NAME" value="client.Client" />
       <module name="client" />
@@ -201,8 +218,8 @@
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.Server" />
         <item itemvalue="Application.Client 2" />
+        <item itemvalue="Application.Server" />
       </list>
     </recent_temporary>
   </component>
@@ -239,7 +256,11 @@
       <workItem from="1647378657692" duration="2012000" />
       <workItem from="1647441150654" duration="17042000" />
       <workItem from="1647464643440" duration="1533000" />
-      <workItem from="1647522903243" duration="2538000" />
+      <workItem from="1647522903243" duration="3852000" />
+      <workItem from="1647556639227" duration="2520000" />
+      <workItem from="1647562136988" duration="516000" />
+      <workItem from="1647562678114" duration="110000" />
+      <workItem from="1647562808052" duration="305000" />
     </task>
     <task id="LOCAL-00001" summary="bug fixed">
       <created>1647128816152</created>
@@ -262,7 +283,14 @@
       <option name="project" value="LOCAL" />
       <updated>1647540527723</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="bug fixed">
+      <created>1647541947883</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1647541947883</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="ToolWindowManager">

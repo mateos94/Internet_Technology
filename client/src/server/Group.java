@@ -21,9 +21,6 @@ public class Group {
         return owner;
     }
 
-    public void setGroupName(String groupName) {
-        this.groupName = groupName;
-    }
 
     public ArrayList<User> getMembers() {
         ArrayList<User> members = new ArrayList<>();
@@ -40,7 +37,7 @@ public class Group {
     }
 
     public void setMembersAndTimeOfLastMessage(ArrayList<UserAndTimeOfLastMessage> membersAndTimeOfLastMessage) {
-        this.membersAndTimeOfLastMessage = membersAndTimeOfLastMessage;
+        Group.membersAndTimeOfLastMessage = membersAndTimeOfLastMessage;
     }
 
     public void updateTimeOfLastMessage(String username, Long newTimestamp){

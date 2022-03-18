@@ -9,8 +9,8 @@ import java.util.concurrent.Executors;
 
 public class Server {
 
-    static final int LIMIT_OF_CLIENTS = 20;
-    static final int PORT = 1337;
+    private static final int LIMIT_OF_CLIENTS = 20;
+    private static final int PORT = 1337;
     private static ArrayList<ClientHandler> clients = new ArrayList<>();
     private static ExecutorService pool = Executors.newFixedThreadPool(LIMIT_OF_CLIENTS);
     private static ExecutorService pool2 = Executors.newFixedThreadPool(LIMIT_OF_CLIENTS);
@@ -62,7 +62,7 @@ public class Server {
 
     }
 
-    public static void kickPeopleWhoAreNotChattingMoreThanTwoMinutesInGroups() throws ConcurrentModificationException {
+    private static void kickPeopleWhoAreNotChattingMoreThanTwoMinutesInGroups() throws ConcurrentModificationException {
         if (!ClientHandler.getGroups().isEmpty()){
             for (Group nextGroup: ClientHandler.getGroups()){
                 for (UserAndTimeOfLastMessage nextUserAndTimeOfLastMessage: nextGroup.getMembersAndTimeOfLastMessage()){

@@ -1,5 +1,7 @@
 package client;
 
+import server.AES;
+
 import java.io.*;
 import java.net.Socket;
 
@@ -51,7 +53,7 @@ public class Client
                         String receiverName = restOfMessage.split(" ", 2)[0];
                         String message = restOfMessage.split(" ", 2)[1];
                         String encryptedMessage = message;
-                        sendMessage = "PRIVATE " + receiverName + " " + Crypto.encrypt(encryptedMessage);
+                        sendMessage = "PRIVATE " + receiverName + " " + AES.encrypt(encryptedMessage);
                     }
                 }
                 pwrite.println(sendMessage);       // sending to server

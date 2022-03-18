@@ -190,63 +190,63 @@ public class ClientHandler implements Runnable{
     public String parseMessage (String string) throws Exception {
         String currentTimeAsDateString = convertTimestampToDate(System.currentTimeMillis());
         //if user responds with Pong extend session.
-        if (string.contains("Pong")){
-            responseMessage = "Connection duration extended";
-            counter = 0;
-            return responseMessage;
-        }
-        if (string.equals("?")) {
-            responseMessage =
-                    "# Help list: \n" +
-                    "Everything starts with # means message from system. \n" +
-                    "CONN <username>: Login to the chat server as a guest if <username> isn’t registered before. \n" +
-                    "SIGNUP <username> <password>: Register at server if <username> isn't registered before. \n" +
-                    "SIGNIN <username> <password>: Sign in using already existing authenticated user. \n" +
-                    "USERS: Request all users from the server that are currently online. \n" +
-                    "BCST <message>: Broadcast a message to all connected(online) users. \n" +
-                    "QUIT: Log out from the server. \n" +
-                    "# -----server.Group related-----: \n" +
-                    "GROUPS: Get a list of all groups. \n" +
-                    "HISTORY <group name>: Get chat history of a group. \n" +
-                    "JOIN <group name>: Join a group that exists. \n" +
-                    "LEAVE <group name>: Leave a group that you are in. \n" +
-                    "CREATE <group name>: Create a new group. \n" +
-                    "KICK <username to be kicked> <group name>: Kick a user from your group (you have to be the admin/creator of that group) \n" +
-                    "GROUP <group name> <message>: Send a message to all members of your group. \n" +
-                    "# -----Send related-----: \n" +
-                    "PRIVATE <username to message> <message>: Send a private message to another user. \n" +
-                    "SEND < receiver’s username> <file name>: Send a file to another user. \n" +
-                    "Pong: extend the duration of your connection";
-            return responseMessage;
-        } else if (string.equalsIgnoreCase("Groups")) {
-            if (user == null){
-                responseMessage = "ER03 Please log in first";
-            } else if (!user.isLoggedIn()) {
-                responseMessage = "ER03 Please log in first";
-            } else {
-                responseMessage = getGroupsAsString();
-            }
-            return responseMessage;
-        } else if (string.equalsIgnoreCase("Users")) {
-            if (user == null){
-                responseMessage = "ER03 Please log in first";
-            } else if (!user.isLoggedIn()) {
-                responseMessage = "ER03 Please log in first";
-            } else {
-                responseMessage = getOnlineUsers();
-            }
-            return responseMessage;
-        } else if (string.equalsIgnoreCase("Quit")) {
-            if (user == null){
-                responseMessage = "ER03 Please log in first";
-            } else if (!user.isLoggedIn()) {
-                responseMessage = "ER03 Please log in first";
-            } else {
-                responseMessage = "# " + currentTimeAsDateString + " You are logged out";
-                removeUserByName(user.getUserName());
-                user = null;
-            }
-            return responseMessage;
+        switch (string.toLowerCase()) {
+            case "PONG":
+                responseMessage = "Connection duration extended";
+                counter = 0;
+                break;
+            case "?":
+                responseMessage =
+                        "# Help list: \n" +
+                                "Everything starts with # means message from system. \n" +
+                                "CONN <username>: Login to the chat server as a guest if <username> isn’t registered before. \n" +
+                                "SIGNUP <username> <password>: Register at server if <username> isn't registered before. \n" +
+                                "SIGNIN <username> <password>: Sign in using already existing authenticated user. \n" +
+                                "USERS: Request all users from the server that are currently online. \n" +
+                                "BCST <message>: Broadcast a message to all connected(online) users. \n" +
+                                "QUIT: Log out from the server. \n" +
+                                "# -----server.Group related-----: \n" +
+                                "GROUPS: Get a list of all groups. \n" +
+                                "HISTORY <group name>: Get chat history of a group. \n" +
+                                "JOIN <group name>: Join a group that exists. \n" +
+                                "LEAVE <group name>: Leave a group that you are in. \n" +
+                                "CREATE <group name>: Create a new group. \n" +
+                                "KICK <username to be kicked> <group name>: Kick a user from your group (you have to be the admin/creator of that group) \n" +
+                                "GROUP <group name> <message>: Send a message to all members of your group. \n" +
+                                "# -----Send related-----: \n" +
+                                "PRIVATE <username to message> <message>: Send a private message to another user. \n" +
+                                "SEND < receiver’s username> <file name>: Send a file to another user. \n" +
+                                "Pong: extend the duration of your connection";
+                break;
+            case "GROUPS":
+                if (user == null) {
+                    responseMessage = "ER03 Please log in first";
+                } else if (!user.isLoggedIn()) {
+                    responseMessage = "ER03 Please log in first";
+                } else {
+                    responseMessage = getGroupsAsString();
+                }
+                break;
+            case "USERS":
+                if (user == null) {
+                    responseMessage = "ER03 Please log in first";
+                } else if (!user.isLoggedIn()) {
+                    responseMessage = "ER03 Please log in first";
+                } else {
+                    responseMessage = getOnlineUsers();
+                }
+                break;
+            case "QUIT":
+                if (user == null) {
+                    responseMessage = "ER03 Please log in first";
+                } else if (!user.isLoggedIn()) {
+                    responseMessage = "ER03 Please log in first";
+                } else {
+                    responseMessage = "# " + currentTimeAsDateString + " You are logged out";
+                    removeUserByName(user.getUserName());
+                    user = null;
+                }
+                break;
         }
         int x = string.indexOf(' ');
         if(x<0) {
@@ -255,36 +255,50 @@ public class ClientHandler implements Runnable{
         }
         typeOfMessage = string.substring(0, x);
         String contentOfMessage = string.substring(x + 1);
-        if (typeOfMessage.equalsIgnoreCase("CONN")) {
-            responseMessage = login(contentOfMessage);
-        } else if (typeOfMessage.equalsIgnoreCase("SIGNIN")) {
-            responseMessage = signin(contentOfMessage);
-        } else if (typeOfMessage.equalsIgnoreCase("SIGNUP")) {
-            responseMessage = signup(contentOfMessage);
-        } else if (typeOfMessage.equalsIgnoreCase("BCST")) {
-            responseMessage = broadcastMessage(string);
-        } else if (typeOfMessage.equalsIgnoreCase("JOIN")) {
-            responseMessage = joinGroup(contentOfMessage);
-        } else if (typeOfMessage.equalsIgnoreCase("LEAVE")) {
-            responseMessage = leaveGroup(contentOfMessage);
-        } else if (typeOfMessage.equalsIgnoreCase("CREATE")) {
-            responseMessage = createGroup(contentOfMessage);
-        } else if (typeOfMessage.equalsIgnoreCase("KICK")) {
-            responseMessage = kickPersonOutOfGroup(contentOfMessage);
-        } else if (typeOfMessage.equalsIgnoreCase("PRIVATE")) {
-            responseMessage = sendPrivateMessage(contentOfMessage);
-        } else if (typeOfMessage.equalsIgnoreCase("GROUP")) {
-            responseMessage = sendGroupMessage(contentOfMessage);
-        } else if (typeOfMessage.equalsIgnoreCase("HISTORY")) {
-            responseMessage = checkHistoryOfGroup(contentOfMessage);
-        } else if (typeOfMessage.equalsIgnoreCase("SEND")){
-            responseMessage = send(contentOfMessage);
-        } else if (typeOfMessage.equalsIgnoreCase("FILE")){
-            responseMessage = askToSendFile(contentOfMessage);
-        }
 
-        else {
-            responseMessage = "ER00 Unknown command";
+        switch (typeOfMessage.toLowerCase()) {
+            case "CONN":
+                responseMessage = login(contentOfMessage);
+                break;
+            case "SIGNIN":
+                responseMessage = signin(contentOfMessage);
+                break;
+            case "SIGNUP":
+                responseMessage = signup(contentOfMessage);
+                break;
+            case "BCST":
+                responseMessage = broadcastMessage(string);
+                break;
+            case "JOIN":
+                responseMessage = joinGroup(contentOfMessage);
+                break;
+            case "LEAVE":
+                responseMessage = leaveGroup(contentOfMessage);
+                break;
+            case "CREATE":
+                responseMessage = createGroup(contentOfMessage);
+                break;
+            case "KICK":
+                responseMessage = kickPersonOutOfGroup(contentOfMessage);
+                break;
+            case "PRIVATE":
+                responseMessage = sendPrivateMessage(contentOfMessage);
+                break;
+            case "GROUP":
+                responseMessage = sendGroupMessage(contentOfMessage);
+                break;
+            case "HISTORY":
+                responseMessage = checkHistoryOfGroup(contentOfMessage);
+                break;
+            case "SEND":
+                responseMessage = send(contentOfMessage);
+                break;
+            case "FILE":
+                responseMessage = askToSendFile(contentOfMessage);
+                break;
+            default:
+                responseMessage = "ER00 Unknown command";
+                break;
         }
         counter = 0;
         return responseMessage;
@@ -542,11 +556,7 @@ public class ClientHandler implements Runnable{
                 responseMessage = "ER04 Such user doesn't exist";
             } else {
                 responseMessage = "Your file has been sent successfully";
-                for( ClientHandler clientHandlers : clients){
-                    if (getByUserName(receiverName).equals(clientHandlers)) {
-                        clientHandlers.out.println("You received a new file");
-                    }
-                }
+                receiveFile(receiverName);
             }
         }
         return responseMessage;
@@ -604,12 +614,6 @@ public class ClientHandler implements Runnable{
         return responseMessage;
     }
 
-    static void outToAll(String responseMessage) {
-        for( ClientHandler clientHandlers : clients){
-            clientHandlers.out.println(responseMessage);
-        }
-    }
-
     private void outToAllLoggedIn(String responseMessage) {
         for( ClientHandler clientHandlers : clients){
             if (clientHandlers.getUserOfClientHandler().getUserName() != null){
@@ -636,24 +640,10 @@ public class ClientHandler implements Runnable{
         }
     }
 
-    public void changeLoginStatus(){
-        for (User nextUser : users) {
-            if (nextUser.getUserName().equals(user.getUserName())) {
-                nextUser.changeLoginStatus();
-            }
-        }
-    }
-
-    private void receiveFile(String name) throws IOException {
-//        byte b[] = new byte[1024];
-//        InputStream inputStream = client.getInputStream();
-//        FileOutputStream fileOutputStream = new FileOutputStream("client/server.txt");
-//        inputStream.read(b,0,b.length);
-//        fileOutputStream.write(b,0,b.length);
+    private void receiveFile(String name) {
         for( ClientHandler clientHandlers : clients){
             if (getByUserName(name).equals(clientHandlers)) {
                 clientHandlers.out.println("You received a new file");
-                //new Thread(fileSender).start();
             }
         }
     }
@@ -665,22 +655,8 @@ public class ClientHandler implements Runnable{
         return format.format(date);
     }
 
-    public void kickPeopleWhoAreNotChattingMoreThanTwoMinutesInGroups() {
-        if (!groups.isEmpty()){
-            for (Group nextGroup: groups){
-                for (UserAndTimeOfLastMessage nextUserAndTimeOfLastMessage: nextGroup.getMembersAndTimeOfLastMessage()){
-                    if (System.currentTimeMillis() - nextUserAndTimeOfLastMessage.getTimestampOfLastMessage() > 120000){
-                        nextGroup.deleteMemberByName(nextUserAndTimeOfLastMessage.getUser().getUserName());
-                        String message = "";
-                        message += "# Because of " + nextUserAndTimeOfLastMessage.getUser().getUserName() + "did not talk for more than 2 mins in group " + nextGroup.getGroupName() + ", got kicked out of group";
-                        outToAll(message);
-                    }
-                }
-            }
-        }
-    }
 
-    public void storeUsernamePasswordInFile(String username, String password, String file) throws IOException {
+    private void storeUsernamePasswordInFile(String username, String password, String file) throws IOException {
         String passwordAfterEncryption = AES.encrypt(password);
         BufferedWriter out = new BufferedWriter(new FileWriter(file, true));
         out.append(username).append(" ").append(passwordAfterEncryption);
@@ -688,11 +664,11 @@ public class ClientHandler implements Runnable{
         out.close();
     }
 
-    public static boolean usernameAlreadyExists(String username) throws IOException {
+    private static boolean usernameAlreadyExists(String username) throws IOException {
         return usernameAlreadyExistsAsGuest(username) || usernameAlreadyExistsAsAuthenticatedUser(username, "client/client/authenticatedUsers.txt");
     }
 
-    public static boolean usernameAlreadyExistsAsAuthenticatedUser(String username, String file) throws IOException {
+    private static boolean usernameAlreadyExistsAsAuthenticatedUser(String username, String file) throws IOException {
         boolean usernameAlreadyExist = false;
         for (String usernameAndPassword : getAllUsernameAndPasswordFromFileAsArray(file)) {
             String[] parts = usernameAndPassword.split(" ");
@@ -704,7 +680,7 @@ public class ClientHandler implements Runnable{
         return usernameAlreadyExist;
     }
 
-    public static boolean usernameAlreadyExistsAsGuest(String username) {
+    private static boolean usernameAlreadyExistsAsGuest(String username) {
         boolean usernameAlreadyExist = false;
         for (User user : users) {
             if (username.equals(user.getUserName())) {
@@ -714,21 +690,13 @@ public class ClientHandler implements Runnable{
         return usernameAlreadyExist;
     }
 
-    public void removeUsernameInFile(String username, String file) throws Exception {
-        File targetFile = new File(file);
-        List<String> out = Files.lines(targetFile.toPath())
-                .filter(line -> !line.contains(username))
-                .collect(Collectors.toList());
-        Files.write(targetFile.toPath(), out, StandardOpenOption.WRITE, StandardOpenOption.TRUNCATE_EXISTING);
-    }
 
-
-    public static ArrayList<String> getAllUsernameAndPasswordFromFileAsArray(String file) throws IOException {
+    private static ArrayList<String> getAllUsernameAndPasswordFromFileAsArray(String file) throws IOException {
         String content = new String(Files.readAllBytes(Paths.get(file)));
         return new ArrayList<>(Arrays.asList(content.split("\\r?\\n")));
     }
 
-    public static boolean validUsernameFormat(String username) {
+    private static boolean validUsernameFormat(String username) {
         Pattern pattern = Pattern.compile("^[a-zA-Z0-9_]{3,14}$");
         Matcher matcher = pattern.matcher(username);
         return matcher.matches();

@@ -8,7 +8,7 @@ import java.util.TimerTask;
 
 public class TimerThread extends Thread{
 
-    static Timer timer;
+    private static Timer timer;
     protected Socket socket;
     private PrintWriter out;
     private ClientHandler clientThread;

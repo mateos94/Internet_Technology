@@ -5,7 +5,7 @@ public class User {
     private String password = null;
     private boolean loggedIn = true;
 
-    public User(String userName) {
+    User(String userName) {
         this.userName = userName;
     }
 

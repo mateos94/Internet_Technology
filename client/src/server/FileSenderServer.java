@@ -9,7 +9,7 @@ public class FileSenderServer implements Runnable{
 
     private Socket socket;
     private static final String PATH = "client/client/receive.txt";
-    public FileSenderServer(Socket socket) {
+    FileSenderServer(Socket socket) {
         this.socket = socket;
     }
     @Override

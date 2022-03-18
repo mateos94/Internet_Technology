@@ -1,5 +1,7 @@
 package client;
 
+import server.AES;
+
 import java.io.*;
 import java.net.Socket;
 
@@ -29,7 +31,7 @@ public class ServerConnection implements Runnable{
                     String head = receiveMessage.split(" ", 2)[0];
                     head = head.substring(3);
                     String encryptedMessage = receiveMessage.split(" ", 2)[1];
-                    receiveMessage = head + " " + Crypto.decrypt(encryptedMessage);
+                    receiveMessage = head + " " + AES.decrypt(encryptedMessage);
                 } else if (receiveMessage.contains("*You are logged in with username ")){
                      loggedIn = true;
                 } else if (receiveMessage.contains("*Logging in failed, this user already exists.")){

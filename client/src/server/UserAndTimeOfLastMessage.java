@@ -9,18 +9,26 @@ public class UserAndTimeOfLastMessage {
         this.timestampOfLastMessage = timestampOfLastMessage;
     }
 
+    /**
+     * Getter of user
+     * @return user
+     */
     public User getUser() {
         return user;
     }
 
-    public void setUser(User user) {
-        this.user = user;
-    }
-
+    /**
+     * Getter of timestampOfLastMessage
+     * @return timestamp of last activity of user
+     */
     public Long getTimestampOfLastMessage() {
         return timestampOfLastMessage;
     }
 
+    /**
+     * Setter of timestampOfLastMessage
+     * @param timestampOfLastMessage timestamp of last activity of user
+     */
     public void setTimestampOfLastMessage(Long timestampOfLastMessage) {
         this.timestampOfLastMessage = timestampOfLastMessage;
     }

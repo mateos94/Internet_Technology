@@ -62,6 +62,10 @@ public class Server {
 
     }
 
+    /**
+     * Kicking people who do not talk in a group for more than 2 minutes
+     * @throws ConcurrentModificationException
+     */
     private static void kickPeopleWhoAreNotChattingMoreThanTwoMinutesInGroups() throws ConcurrentModificationException {
         if (!ClientHandler.getGroups().isEmpty()){
             for (Group nextGroup: ClientHandler.getGroups()){

@@ -10,9 +10,6 @@ public class ServerConnection implements Runnable{
     private Socket server;
     private BufferedReader in;
     private boolean loggedIn = false;
-    public boolean isLoggedIn() {
-        return loggedIn;
-    }
 
     public ServerConnection(Socket socket) throws IOException {
         server = socket;

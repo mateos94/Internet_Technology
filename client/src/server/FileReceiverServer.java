@@ -9,6 +9,9 @@ public class FileReceiverServer implements Runnable {
         this.socket = socket;
     }
 
+    /**
+     * Receive a file
+     */
     public void receive(){
         try {
             byte [] b = new byte[2002];

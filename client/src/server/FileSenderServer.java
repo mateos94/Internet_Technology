@@ -17,6 +17,9 @@ public class FileSenderServer implements Runnable{
         sendFile();
     }
 
+    /**
+     * Send a file
+     */
     public void sendFile(){
         try {
             FileInputStream fis = new FileInputStream(PATH);

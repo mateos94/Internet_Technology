@@ -9,30 +9,41 @@ public class User {
         this.userName = userName;
     }
 
+    /**
+     * Getter of username
+     * @return Username of user
+     */
     public String getUserName() {
         return userName;
     }
 
-    public void setUserName(String userName) {
-        this.userName = userName;
-    }
-
+    /**
+     * Setter of password
+     * @param password Password of user
+     */
     public void setPassword(String password) {
         this.password = password;
     }
 
-    public String getPassword() {
-        return password;
-    }
-
+    /**
+     * Check if user has a password
+     * @return Boolean of weather user has a password
+     */
     public boolean userIsAuthenticated() {
         return password != null;
     }
 
+    /**
+     * Check if user is logged in
+     * @return Boolean of weather user is logged in
+     */
     public boolean isLoggedIn() {
         return loggedIn;
     }
 
+    /**
+     * Change boolean loggedin
+     */
     public void changeLoginStatus() {
         if (loggedIn){
             loggedIn = false;

@@ -2,21 +2,17 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="0b2b46a1-6066-452f-b965-97d7e6559bc4" name="Default Changelist" comment="bug fixed">
-      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/client/authenticatedUsers.txt" beforeDir="false" afterPath="$PROJECT_DIR$/client/client/authenticatedUsers.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/out/production/client/client/Client.class" beforeDir="false" afterPath="$PROJECT_DIR$/client/out/production/client/client/Client.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/out/production/client/client/ServerConnection.class" beforeDir="false" afterPath="$PROJECT_DIR$/client/out/production/client/client/ServerConnection.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/out/production/client/server/AES.class" beforeDir="false" afterPath="$PROJECT_DIR$/client/out/production/client/server/AES.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/out/production/client/server/ClientHandler.class" beforeDir="false" afterPath="$PROJECT_DIR$/client/out/production/client/server/ClientHandler.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/out/production/client/server/FileReceiverServer.class" beforeDir="false" afterPath="$PROJECT_DIR$/client/out/production/client/server/FileReceiverServer.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/out/production/client/server/FileSenderServer.class" beforeDir="false" afterPath="$PROJECT_DIR$/client/out/production/client/server/FileSenderServer.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/out/production/client/server/Group.class" beforeDir="false" afterPath="$PROJECT_DIR$/client/out/production/client/server/Group.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/out/production/client/server/Server.class" beforeDir="false" afterPath="$PROJECT_DIR$/client/out/production/client/server/Server.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/client/AES.java" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/client/Crypto.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/client/src/client/Client.java" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/client/Client.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/client/src/client/ServerConnection.java" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/client/ServerConnection.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/server/AES.java" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/server/AES.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/client/src/server/ClientHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/server/ClientHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/server/FileReceiverServer.java" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/server/FileReceiverServer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/server/FileSenderServer.java" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/server/FileSenderServer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/server/Group.java" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/server/Group.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/server/Server.java" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/server/Server.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/server/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/server/User.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/server/UserAndTimeOfLastMessage.java" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/server/UserAndTimeOfLastMessage.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -192,17 +188,6 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration default="true" type="ArquillianJUnit" factoryName="" nameIsGenerated="true">
-      <option name="arquillianRunConfiguration">
-        <value>
-          <option name="containerStateName" value="" />
-        </value>
-      </option>
-      <option name="TEST_OBJECT" value="class" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <list>
       <item itemvalue="Application.Client 1" />
       <item itemvalue="Application.Client 3" />
@@ -261,6 +246,8 @@
       <workItem from="1647562136988" duration="516000" />
       <workItem from="1647562678114" duration="110000" />
       <workItem from="1647562808052" duration="305000" />
+      <workItem from="1647637146012" duration="12137000" />
+      <workItem from="1647693486741" duration="747000" />
     </task>
     <task id="LOCAL-00001" summary="bug fixed">
       <created>1647128816152</created>

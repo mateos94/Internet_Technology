@@ -2,18 +2,14 @@ package server;
 
 
 import java.io.*;
-import java.net.ServerSocket;
 import java.net.Socket;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.nio.file.StandardOpenOption;
-import java.text.DecimalFormat;
 import java.text.Format;
 import java.text.SimpleDateFormat;
 import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-import java.util.stream.Collectors;
 
 public class ClientHandler implements Runnable{
 
@@ -29,22 +25,34 @@ public class ClientHandler implements Runnable{
     private User user;
     private String typeOfMessage;
 
+    /**
+     * Getter of pingpong counter
+     * @return counter
+     */
     public int getCounter() {
         return counter;
     }
 
+    /**
+     * Increase pingpong counter by 1
+     */
     public void setCounter() {
         counter++;
     }
 
+    /**
+     * Getter of responseMessage
+     * @return response message to the sender
+     */
     public String getResponseMessage() {
         return responseMessage;
     }
 
-    public Socket getClient() {
-        return client;
-    }
-
+    /**
+     * Get a clientHandler by user name
+     * @param clientName username of client
+     * @return clientHandler
+     */
     public static ClientHandler getByUserName(String clientName) {
         for (ClientHandler nextClient : clients) {
             if (nextClient.getUserOfClientHandler().getUserName().equals(clientName)) {
@@ -54,12 +62,24 @@ public class ClientHandler implements Runnable{
         return null;
     }
 
+    /**
+     * Getter of user
+     * @return User
+     */
     public User getUserOfClientHandler() {
         return user;
     }
 
+    /**
+     * Remove a user in users
+     * @param userName username of user that needs to be removed
+     */
     public void removeUserByName(String userName){
-        users.removeIf(user -> user.getUserName().equals(userName));
+        for (User user: users) {
+            if (user.getUserName().equals(userName)) {
+                users.remove(user);
+            }
+        }
     }
 
     public ClientHandler(Socket clientSocket, ArrayList<ClientHandler> clients) throws IOException {
@@ -98,6 +118,11 @@ public class ClientHandler implements Runnable{
         }
 }
 
+    /**
+     * Get a user by name
+     * @param name name of user
+     * @return User
+     */
     User getUserByName(String name) {
         for (User nextUser : users) {
             if (nextUser.getUserName().equals(name)) {
@@ -107,6 +132,11 @@ public class ClientHandler implements Runnable{
         return null;
     }
 
+    /**
+     * Get a group by name
+     * @param name Name of group
+     * @return Group
+     */
     Group getGroupByName(String name) {
         for (Group nextGroup : groups) {
             if (nextGroup.getGroupName().equals(name)) {
@@ -116,6 +146,11 @@ public class ClientHandler implements Runnable{
         return null;
     }
 
+    /**
+     * Check if user exists in the arraylist
+     * @param name Name of user
+     * @return Boolean of weather the user is in arraylist
+     */
     boolean checkIfUserExist(String name) {
         for (User nextUser : users) {
             if (nextUser.getUserName().equals(name)) {
@@ -125,6 +160,11 @@ public class ClientHandler implements Runnable{
         return false;
     }
 
+    /**
+     * Check if group exists by group name
+     * @param name Name of group
+     * @return Boolean of weather the group exists
+     */
     boolean checkIfGroupExist(String name) {
         for (Group nextGroup : groups) {
             if (nextGroup.getGroupName().equals(name)) {
@@ -134,10 +174,18 @@ public class ClientHandler implements Runnable{
         return false;
     }
 
+    /**
+     * Getter of arraylist of groups
+     * @return Groups
+     */
     public static ArrayList<Group> getGroups() {
         return groups;
     }
 
+    /**
+     * Get the whole chatting history of the group as a string
+     * @return String that represents chatting history of group
+     */
     public String getGroupsAsString() {
         String listOfGroupsAsString = "";
         if (groups.size() == 0) {
@@ -154,6 +202,10 @@ public class ClientHandler implements Runnable{
         return listOfGroupsAsString;
     }
 
+    /**
+     * Get list of online users as string
+     * @return list of online users or error
+     */
     public String getOnlineUsers() {
         String listOfOnlineUsersAsString = "";
         boolean anyUserLoggedIn = false;
@@ -183,10 +235,24 @@ public class ClientHandler implements Runnable{
         return listOfOnlineUsersAsString;
     }
 
+    /**
+     * Disband a group by name
+     * @param groupName Name of group
+     */
     static void disbandGroup(String groupName) {
-        groups.removeIf(nextGroup -> nextGroup.getGroupName().equals(groupName));
+        for (Group group : groups) {
+            if (group.getGroupName().equals(groupName)) {
+                groups.remove(group);
+            }
+        }
     }
 
+    /**
+     * Parse command that received from client
+     * @param string command
+     * @return Response to the client who sent the command, might be error that warns client
+     * @throws Exception
+     */
     public String parseMessage (String string) throws Exception {
         String currentTimeAsDateString = convertTimestampToDate(System.currentTimeMillis());
         //if user responds with Pong extend session.
@@ -305,6 +371,12 @@ public class ClientHandler implements Runnable{
 
     }
 
+    /**
+     * Client logs in as guest
+     * @param contentOfMessage content of message
+     * @return Response to the client who sent the command, might be error that warns client
+     * @throws IOException
+     */
     private String login(String contentOfMessage) throws IOException {
         if (user == null) {
             if (!validUsernameFormat(contentOfMessage)){
@@ -322,6 +394,12 @@ public class ClientHandler implements Runnable{
         return responseMessage;
     }
 
+    /**
+     * Client signs in as authenticated user
+     * @param contentOfMessage content of message
+     * @return Response to the client who sent the command, might be error that warns client
+     * @throws IOException
+     */
     private String signin(String contentOfMessage) throws IOException {
         if (user == null) {
             if (!contentOfMessage.contains(" ")) {
@@ -345,6 +423,12 @@ public class ClientHandler implements Runnable{
         return responseMessage;
     }
 
+    /**
+     * Client signs up as authenticated user and sign in with that newly created authenticated user
+     * @param contentOfMessage content of message
+     * @return Response to the client who sent the command, might be error that warns client
+     * @throws IOException
+     */
     private String signup(String contentOfMessage) throws IOException {
         if (user == null) {
             if (!contentOfMessage.contains(" ")) {
@@ -372,6 +456,11 @@ public class ClientHandler implements Runnable{
         return responseMessage;
     }
 
+    /**
+     * Client broadcast message to all online people
+     * @param string content of message
+     * @return Response to the client who sent the command, might be error that warns client
+     */
     private String broadcastMessage(String string){
         if (user == null){
             responseMessage = "ER03 Please log in first";
@@ -402,6 +491,11 @@ public class ClientHandler implements Runnable{
         return responseMessage;
     }
 
+    /**
+     * Client leave group
+     * @param contentOfMessage content of message
+     * @return Response to the client who sent the command, might be error that warns client
+     */
     private String leaveGroup(String contentOfMessage){
         if (user == null){
             responseMessage = "ER03 Please log in first";
@@ -423,6 +517,11 @@ public class ClientHandler implements Runnable{
         return responseMessage;
     }
 
+    /**
+     * Client create group
+     * @param contentOfMessage content of message
+     * @return Response to the client who sent the command, might be error that warns client
+     */
     private String createGroup(String contentOfMessage){
         if (user == null){
             responseMessage = "ER03 Please log in first";
@@ -442,6 +541,11 @@ public class ClientHandler implements Runnable{
         return responseMessage;
     }
 
+    /**
+     * Client kick someone out of group, only owner group can kick other people
+     * @param contentOfMessage content of message
+     * @return Response to the client who sent the command, might be error that warns client
+     */
     private String kickPersonOutOfGroup(String contentOfMessage){
         if (user == null){
             responseMessage = "ER03 Please log in first";
@@ -469,6 +573,11 @@ public class ClientHandler implements Runnable{
         return responseMessage;
     }
 
+    /**
+     * A client send private message to another client
+     * @param contentOfMessage content of message
+     * @return Response to the client who sent the command, might be error that warns client
+     */
     private String sendPrivateMessage(String contentOfMessage){
         if (user == null){
             responseMessage = "ER03 Please log in first";
@@ -499,6 +608,11 @@ public class ClientHandler implements Runnable{
         return responseMessage;
     }
 
+    /**
+     * Client send message to all clients of a group
+     * @param contentOfMessage content of message
+     * @return Response to the client who sent the command, might be error that warns client
+     */
     private String sendGroupMessage(String contentOfMessage){
         if (user == null){
             responseMessage = "ER03 Please log in first";
@@ -527,6 +641,11 @@ public class ClientHandler implements Runnable{
         return responseMessage;
     }
 
+    /**
+     * Client check chatting history of a group
+     * @param contentOfMessage content of message
+     * @return Response to the client who sent the command, might be error that warns client
+     */
     private String checkHistoryOfGroup(String contentOfMessage){
         if (user == null){
             responseMessage = "ER03 Please log in first";
@@ -544,6 +663,11 @@ public class ClientHandler implements Runnable{
         return responseMessage;
     }
 
+    /**
+     * Client send a file
+     * @param contentOfMessage content of message
+     * @return Response to the client who sent the command, might be error that warns client
+     */
     private String send(String contentOfMessage){
         if (user == null){
             responseMessage = "ER03 Please log in first";
@@ -562,6 +686,12 @@ public class ClientHandler implements Runnable{
         return responseMessage;
     }
 
+    /**
+     * Client send a file
+     * @param contentOfMessage content of message
+     * @return Response to the client who sent the command, might be error that warns client
+     * @throws IOException
+     */
     private String askToSendFile(String contentOfMessage) throws IOException {
         if (user == null){
             responseMessage = "ER03 Please log in first";
@@ -614,6 +744,10 @@ public class ClientHandler implements Runnable{
         return responseMessage;
     }
 
+    /**
+     * Send message to all logged in clients
+     * @param responseMessage Message that will be sent
+     */
     private void outToAllLoggedIn(String responseMessage) {
         for( ClientHandler clientHandlers : clients){
             if (clientHandlers.getUserOfClientHandler().getUserName() != null){
@@ -622,6 +756,11 @@ public class ClientHandler implements Runnable{
         }
     }
 
+    /**
+     * Send message to a client
+     * @param responseMessage Message that will be sent
+     * @param name Name of receiver client
+     */
     static void outToPrivate(String responseMessage, String name){
         for( ClientHandler clientHandlers : clients){
             if (getByUserName(name).equals(clientHandlers)) {
@@ -630,6 +769,11 @@ public class ClientHandler implements Runnable{
         }
     }
 
+    /**
+     * Send message to all clients of a group
+     * @param responseMessage Message that will be sent
+     * @param groupName Name of group
+     */
     private void outToGroup(String responseMessage, String groupName){
         for( ClientHandler clientHandlers : clients){
             for (Group group : groups){
@@ -640,6 +784,10 @@ public class ClientHandler implements Runnable{
         }
     }
 
+    /**
+     * Client receive file
+     * @param name Name of receiver client
+     */
     private void receiveFile(String name) {
         for( ClientHandler clientHandlers : clients){
             if (getByUserName(name).equals(clientHandlers)) {
@@ -648,6 +796,11 @@ public class ClientHandler implements Runnable{
         }
     }
 
+    /**
+     * Convert timestamp to string
+     * @param timestamp timestamp of time
+     * @return String version of timestamp
+     */
     private String convertTimestampToDate(long timestamp){
 
         Date date = new Date(timestamp);
@@ -655,7 +808,13 @@ public class ClientHandler implements Runnable{
         return format.format(date);
     }
 
-
+    /**
+     * Store username and password to txt file for authenticated user
+     * @param username Username of authenticated user
+     * @param password Password of authenticated user
+     * @param file File that stores usernames and passwords of authenticated users
+     * @throws IOException
+     */
     private void storeUsernamePasswordInFile(String username, String password, String file) throws IOException {
         String passwordAfterEncryption = AES.encrypt(password);
         BufferedWriter out = new BufferedWriter(new FileWriter(file, true));
@@ -664,10 +823,23 @@ public class ClientHandler implements Runnable{
         out.close();
     }
 
+    /**
+     * Check if user name already existed as guest or authenticated user
+     * @param username Username that will be checked
+     * @return Boolean weather the username is already existing
+     * @throws IOException
+     */
     private static boolean usernameAlreadyExists(String username) throws IOException {
         return usernameAlreadyExistsAsGuest(username) || usernameAlreadyExistsAsAuthenticatedUser(username, "client/client/authenticatedUsers.txt");
     }
 
+    /**
+     * Check if user name already existed as authenticated user
+     * @param username Username that will be checked
+     * @param file File that stores usernames and passwords of authenticated users
+     * @return Boolean weather the username is already existing as authenticated user
+     * @throws IOException
+     */
     private static boolean usernameAlreadyExistsAsAuthenticatedUser(String username, String file) throws IOException {
         boolean usernameAlreadyExist = false;
         for (String usernameAndPassword : getAllUsernameAndPasswordFromFileAsArray(file)) {
@@ -680,6 +852,11 @@ public class ClientHandler implements Runnable{
         return usernameAlreadyExist;
     }
 
+    /**
+     * Check if user name already existed as guest
+     * @param username Username that will be checked
+     * @return Boolean weather the username is already existing as guest
+     */
     private static boolean usernameAlreadyExistsAsGuest(String username) {
         boolean usernameAlreadyExist = false;
         for (User user : users) {
@@ -690,18 +867,36 @@ public class ClientHandler implements Runnable{
         return usernameAlreadyExist;
     }
 
-
+    /**
+     * Get all usernames and passwords of authenticated users as an arraylist, every item of arraylist is a username and a password
+     * @param file File that stores usernames and passwords of authenticated users
+     * @return Arraylist of usernames and passwords of authenticated users
+     * @throws IOException
+     */
     private static ArrayList<String> getAllUsernameAndPasswordFromFileAsArray(String file) throws IOException {
         String content = new String(Files.readAllBytes(Paths.get(file)));
         return new ArrayList<>(Arrays.asList(content.split("\\r?\\n")));
     }
 
+    /**
+     * Check if string matches rule of username
+     * @param username Username that will be checked
+     * @return Boolean weather the username is matching the rule
+     */
     private static boolean validUsernameFormat(String username) {
         Pattern pattern = Pattern.compile("^[a-zA-Z0-9_]{3,14}$");
         Matcher matcher = pattern.matcher(username);
         return matcher.matches();
     }
 
+    /**
+     * Check if username and password are correct as authenticated user
+     * @param username Username that will be checked
+     * @param password Password that will be checked
+     * @param file File that stores usernames and passwords of authenticated users
+     * @return Boolean of weather the username and password are correct as existing authenticated user
+     * @throws IOException
+     */
     public static boolean usernameAndPasswordCorrect(String username, String password, String file) throws IOException {
         boolean usernameExistsAndMatchPassword = false;
         for (String usernameAndPassword : getAllUsernameAndPasswordFromFileAsArray(file)) {

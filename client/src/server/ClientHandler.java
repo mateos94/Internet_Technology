@@ -5,8 +5,6 @@ import java.io.*;
 import java.net.Socket;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.text.Format;
-import java.text.SimpleDateFormat;
 import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -255,112 +253,97 @@ public class ClientHandler implements Runnable{
      */
     public String parseMessage (String string) throws Exception {
         //if user responds with Pong extend session.
-        switch (string.toLowerCase()) {
-            case "PONG":
-                responseMessage = "Connection duration extended";
-                counter = 0;
-                break;
-            case "?":
-                responseMessage =
-                        "Help list: \n" +
-                                "Everything starts with means message from system. \n" +
-                                "CONN <username>: Login to the chat server as a guest if <username> isn’t registered before. \n" +
-                                "SIGNUP <username> <password>: Register at server if <username> isn't registered before. \n" +
-                                "SIGNIN <username> <password>: Sign in using already existing authenticated user. \n" +
-                                "USERS: Request all users from the server that are currently online. \n" +
-                                "BCST <message>: Broadcast a message to all connected(online) users. \n" +
-                                "QUIT: Log out from the server. \n" +
-                                "-----server.Group related-----: \n" +
-                                "GROUPS: Get a list of all groups. \n" +
-                                "HISTORY <group name>: Get chat history of a group. \n" +
-                                "JOIN <group name>: Join a group that exists. \n" +
-                                "LEAVE <group name>: Leave a group that you are in. \n" +
-                                "CREATE <group name>: Create a new group. \n" +
-                                "KICK <username to be kicked> <group name>: Kick a user from your group (you have to be the admin/creator of that group) \n" +
-                                "GROUP <group name> <message>: Send a message to all members of your group. \n" +
-                                "-----Send related-----: \n" +
-                                "PRIVATE <username to message> <message>: Send a private message to another user. \n" +
-                                "SEND < receiver’s username> <file name>: Send a file to another user. \n" +
-                                "Pong: extend the duration of your connection";
-                break;
-            case "GROUPS":
-                if (user == null) {
-                    responseMessage = "ER03 Please log in first";
-                } else if (!user.isLoggedIn()) {
-                    responseMessage = "ER03 Please log in first";
-                } else {
-                    responseMessage = getGroupsAsString();
-                }
-                break;
-            case "USERS":
-                if (user == null) {
-                    responseMessage = "ER03 Please log in first";
-                } else if (!user.isLoggedIn()) {
-                    responseMessage = "ER03 Please log in first";
-                } else {
-                    responseMessage = getOnlineUsers();
-                }
-                break;
-            case "QUIT":
-                if (user == null) {
-                    responseMessage = "ER03 Please log in first";
-                } else if (!user.isLoggedIn()) {
-                    responseMessage = "ER03 Please log in first";
-                } else {
-                    responseMessage = "You are logged out";
-                    removeUserByName(user.getUserName());
-                    user = null;
-                }
-                break;
+        if (string.toLowerCase(Locale.ROOT).equals("pong")){
+            responseMessage = "Connection duration extended";
+            counter = 0;
+            return responseMessage;
+        }
+        if (string.equals("?")){
+            responseMessage = "Help list: \n" +
+                    "Everything starts with means message from system. \n" +
+                    "CONN <username>: Login to the chat server as a guest if <username> isn’t registered before. \n" +
+                    "SIGNUP <username> <password>: Register at server if <username> isn't registered before. \n" +
+                    "SIGNIN <username> <password>: Sign in using already existing authenticated user. \n" +
+                    "USERS: Request all users from the server that are currently online. \n" +
+                    "BCST <message>: Broadcast a message to all connected(online) users. \n" +
+                    "QUIT: Log out from the server. \n" +
+                    "-----server.Group related-----: \n" +
+                    "GROUPS: Get a list of all groups. \n" +
+                    "HISTORY <group name>: Get chat history of a group. \n" +
+                    "JOIN <group name>: Join a group that exists. \n" +
+                    "LEAVE <group name>: Leave a group that you are in. \n" +
+                    "CREATE <group name>: Create a new group. \n" +
+                    "KICK <username to be kicked> <group name>: Kick a user from your group (you have to be the admin/creator of that group) \n" +
+                    "GROUP <group name> <message>: Send a message to all members of your group. \n" +
+                    "-----Send related-----: \n" +
+                    "PRIVATE <username to message> <message>: Send a private message to another user. \n" +
+                    "SEND < receiver’s username> <file name>: Send a file to another user. \n" +
+                    "Pong: extend the duration of your connection";
+            return responseMessage;
+        } else if (string.equalsIgnoreCase("Groups")) {
+            if (user == null) {
+                responseMessage = "ER03 Please log in first";
+            } else if (!user.isLoggedIn()) {
+                responseMessage = "ER03 Please log in first";
+            } else {
+                responseMessage = getGroupsAsString();
+            }
+            return responseMessage;
+        } else if (string.equalsIgnoreCase("Users")) {
+            if (user == null){
+                responseMessage = "ER03 Please log in first";
+            } else if (!user.isLoggedIn()) {
+                responseMessage = "ER03 Please log in first";
+            } else {
+                responseMessage = getOnlineUsers();
+            }
+            return responseMessage;
+        } else if (string.equalsIgnoreCase("Quit")) {
+            if (user == null){
+                responseMessage = "ER03 Please log in first";
+            } else if (!user.isLoggedIn()) {
+                responseMessage = "ER03 Please log in first";
+            } else {
+                responseMessage = "You are logged out";
+                removeUserByName(user.getUserName());
+                user = null;
+            }
+            return responseMessage;
         }
         int x = string.indexOf(' ');
         if(x<0) {
-            responseMessage = "Please enter the full command";
+            responseMessage = "ER21 Please enter the full command";
             return responseMessage;
         }
         typeOfMessage = string.substring(0, x);
         String contentOfMessage = string.substring(x + 1);
 
-        switch (typeOfMessage.toLowerCase()) {
-            case "CONN":
-                responseMessage = login(contentOfMessage);
-                break;
-            case "SIGNIN":
-                responseMessage = signin(contentOfMessage);
-                break;
-            case "SIGNUP":
-                responseMessage = signup(contentOfMessage);
-                break;
-            case "BCST":
-                responseMessage = broadcastMessage(string);
-                break;
-            case "JOIN":
-                responseMessage = joinGroup(contentOfMessage);
-                break;
-            case "LEAVE":
-                responseMessage = leaveGroup(contentOfMessage);
-                break;
-            case "CREATE":
-                responseMessage = createGroup(contentOfMessage);
-                break;
-            case "KICK":
-                responseMessage = kickPersonOutOfGroup(contentOfMessage);
-                break;
-            case "PRIVATE":
-                responseMessage = sendPrivateMessage(contentOfMessage);
-                break;
-            case "GROUP":
-                responseMessage = sendGroupMessage(contentOfMessage);
-                break;
-            case "HISTORY":
-                responseMessage = checkHistoryOfGroup(contentOfMessage);
-                break;
-            case "SEND":
-                responseMessage = send(contentOfMessage);
-                break;
-            default:
-                responseMessage = "ER00 Unknown command";
-                break;
+        if (typeOfMessage.equalsIgnoreCase("CONN")) {
+            responseMessage = login(contentOfMessage);
+        } else if (typeOfMessage.equalsIgnoreCase("SIGNIN")) {
+            responseMessage = signin(contentOfMessage);
+        } else if (typeOfMessage.equalsIgnoreCase("SIGNUP")) {
+            responseMessage = signup(contentOfMessage);
+        } else if (typeOfMessage.equalsIgnoreCase("BCST")) {
+            responseMessage = broadcastMessage(string);
+        } else if (typeOfMessage.equalsIgnoreCase("JOIN")) {
+            responseMessage = joinGroup(contentOfMessage);
+        } else if (typeOfMessage.equalsIgnoreCase("LEAVE")) {
+            responseMessage = leaveGroup(contentOfMessage);
+        } else if (typeOfMessage.equalsIgnoreCase("CREATE")) {
+            responseMessage = createGroup(contentOfMessage);
+        } else if (typeOfMessage.equalsIgnoreCase("KICK")) {
+            responseMessage = kickPersonOutOfGroup(contentOfMessage);
+        } else if (typeOfMessage.equalsIgnoreCase("PRIVATE")) {
+            responseMessage = sendPrivateMessage(contentOfMessage);
+        } else if (typeOfMessage.equalsIgnoreCase("GROUP")) {
+            responseMessage = sendGroupMessage(contentOfMessage);
+        } else if (typeOfMessage.equalsIgnoreCase("HISTORY")) {
+            responseMessage = checkHistoryOfGroup(contentOfMessage);
+        } else if (typeOfMessage.equalsIgnoreCase("SEND")){
+            responseMessage = send(contentOfMessage);
+        } else {
+            responseMessage = "ER00 Unknown command";
         }
         counter = 0;
         return responseMessage;

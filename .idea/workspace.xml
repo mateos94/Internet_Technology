@@ -3,9 +3,19 @@
   <component name="ChangeListManager">
     <list default="true" id="0b2b46a1-6066-452f-b965-97d7e6559bc4" name="Default Changelist" comment="bug fixed">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/client/ServerConnection.java" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/client/ServerConnection.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/out/production/client/client/Client.class" beforeDir="false" afterPath="$PROJECT_DIR$/client/out/production/client/client/Client.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/out/production/client/client/Crypto.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/out/production/client/client/ServerConnection.class" beforeDir="false" afterPath="$PROJECT_DIR$/client/out/production/client/client/ServerConnection.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/out/production/client/server/AES.class" beforeDir="false" afterPath="$PROJECT_DIR$/client/out/production/client/server/AES.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/out/production/client/server/ClientHandler.class" beforeDir="false" afterPath="$PROJECT_DIR$/client/out/production/client/server/ClientHandler.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/out/production/client/server/FileReceiverServer.class" beforeDir="false" afterPath="$PROJECT_DIR$/client/out/production/client/server/FileReceiverServer.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/out/production/client/server/FileSenderServer.class" beforeDir="false" afterPath="$PROJECT_DIR$/client/out/production/client/server/FileSenderServer.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/out/production/client/server/Group.class" beforeDir="false" afterPath="$PROJECT_DIR$/client/out/production/client/server/Group.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/out/production/client/server/Server.class" beforeDir="false" afterPath="$PROJECT_DIR$/client/out/production/client/server/Server.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/out/production/client/server/TimerThread.class" beforeDir="false" afterPath="$PROJECT_DIR$/client/out/production/client/server/TimerThread.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/out/production/client/server/User.class" beforeDir="false" afterPath="$PROJECT_DIR$/client/out/production/client/server/User.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/out/production/client/server/UserAndTimeOfLastMessage.class" beforeDir="false" afterPath="$PROJECT_DIR$/client/out/production/client/server/UserAndTimeOfLastMessage.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/client/src/server/ClientHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/server/ClientHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/server/Group.java" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/server/Group.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -87,7 +97,7 @@
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
     <property name="jdk.selected.JAVA_MODULE" value="15" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../test use/Internet_Technology-ba766afaaa4d17c1048722fca60f60e5159be421" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../version 41/Internet_Technology-84592e75324537f7cdbedcda621d29cfee662b8d" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
@@ -103,7 +113,7 @@
       <recent name="client" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.Client 2">
+  <component name="RunManager" selected="Application.Client 1">
     <configuration name="Client 1" type="Application" factoryName="Application">
       <option name="MAIN_CLASS_NAME" value="client.Client" />
       <module name="client" />
@@ -181,6 +191,17 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration default="true" type="ArquillianJUnit" factoryName="" nameIsGenerated="true">
+      <option name="arquillianRunConfiguration">
+        <value>
+          <option name="containerStateName" value="" />
+        </value>
+      </option>
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <list>
       <item itemvalue="Application.Client 1" />
       <item itemvalue="Application.Client 3" />
@@ -196,8 +217,8 @@
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.Client 2" />
         <item itemvalue="Application.Server" />
+        <item itemvalue="Application.Client 2" />
       </list>
     </recent_temporary>
   </component>
@@ -243,7 +264,8 @@
       <workItem from="1647693486741" duration="960000" />
       <workItem from="1647696521675" duration="1634000" />
       <workItem from="1647714018082" duration="6994000" />
-      <workItem from="1647779747063" duration="2021000" />
+      <workItem from="1647779747063" duration="2700000" />
+      <workItem from="1647795169750" duration="5076000" />
     </task>
     <task id="LOCAL-00001" summary="bug fixed">
       <created>1647128816152</created>
@@ -280,7 +302,14 @@
       <option name="project" value="LOCAL" />
       <updated>1647694428758</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="bug fixed">
+      <created>1647782006847</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1647782006847</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="ToolWindowManager">

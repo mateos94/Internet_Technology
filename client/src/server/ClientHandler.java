@@ -529,11 +529,11 @@ public class ClientHandler implements Runnable{
             responseMessage = "ER03 Please log in first";
         } else if (getGroupByName(contentOfMessage) == null){
             responseMessage = "ER10 Such group doesn't exist";
+        } else if(getGroupByName(contentOfMessage).checkIfUserExist(user.getUserName())){
+            responseMessage = "ER11 You are already part of the group";
         } else if(getGroupByName(contentOfMessage).addMember(getUserByName(user.getUserName()), System.currentTimeMillis())){
             outToAllLoggedIn("User " + user.getUserName() + " joint group " + contentOfMessage);
             responseMessage = "You joined group " + contentOfMessage;
-        } else{
-            responseMessage = "ER11 Failed to join group";
         }
         return responseMessage;
     }

@@ -6,7 +6,7 @@ import java.util.ConcurrentModificationException;
 public class Group {
     private String groupName;
     private User owner;
-    private static ArrayList<UserAndTimeOfLastMessage> membersAndTimeOfLastMessage = new ArrayList<>();
+    private ArrayList<UserAndTimeOfLastMessage> membersAndTimeOfLastMessage = new ArrayList<>();
     private ArrayList<String> historyMessages = new ArrayList<>();
 
     public Group(String groupName, User owner) {
@@ -36,6 +36,10 @@ public class Group {
      */
     public ArrayList<UserAndTimeOfLastMessage> getMembersAndTimeOfLastMessage() {
         return membersAndTimeOfLastMessage;
+    }
+
+    public void setMembersAndTimeOfLastMessage(ArrayList<UserAndTimeOfLastMessage> membersAndTimeOfLastMessage) {
+        this.membersAndTimeOfLastMessage = membersAndTimeOfLastMessage;
     }
 
     /**

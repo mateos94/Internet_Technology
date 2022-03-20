@@ -24,7 +24,7 @@ public class Server {
 
         Timer timer = new Timer();
         int begin = 0;
-        int timeInterval = 5000;
+        int timeInterval = 120000;
         timer.schedule(new TimerTask() {
             @Override
             public void run() throws ConcurrentModificationException {
@@ -41,10 +41,9 @@ public class Server {
             ClientHandler clientThread = new ClientHandler(client, clients);
             TimerThread timerThread = new TimerThread(client,clientThread);
 
-
             clients.add(clientThread);
             pool.execute(clientThread);
-            pool2.execute(timerThread);
+            //pool2.execute(timerThread);
 
             if(clientThread.getResponseMessage().equals("Your file has been sent successfully")){
                 FileReceiverServer fileReceiverServer = new FileReceiverServer(client);
@@ -76,7 +75,7 @@ public class Server {
                             ClientHandler.disbandGroup(nextGroup.getGroupName());
                         }
                         String message = "";
-                        message += "# Because of " + nextUserAndTimeOfLastMessage.getUser().getUserName() + " did not talk for more than 2 mins in group " + nextGroup.getGroupName() + ", got kicked out of group.";
+                        message += "Because of " + nextUserAndTimeOfLastMessage.getUser().getUserName() + " did not talk for more than 2 mins in group " + nextGroup.getGroupName() + ", got kicked out of group.";
                         ClientHandler.outToPrivate(message, nextUserAndTimeOfLastMessage.getUser().getUserName());
                     }
                 }

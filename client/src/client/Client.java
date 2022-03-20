@@ -4,6 +4,10 @@ import server.AES;
 
 import java.io.*;
 import java.net.Socket;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.security.DigestInputStream;
+import java.security.MessageDigest;
 
 public class Client
 {
@@ -11,7 +15,6 @@ public class Client
 
     private static final String SERVER_IP = "127.0.0.1";
     private static final int SERVER_PORT = 1337;
-    private static final String PATH = "client/client/client.txt";
 
 
     public static void main(String[] args) throws Exception
@@ -31,18 +34,33 @@ public class Client
         new Thread(serverConn).start();
         while(true)
         {
-            sendMessage = keyRead.readLine();  // keyboard reading   clientName is at the beginning of every message
+            sendMessage = keyRead.readLine();
             if (startsWithIgnoreCase("Send ", sendMessage)){
                 String fileLocation = sendMessage.substring(sendMessage.lastIndexOf(" ")+1);
+                File file = new File(fileLocation);
+                if (file.exists()) {
                 try {
-                    FileInputStream fis = new FileInputStream(PATH);
-                    byte b[] = new byte[2002];
-                    fis.read(b, 0, b.length);
-                    OutputStream os = socket.getOutputStream();
-                    os.write(b, 0, b.length);
+                    FileInputStream fis = new FileInputStream(fileLocation);
 
-                } catch (Exception e) {
+                        byte b[] = new byte[2002];
+                        MessageDigest md = MessageDigest.getInstance("MD5");
+                        try (InputStream is = Files.newInputStream(Paths.get(fileLocation));
+                             DigestInputStream dis = new DigestInputStream(is, md))
+                        {
+                            dis.read(b, 0, b.length);
+                        }
+                        byte[] d = md.digest();
+                        fis.read(d, 0, b.length);
+                        OutputStream os = socket.getOutputStream();
+                        os.write(d, 0, b.length);
+                    }
+                catch (Exception e) {
                     e.printStackTrace();
+                }
+                }
+                else {
+                    pwrite.println("Ignore message");       // sending to server
+                    pwrite.flush();
                 }
                 pwrite.println(sendMessage);       // sending to server
                 pwrite.flush();                    // flush the data

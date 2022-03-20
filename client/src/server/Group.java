@@ -1,6 +1,7 @@
 package server;
 
 import java.util.ArrayList;
+import java.util.ConcurrentModificationException;
 
 public class Group {
     private String groupName;
@@ -70,12 +71,15 @@ public class Group {
      * Delete a user in group by name of user
      * @param name name of user
      */
-    public void deleteMemberByName(String name){
+
+    public void deleteMemberByName(String name) throws ConcurrentModificationException {
+        int indexOfTarget = 0;
         for (UserAndTimeOfLastMessage userAndTimeOfLastMessage: membersAndTimeOfLastMessage) {
             if (userAndTimeOfLastMessage.getUser().getUserName().equals(name)){
-                membersAndTimeOfLastMessage.remove(userAndTimeOfLastMessage);
+                indexOfTarget = membersAndTimeOfLastMessage.indexOf(userAndTimeOfLastMessage);
             }
         }
+        membersAndTimeOfLastMessage.remove(indexOfTarget);
     }
 
     public boolean checkIfUserExist(String name){

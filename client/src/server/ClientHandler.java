@@ -191,13 +191,13 @@ public class ClientHandler implements Runnable{
         if (groups.size() == 0) {
             listOfGroupsAsString = "ER18 There is no group";
         } else {
-            listOfGroupsAsString = "#Here are the list of groups:";
+            listOfGroupsAsString = "Here are the list of groups:";
             listOfGroupsAsString += "\n";
             for (Group nextGroup: groups) {
                 listOfGroupsAsString += nextGroup.getGroupName();
                 listOfGroupsAsString += "\n";
             }
-            listOfGroupsAsString += "#End.";
+            listOfGroupsAsString += "End.";
         }
         return listOfGroupsAsString;
     }
@@ -220,7 +220,7 @@ public class ClientHandler implements Runnable{
             listOfOnlineUsersAsString = "ER19 There is no user logged in so far";
             listOfOnlineUsersAsString += "\n";
         } else {
-            listOfOnlineUsersAsString = "#List of users:";
+            listOfOnlineUsersAsString = "List of users:";
             listOfOnlineUsersAsString += "\n";
             for (User nextUser : users) {
                 if (nextUser.isLoggedIn()) {
@@ -254,7 +254,6 @@ public class ClientHandler implements Runnable{
      * @throws Exception
      */
     public String parseMessage (String string) throws Exception {
-        String currentTimeAsDateString = convertTimestampToDate(System.currentTimeMillis());
         //if user responds with Pong extend session.
         switch (string.toLowerCase()) {
             case "PONG":
@@ -263,15 +262,15 @@ public class ClientHandler implements Runnable{
                 break;
             case "?":
                 responseMessage =
-                        "# Help list: \n" +
-                                "Everything starts with # means message from system. \n" +
+                        "Help list: \n" +
+                                "Everything starts with means message from system. \n" +
                                 "CONN <username>: Login to the chat server as a guest if <username> isn’t registered before. \n" +
                                 "SIGNUP <username> <password>: Register at server if <username> isn't registered before. \n" +
                                 "SIGNIN <username> <password>: Sign in using already existing authenticated user. \n" +
                                 "USERS: Request all users from the server that are currently online. \n" +
                                 "BCST <message>: Broadcast a message to all connected(online) users. \n" +
                                 "QUIT: Log out from the server. \n" +
-                                "# -----server.Group related-----: \n" +
+                                "-----server.Group related-----: \n" +
                                 "GROUPS: Get a list of all groups. \n" +
                                 "HISTORY <group name>: Get chat history of a group. \n" +
                                 "JOIN <group name>: Join a group that exists. \n" +
@@ -279,7 +278,7 @@ public class ClientHandler implements Runnable{
                                 "CREATE <group name>: Create a new group. \n" +
                                 "KICK <username to be kicked> <group name>: Kick a user from your group (you have to be the admin/creator of that group) \n" +
                                 "GROUP <group name> <message>: Send a message to all members of your group. \n" +
-                                "# -----Send related-----: \n" +
+                                "-----Send related-----: \n" +
                                 "PRIVATE <username to message> <message>: Send a private message to another user. \n" +
                                 "SEND < receiver’s username> <file name>: Send a file to another user. \n" +
                                 "Pong: extend the duration of your connection";
@@ -308,7 +307,7 @@ public class ClientHandler implements Runnable{
                 } else if (!user.isLoggedIn()) {
                     responseMessage = "ER03 Please log in first";
                 } else {
-                    responseMessage = "# " + currentTimeAsDateString + " You are logged out";
+                    responseMessage = "You are logged out";
                     removeUserByName(user.getUserName());
                     user = null;
                 }
@@ -316,7 +315,7 @@ public class ClientHandler implements Runnable{
         }
         int x = string.indexOf(' ');
         if(x<0) {
-            responseMessage = "#Please enter the full command";
+            responseMessage = "Please enter the full command";
             return responseMessage;
         }
         typeOfMessage = string.substring(0, x);
@@ -358,9 +357,6 @@ public class ClientHandler implements Runnable{
                 break;
             case "SEND":
                 responseMessage = send(contentOfMessage);
-                break;
-            case "FILE":
-                responseMessage = askToSendFile(contentOfMessage);
                 break;
             default:
                 responseMessage = "ER00 Unknown command";
@@ -435,14 +431,19 @@ public class ClientHandler implements Runnable{
                 responseMessage = "ER08 You need a password";
             } else {
                 boolean userExist = false;
+                boolean usernameFormatIsBad = false;
                 int j = contentOfMessage.indexOf(' ');
                 String username = contentOfMessage.substring(0, j);
                 String password = contentOfMessage.substring(j + 1);
+                if (!validUsernameFormat(username)){
+                    responseMessage = "ER02 This username has an invalid format (only characters, numbers and underscores are allowed)";
+                    usernameFormatIsBad = true;
+                }
                 if (usernameAlreadyExists(username)) {
                     responseMessage = "ERO1 User already logged in";
                     userExist = true;
                 }
-                if (!userExist) {
+                if (!userExist && !usernameFormatIsBad) {
                     user = new User(username);
                     user.setPassword(password);
                     users.add(user);
@@ -563,6 +564,8 @@ public class ClientHandler implements Runnable{
                 } else {
                     if (!getGroupByName(groupName).checkIfUserExist(kickedUsername)) {
                         responseMessage = "ER15 The user does not exist in the group";
+                    } else if (kickedUsername.equals(user.getUserName())) {
+                        responseMessage = "ER20 Cannot kick yourself";
                     } else {
                         getGroupByName(groupName).deleteMemberByName(kickedUsername);
                         responseMessage = "The user " + kickedUsername +" was kicked from the group";
@@ -687,64 +690,6 @@ public class ClientHandler implements Runnable{
     }
 
     /**
-     * Client send a file
-     * @param contentOfMessage content of message
-     * @return Response to the client who sent the command, might be error that warns client
-     * @throws IOException
-     */
-    private String askToSendFile(String contentOfMessage) throws IOException {
-        if (user == null){
-            responseMessage = "ER03 Please log in first";
-        } else if (!user.isLoggedIn()) {
-            responseMessage = "ER03 Please log in first";
-        } else {
-            int j = contentOfMessage.indexOf(' ');
-            String receiverName = contentOfMessage.substring(0, j);
-            String filePath = contentOfMessage.substring(j + 1);
-            File file = new File(filePath);
-
-            FileInputStream fis;
-            DataOutputStream dos;
-
-            if (file.exists()) {
-                try {
-                        fis = new FileInputStream(file);
-                        dos = new DataOutputStream(client.getOutputStream());
-
-                        dos.writeUTF(file.getName());
-                        dos.flush();
-                        dos.writeLong(file.length());
-                        dos.flush();
-
-                        byte[] bytes = new byte[1024];
-                        int length = 0;
-                        long progress = 0;
-                        while((length = fis.read(bytes, 0, bytes.length)) != -1) {
-                            dos.write(bytes, 0, length);
-                            dos.flush();
-                            progress += length;
-                            System.out.print("| " + (100*progress/file.length()) + "% |");
-                        }
-                } catch (Exception e) {
-                    e.printStackTrace();
-                } finally {
-                    client.close();
-                }
-            }
-
-            if (!file.isFile()) {
-                responseMessage = "ER17 File path is wrong";
-            } else if (!checkIfUserExist(receiverName)) {
-                responseMessage = "ER04 Such user doesn't exist";
-            } else {
-                outToPrivate("<" + user.getUserName() + "> want to send you a file, do you allow? type file to save it", receiverName);
-                responseMessage = "Your file has been sent successfully, if the receiver allows, he/she will receive";
-            }
-        }
-        return responseMessage;
-    }
-
-    /**
      * Send message to all logged in clients
      * @param responseMessage Message that will be sent
      */
@@ -794,18 +739,6 @@ public class ClientHandler implements Runnable{
                 clientHandlers.out.println("You received a new file");
             }
         }
-    }
-
-    /**
-     * Convert timestamp to string
-     * @param timestamp timestamp of time
-     * @return String version of timestamp
-     */
-    private String convertTimestampToDate(long timestamp){
-
-        Date date = new Date(timestamp);
-        Format format = new SimpleDateFormat("yyyy MM dd HH:mm:ss");
-        return format.format(date);
     }
 
     /**

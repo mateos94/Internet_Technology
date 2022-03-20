@@ -29,12 +29,7 @@ public class ServerConnection implements Runnable{
                     head = head.substring(3);
                     String encryptedMessage = receiveMessage.split(" ", 2)[1];
                     receiveMessage = head + " " + AES.decrypt(encryptedMessage);
-                } else if (receiveMessage.contains("*You are logged in with username ")){
-                     loggedIn = true;
-                } else if (receiveMessage.contains("*Logging in failed, this user already exists.")){
-                    server.close(); // cut connection if user exists already
-                }
-                 if (receiveMessage.contains("You received a new file")){
+                } if (receiveMessage.contains("You received a new file")){
                      byte [] b = new byte[2002];
                      //InputStream is = server.getInputStream();
                      FileInputStream fis = new FileInputStream("client/receive.txt");

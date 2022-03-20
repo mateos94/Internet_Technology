@@ -3,16 +3,9 @@
   <component name="ChangeListManager">
     <list default="true" id="0b2b46a1-6066-452f-b965-97d7e6559bc4" name="Default Changelist" comment="bug fixed">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/client/Client.java" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/client/Client.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/client/src/client/ServerConnection.java" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/client/ServerConnection.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/server/AES.java" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/server/AES.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/client/src/server/ClientHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/server/ClientHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/server/FileReceiverServer.java" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/server/FileReceiverServer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/server/FileSenderServer.java" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/server/FileSenderServer.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/client/src/server/Group.java" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/server/Group.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/server/Server.java" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/server/Server.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/server/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/server/User.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/server/UserAndTimeOfLastMessage.java" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/server/UserAndTimeOfLastMessage.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -101,7 +94,7 @@
     <property name="node.js.path.for.package.tslint" value="project" />
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
     <property name="node.js.selected.package.tslint" value="(autodetect)" />
-    <property name="project.structure.last.edited" value="Modules" />
+    <property name="project.structure.last.edited" value="Project" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
   </component>
@@ -247,7 +240,10 @@
       <workItem from="1647562678114" duration="110000" />
       <workItem from="1647562808052" duration="305000" />
       <workItem from="1647637146012" duration="12137000" />
-      <workItem from="1647693486741" duration="747000" />
+      <workItem from="1647693486741" duration="960000" />
+      <workItem from="1647696521675" duration="1634000" />
+      <workItem from="1647714018082" duration="6994000" />
+      <workItem from="1647779747063" duration="2021000" />
     </task>
     <task id="LOCAL-00001" summary="bug fixed">
       <created>1647128816152</created>
@@ -277,7 +273,14 @@
       <option name="project" value="LOCAL" />
       <updated>1647541947883</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="bug fixed">
+      <created>1647694428757</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1647694428758</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="ToolWindowManager">

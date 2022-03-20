@@ -102,15 +102,15 @@ public class Group {
     public String getHistoryMessages() {
         String historyMessagesOfGroup = "";
         if (historyMessages.size() == 0) {
-            historyMessagesOfGroup = "*The group has no history message";
+            historyMessagesOfGroup = "The group has no history message";
         } else {
-            historyMessagesOfGroup = "*Following are the history messages of group:";
+            historyMessagesOfGroup = "Following are the history messages of group:";
             for (String historyMessage: historyMessages){
                 historyMessagesOfGroup += "\n";
                 historyMessagesOfGroup += historyMessage;
             }
             historyMessagesOfGroup += "\n";
-            historyMessagesOfGroup += "*End.";
+            historyMessagesOfGroup += "End.";
         }
         return historyMessagesOfGroup;
     }

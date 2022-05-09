@@ -2,32 +2,141 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="0b2b46a1-6066-452f-b965-97d7e6559bc4" name="Default Changelist" comment="bug fixed">
+      <change afterPath="$PROJECT_DIR$/Internet technology assignment/src/server/SaltedMD5Example.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/out/production/client/client/Client.class" beforeDir="false" afterPath="$PROJECT_DIR$/client/out/production/client/client/Client.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/out/production/client/client/Crypto.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/out/production/client/client/ServerConnection.class" beforeDir="false" afterPath="$PROJECT_DIR$/client/out/production/client/client/ServerConnection.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/out/production/client/server/AES.class" beforeDir="false" afterPath="$PROJECT_DIR$/client/out/production/client/server/AES.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/out/production/client/server/ClientHandler.class" beforeDir="false" afterPath="$PROJECT_DIR$/client/out/production/client/server/ClientHandler.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/out/production/client/server/FileReceiverServer.class" beforeDir="false" afterPath="$PROJECT_DIR$/client/out/production/client/server/FileReceiverServer.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/out/production/client/server/FileSenderServer.class" beforeDir="false" afterPath="$PROJECT_DIR$/client/out/production/client/server/FileSenderServer.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/out/production/client/server/Group.class" beforeDir="false" afterPath="$PROJECT_DIR$/client/out/production/client/server/Group.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/out/production/client/server/Server.class" beforeDir="false" afterPath="$PROJECT_DIR$/client/out/production/client/server/Server.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/out/production/client/server/TimerThread.class" beforeDir="false" afterPath="$PROJECT_DIR$/client/out/production/client/server/TimerThread.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/out/production/client/server/User.class" beforeDir="false" afterPath="$PROJECT_DIR$/client/out/production/client/server/User.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/out/production/client/server/UserAndTimeOfLastMessage.class" beforeDir="false" afterPath="$PROJECT_DIR$/client/out/production/client/server/UserAndTimeOfLastMessage.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/server/ClientHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/server/ClientHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/.idea/checkstyle-idea.xml" beforeDir="false" afterPath="$PROJECT_DIR$/Internet technology assignment/.idea/checkstyle-idea.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/Internet technology assignment/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/Internet technology assignment/.idea/modules.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/.idea/sonarIssues.xml" beforeDir="false" afterPath="$PROJECT_DIR$/Internet technology assignment/.idea/sonarIssues.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/.idea/uiDesigner.xml" beforeDir="false" afterPath="$PROJECT_DIR$/Internet technology assignment/.idea/uiDesigner.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/Internet technology assignment/.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/Internet technology assignment/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/Chat application.iml" beforeDir="false" afterPath="$PROJECT_DIR$/Internet technology assignment/Chat application.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/Internet technology assignment/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/client.iml" beforeDir="false" afterPath="$PROJECT_DIR$/Internet technology assignment/Internet technology assignment.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/client/authenticatedUsers.txt" beforeDir="false" afterPath="$PROJECT_DIR$/Internet technology assignment/relatedTextFiles/authenticatedUsers.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/client/client.txt" beforeDir="false" afterPath="$PROJECT_DIR$/Internet technology assignment/relatedTextFiles/client.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/client/receive.txt" beforeDir="false" afterPath="$PROJECT_DIR$/Internet technology assignment/receive.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/client/receivedFromServer.txt" beforeDir="false" afterPath="$PROJECT_DIR$/Internet technology assignment/relatedTextFiles/receivedFromServer.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/client/server.txt" beforeDir="false" afterPath="$PROJECT_DIR$/Internet technology assignment/relatedTextFiles/server.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/out/production/Chat application/AES.class" beforeDir="false" afterPath="$PROJECT_DIR$/Internet technology assignment/out/production/Chat application/AES.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/out/production/Chat application/Client.class" beforeDir="false" afterPath="$PROJECT_DIR$/Internet technology assignment/out/production/Chat application/Client.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/out/production/Chat application/ClientHandler.class" beforeDir="false" afterPath="$PROJECT_DIR$/Internet technology assignment/out/production/Chat application/ClientHandler.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/out/production/Chat application/FileSender.class" beforeDir="false" afterPath="$PROJECT_DIR$/Internet technology assignment/out/production/Chat application/FileSender.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/out/production/Chat application/Group.class" beforeDir="false" afterPath="$PROJECT_DIR$/Internet technology assignment/out/production/Chat application/Group.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/out/production/Chat application/META-INF/Chat application.kotlin_module" beforeDir="false" afterPath="$PROJECT_DIR$/Internet technology assignment/out/production/Chat application/META-INF/Chat application.kotlin_module" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/out/production/Chat application/Server$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/Internet technology assignment/out/production/Chat application/Server$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/out/production/Chat application/Server.class" beforeDir="false" afterPath="$PROJECT_DIR$/Internet technology assignment/out/production/Chat application/Server.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/out/production/Chat application/ServerConnection.class" beforeDir="false" afterPath="$PROJECT_DIR$/Internet technology assignment/out/production/Chat application/ServerConnection.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/out/production/Chat application/TimerThread$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/Internet technology assignment/out/production/Chat application/TimerThread$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/out/production/Chat application/TimerThread$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/Internet technology assignment/out/production/Chat application/TimerThread$2.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/out/production/Chat application/TimerThread.class" beforeDir="false" afterPath="$PROJECT_DIR$/Internet technology assignment/out/production/Chat application/TimerThread.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/out/production/Chat application/User.class" beforeDir="false" afterPath="$PROJECT_DIR$/Internet technology assignment/out/production/Chat application/User.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/out/production/Chat application/UserAndTimeOfLastMessage.class" beforeDir="false" afterPath="$PROJECT_DIR$/Internet technology assignment/out/production/Chat application/UserAndTimeOfLastMessage.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/out/production/Chat application/client/Client.class" beforeDir="false" afterPath="$PROJECT_DIR$/Internet technology assignment/out/production/Chat application/client/Client.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/out/production/Chat application/client/ServerConnection.class" beforeDir="false" afterPath="$PROJECT_DIR$/Internet technology assignment/out/production/Chat application/client/ServerConnection.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/out/production/Chat application/server/AES.class" beforeDir="false" afterPath="$PROJECT_DIR$/Internet technology assignment/out/production/Chat application/server/AES.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/out/production/Chat application/server/ClientHandler.class" beforeDir="false" afterPath="$PROJECT_DIR$/Internet technology assignment/out/production/Chat application/server/ClientHandler.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/out/production/Chat application/server/FileReceiverServer.class" beforeDir="false" afterPath="$PROJECT_DIR$/Internet technology assignment/out/production/Chat application/server/FileReceiverServer.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/out/production/Chat application/server/FileSenderServer.class" beforeDir="false" afterPath="$PROJECT_DIR$/Internet technology assignment/out/production/Chat application/server/FileSenderServer.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/out/production/Chat application/server/Group.class" beforeDir="false" afterPath="$PROJECT_DIR$/Internet technology assignment/out/production/Chat application/server/Group.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/out/production/Chat application/server/Server$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/Internet technology assignment/out/production/Chat application/server/Server$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/out/production/Chat application/server/Server.class" beforeDir="false" afterPath="$PROJECT_DIR$/Internet technology assignment/out/production/Chat application/server/Server.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/out/production/Chat application/server/TimerThread$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/Internet technology assignment/out/production/Chat application/server/TimerThread$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/out/production/Chat application/server/TimerThread$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/Internet technology assignment/out/production/Chat application/server/TimerThread$2.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/out/production/Chat application/server/TimerThread.class" beforeDir="false" afterPath="$PROJECT_DIR$/Internet technology assignment/out/production/Chat application/server/TimerThread.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/out/production/Chat application/server/User.class" beforeDir="false" afterPath="$PROJECT_DIR$/Internet technology assignment/out/production/Chat application/server/User.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/out/production/Chat application/server/UserAndTimeOfLastMessage.class" beforeDir="false" afterPath="$PROJECT_DIR$/Internet technology assignment/out/production/Chat application/server/UserAndTimeOfLastMessage.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/out/production/client/client/Client.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/out/production/client/client/ServerConnection.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/out/production/client/server/AES.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/out/production/client/server/ClientHandler.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/out/production/client/server/FileReceiverServer.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/out/production/client/server/FileSenderServer.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/out/production/client/server/Group.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/out/production/client/server/Server$1.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/out/production/client/server/Server.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/out/production/client/server/TimerThread$1.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/out/production/client/server/TimerThread$2.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/out/production/client/server/TimerThread.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/out/production/client/server/User.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/out/production/client/server/UserAndTimeOfLastMessage.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/receive.txt" beforeDir="false" afterPath="$PROJECT_DIR$/Internet technology assignment/relatedTextFiles/receive.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/receivedFromServer.txt" beforeDir="false" afterPath="$PROJECT_DIR$/Internet technology assignment/receivedFromServer.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/client/Client.java" beforeDir="false" afterPath="$PROJECT_DIR$/Internet technology assignment/src/client/Client.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/client/ServerConnection.java" beforeDir="false" afterPath="$PROJECT_DIR$/Internet technology assignment/src/client/ServerConnection.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/server/AES.java" beforeDir="false" afterPath="$PROJECT_DIR$/Internet technology assignment/src/server/AES.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/server/ClientHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/Internet technology assignment/src/server/ClientHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/server/FileReceiverServer.java" beforeDir="false" afterPath="$PROJECT_DIR$/Internet technology assignment/src/server/FileReceiverServer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/server/FileSenderServer.java" beforeDir="false" afterPath="$PROJECT_DIR$/Internet technology assignment/src/server/FileSenderServer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/server/Group.java" beforeDir="false" afterPath="$PROJECT_DIR$/Internet technology assignment/src/server/Group.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/server/Server.java" beforeDir="false" afterPath="$PROJECT_DIR$/Internet technology assignment/src/server/Server.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/server/TimerThread.java" beforeDir="false" afterPath="$PROJECT_DIR$/Internet technology assignment/src/server/TimerThread.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/server/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/Internet technology assignment/src/server/User.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/server/UserAndTimeOfLastMessage.java" beforeDir="false" afterPath="$PROJECT_DIR$/Internet technology assignment/src/server/UserAndTimeOfLastMessage.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/.idea/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/.idea/markdown-navigator-enh.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/.idea/markdown-navigator.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/.idea/misc.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/.idea/modules.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/.idea/runConfigurations.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/.idea/server.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/.idea/vcs.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/CHANGELOG.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/README.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/server.js" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
+  <component name="DefaultGradleProjectSettings">
+    <option name="testRunner" value="GRADLE" />
+    <option name="delegatedBuild" value="true" />
+  </component>
+  <component name="FileEditorManager">
+    <leaf>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/client/src/server/Server.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="527">
+              <caret line="45" column="124" lean-forward="true" selection-start-line="45" selection-start-column="124" selection-end-line="45" selection-end-column="124" />
+              <folding>
+                <element signature="e#1024#1450#0" expanded="true" />
+                <element signature="e#1449#1450#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
+  <component name="IdeDocumentHistory">
+    <option name="CHANGED_PATHS">
+      <list>
+        <option value="$PROJECT_DIR$/client/src/server/Server.java" />
+      </list>
+    </option>
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="264" />
-    <option name="y" value="-22" />
+    <option name="x" value="-8" />
+    <option name="y" value="-8" />
     <option name="width" value="1936" />
     <option name="height" value="1056" />
   </component>
@@ -39,7 +148,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="PackagesPane" />
       <pane id="Scope">
         <subPane subId="Scope 'Project Files'; set:Project Files; class com.intellij.psi.search.scope.ProjectFilesScope">
           <expand>
@@ -67,23 +175,24 @@
           <expand>
             <path>
               <item name="Internet_Technology" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Internet_Technology" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Internet_Technology" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Internet_Technology" type="462c0819:PsiDirectoryNode" />
               <item name="client" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="Internet_Technology" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Internet_Technology" type="462c0819:PsiDirectoryNode" />
               <item name="client" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Internet_Technology" type="b2602c69:ProjectViewProjectNode" />
+              <item name="client" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="server" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
         </subPane>
       </pane>
+      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="ProjectViewState">
@@ -97,107 +206,127 @@
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
     <property name="jdk.selected.JAVA_MODULE" value="15" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../version 41/Internet_Technology-84592e75324537f7cdbedcda621d29cfee662b8d" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
     <property name="node.js.path.for.package.tslint" value="project" />
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
     <property name="node.js.selected.package.tslint" value="(autodetect)" />
-    <property name="project.structure.last.edited" value="Project" />
+    <property name="nodejs_package_manager_path" value="npm" />
+    <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
   </component>
   <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\steve\Advanced app developing retake\HD assignment 2\Internet_Technology\Internet technology assignment\relatedTextFiles" />
+      <recent name="C:\Users\steve\Advanced app developing retake\HD assignment 2\Internet_Technology\Internet technology assignment\src\server" />
+    </key>
     <key name="CopyClassDialog.RECENTS_KEY">
       <recent name="client" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.Client 1">
+  <component name="RunManager" selected="Application.SaltedMD5Example">
     <configuration name="Client 1" type="Application" factoryName="Application">
       <option name="MAIN_CLASS_NAME" value="client.Client" />
-      <module name="client" />
+      <module name="Internet technology assignment" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
     <configuration name="Client 10" type="Application" factoryName="Application">
       <option name="MAIN_CLASS_NAME" value="client.Client" />
-      <module name="client" />
+      <module name="Internet technology assignment" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
     <configuration name="Client 2" type="Application" factoryName="Application" temporary="true">
       <option name="MAIN_CLASS_NAME" value="client.Client" />
-      <module name="client" />
+      <module name="Internet technology assignment" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
     <configuration name="Client 3" type="Application" factoryName="Application">
       <option name="MAIN_CLASS_NAME" value="client.Client" />
-      <module name="client" />
+      <module name="Internet technology assignment" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
     <configuration name="Client 4" type="Application" factoryName="Application">
       <option name="MAIN_CLASS_NAME" value="client.Client" />
-      <module name="client" />
+      <module name="Internet technology assignment" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
     <configuration name="Client 5" type="Application" factoryName="Application">
       <option name="MAIN_CLASS_NAME" value="client.Client" />
-      <module name="client" />
+      <module name="Internet technology assignment" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
     <configuration name="Client 6" type="Application" factoryName="Application">
       <option name="MAIN_CLASS_NAME" value="client.Client" />
-      <module name="client" />
+      <module name="Internet technology assignment" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
     <configuration name="Client 7" type="Application" factoryName="Application">
       <option name="MAIN_CLASS_NAME" value="client.Client" />
-      <module name="client" />
+      <module name="Internet technology assignment" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
     <configuration name="Client 8" type="Application" factoryName="Application">
       <option name="MAIN_CLASS_NAME" value="client.Client" />
-      <module name="client" />
+      <module name="Internet technology assignment" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
     <configuration name="Client 9" type="Application" factoryName="Application">
       <option name="MAIN_CLASS_NAME" value="client.Client" />
-      <module name="client" />
+      <module name="Internet technology assignment" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="SaltedMD5Example" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="server.SaltedMD5Example" />
+      <module name="Internet technology assignment" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="server.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
     <configuration name="Server" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="server.Server" />
-      <module name="client" />
+      <module name="Internet technology assignment" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration default="true" type="ArquillianJUnit" factoryName="" nameIsGenerated="true">
-      <option name="arquillianRunConfiguration">
-        <value>
-          <option name="containerStateName" value="" />
-        </value>
-      </option>
-      <option name="TEST_OBJECT" value="class" />
+    <configuration name="SimpleMD5Example" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="server.SimpleMD5Example" />
+      <module name="Internet technology assignment" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="server.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -214,9 +343,13 @@
       <item itemvalue="Application.Client 10" />
       <item itemvalue="Application.Client 2" />
       <item itemvalue="Application.Server" />
+      <item itemvalue="Application.SimpleMD5Example" />
+      <item itemvalue="Application.SaltedMD5Example" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Application.SaltedMD5Example" />
+        <item itemvalue="Application.SimpleMD5Example" />
         <item itemvalue="Application.Server" />
         <item itemvalue="Application.Client 2" />
       </list>
@@ -266,6 +399,19 @@
       <workItem from="1647714018082" duration="6994000" />
       <workItem from="1647779747063" duration="2700000" />
       <workItem from="1647795169750" duration="5076000" />
+      <workItem from="1649169307678" duration="722000" />
+      <workItem from="1649191621689" duration="1681000" />
+      <workItem from="1649232773264" duration="3203000" />
+      <workItem from="1649255543975" duration="735000" />
+      <workItem from="1651150443302" duration="3589000" />
+      <workItem from="1651347187789" duration="3724000" />
+      <workItem from="1651512252680" duration="8424000" />
+      <workItem from="1651605690576" duration="667000" />
+      <workItem from="1651673772842" duration="4361000" />
+      <workItem from="1651921833101" duration="2981000" />
+      <workItem from="1651924958439" duration="8118000" />
+      <workItem from="1652022949118" duration="870000" />
+      <workItem from="1652039511636" duration="3159000" />
     </task>
     <task id="LOCAL-00001" summary="bug fixed">
       <created>1647128816152</created>
@@ -314,8 +460,9 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
+    <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.25266525" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.2553305" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Designer" order="2" />
       <window_info id="Image Layers" order="3" />
@@ -379,5 +526,18 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="bug fixed" />
     <option name="LAST_COMMIT_MESSAGE" value="bug fixed" />
+  </component>
+  <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/client/src/server/Server.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="527">
+          <caret line="45" column="124" lean-forward="true" selection-start-line="45" selection-start-column="124" selection-end-line="45" selection-end-column="124" />
+          <folding>
+            <element signature="e#1024#1450#0" expanded="true" />
+            <element signature="e#1449#1450#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
   </component>
 </project>

@@ -393,7 +393,7 @@ public class ClientHandler implements Runnable{
                 int j = contentOfMessage.indexOf(' ');
                 String username = contentOfMessage.substring(0, j);
                 String password = contentOfMessage.substring(j + 1);
-                if (usernameAndPasswordCorrect(username, password, "Internet technology assignment/relatedTextFiles/authenticatedUsers.txt")) {
+                if (usernameAndPasswordCorrect(username, password, "InternetTechnologyAssignment/relatedTextFiles/authenticatedUsers.txt")) {
                     user = new User(username);
                     users.add(user);
                     user.setPassword(password);
@@ -437,7 +437,7 @@ public class ClientHandler implements Runnable{
                     user = new User(username);
                     user.setPassword(password);
                     users.add(user);
-                    storeUsernamePasswordInFile(username, password, "Internet technology assignment/relatedTextFiles/authenticatedUsers.txt");
+                    storeUsernamePasswordInFile(username, password, "InternetTechnologyAssignment/relatedTextFiles/authenticatedUsers.txt");
                     responseMessage = "You are registered and logged in with authenticated user, with username of " + username;
                 }
             }
@@ -673,11 +673,12 @@ public class ClientHandler implements Runnable{
         } else {
             int j = contentOfMessage.indexOf(' ');
             String receiverName = contentOfMessage.substring(0, j);
+            String fileNameAndBase64String = contentOfMessage.substring(j + 1);
             if (!checkIfUserExist(receiverName)) {
                 responseMessage = "ER04 Such user doesn't exist";
             } else {
                 responseMessage = "Your file has been sent successfully";
-                receiveFile(receiverName);
+                receiveFile(receiverName, user.getUserName(), fileNameAndBase64String);
             }
         }
         return responseMessage;
@@ -725,12 +726,12 @@ public class ClientHandler implements Runnable{
 
     /**
      * Client receive file
-     * @param name Name of receiver client
+     * @param receiverName Name of receiver client
      */
-    private void receiveFile(String name) {
+    private void receiveFile(String receiverName, String senderName, String fileNameAndBase64String) {
         for( ClientHandler clientHandlers : clients){
-            if (getByUserName(name).equals(clientHandlers)) {
-                clientHandlers.out.println("You received a new file");
+            if (getByUserName(receiverName).equals(clientHandlers)) {
+                clientHandlers.out.println("You received a new file " + senderName + " " + fileNameAndBase64String);
             }
         }
     }
@@ -757,7 +758,7 @@ public class ClientHandler implements Runnable{
      * @throws IOException The function is using file, so it needs to throw IOException
      */
     private static boolean usernameAlreadyExists(String username) throws IOException {
-        return usernameAlreadyExistsAsGuest(username) || usernameAlreadyExistsAsAuthenticatedUser(username, "Internet technology assignment/relatedTextFiles/authenticatedUsers.txt");
+        return usernameAlreadyExistsAsGuest(username) || usernameAlreadyExistsAsAuthenticatedUser(username, "InternetTechnologyAssignment/relatedTextFiles/authenticatedUsers.txt");
     }
 
     /**

@@ -1,92 +1,155 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="0b2b46a1-6066-452f-b965-97d7e6559bc4" name="Default Changelist" comment="bug fixed">
-      <change afterPath="$PROJECT_DIR$/Internet technology assignment/src/server/SaltedMD5Example.java" afterDir="false" />
+    <list default="true" id="0b2b46a1-6066-452f-b965-97d7e6559bc4" name="Default Changelist" comment="A lot of changes">
       <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/.idea/checkstyle-idea.xml" beforeDir="false" afterPath="$PROJECT_DIR$/Internet technology assignment/.idea/checkstyle-idea.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/Internet technology assignment/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/Internet technology assignment/.idea/modules.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/.idea/sonarIssues.xml" beforeDir="false" afterPath="$PROJECT_DIR$/Internet technology assignment/.idea/sonarIssues.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/.idea/uiDesigner.xml" beforeDir="false" afterPath="$PROJECT_DIR$/Internet technology assignment/.idea/uiDesigner.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/Internet technology assignment/.idea/vcs.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/Internet technology assignment/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/Chat application.iml" beforeDir="false" afterPath="$PROJECT_DIR$/Internet technology assignment/Chat application.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/Internet technology assignment/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/client.iml" beforeDir="false" afterPath="$PROJECT_DIR$/Internet technology assignment/Internet technology assignment.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/client/authenticatedUsers.txt" beforeDir="false" afterPath="$PROJECT_DIR$/Internet technology assignment/relatedTextFiles/authenticatedUsers.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/client/client.txt" beforeDir="false" afterPath="$PROJECT_DIR$/Internet technology assignment/relatedTextFiles/client.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/client/receive.txt" beforeDir="false" afterPath="$PROJECT_DIR$/Internet technology assignment/receive.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/client/receivedFromServer.txt" beforeDir="false" afterPath="$PROJECT_DIR$/Internet technology assignment/relatedTextFiles/receivedFromServer.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/client/server.txt" beforeDir="false" afterPath="$PROJECT_DIR$/Internet technology assignment/relatedTextFiles/server.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/out/production/Chat application/AES.class" beforeDir="false" afterPath="$PROJECT_DIR$/Internet technology assignment/out/production/Chat application/AES.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/out/production/Chat application/Client.class" beforeDir="false" afterPath="$PROJECT_DIR$/Internet technology assignment/out/production/Chat application/Client.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/out/production/Chat application/ClientHandler.class" beforeDir="false" afterPath="$PROJECT_DIR$/Internet technology assignment/out/production/Chat application/ClientHandler.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/out/production/Chat application/FileSender.class" beforeDir="false" afterPath="$PROJECT_DIR$/Internet technology assignment/out/production/Chat application/FileSender.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/out/production/Chat application/Group.class" beforeDir="false" afterPath="$PROJECT_DIR$/Internet technology assignment/out/production/Chat application/Group.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/out/production/Chat application/META-INF/Chat application.kotlin_module" beforeDir="false" afterPath="$PROJECT_DIR$/Internet technology assignment/out/production/Chat application/META-INF/Chat application.kotlin_module" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/out/production/Chat application/Server$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/Internet technology assignment/out/production/Chat application/Server$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/out/production/Chat application/Server.class" beforeDir="false" afterPath="$PROJECT_DIR$/Internet technology assignment/out/production/Chat application/Server.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/out/production/Chat application/ServerConnection.class" beforeDir="false" afterPath="$PROJECT_DIR$/Internet technology assignment/out/production/Chat application/ServerConnection.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/out/production/Chat application/TimerThread$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/Internet technology assignment/out/production/Chat application/TimerThread$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/out/production/Chat application/TimerThread$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/Internet technology assignment/out/production/Chat application/TimerThread$2.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/out/production/Chat application/TimerThread.class" beforeDir="false" afterPath="$PROJECT_DIR$/Internet technology assignment/out/production/Chat application/TimerThread.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/out/production/Chat application/User.class" beforeDir="false" afterPath="$PROJECT_DIR$/Internet technology assignment/out/production/Chat application/User.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/out/production/Chat application/UserAndTimeOfLastMessage.class" beforeDir="false" afterPath="$PROJECT_DIR$/Internet technology assignment/out/production/Chat application/UserAndTimeOfLastMessage.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/out/production/Chat application/client/Client.class" beforeDir="false" afterPath="$PROJECT_DIR$/Internet technology assignment/out/production/Chat application/client/Client.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/out/production/Chat application/client/ServerConnection.class" beforeDir="false" afterPath="$PROJECT_DIR$/Internet technology assignment/out/production/Chat application/client/ServerConnection.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/out/production/Chat application/server/AES.class" beforeDir="false" afterPath="$PROJECT_DIR$/Internet technology assignment/out/production/Chat application/server/AES.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/out/production/Chat application/server/ClientHandler.class" beforeDir="false" afterPath="$PROJECT_DIR$/Internet technology assignment/out/production/Chat application/server/ClientHandler.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/out/production/Chat application/server/FileReceiverServer.class" beforeDir="false" afterPath="$PROJECT_DIR$/Internet technology assignment/out/production/Chat application/server/FileReceiverServer.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/out/production/Chat application/server/FileSenderServer.class" beforeDir="false" afterPath="$PROJECT_DIR$/Internet technology assignment/out/production/Chat application/server/FileSenderServer.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/out/production/Chat application/server/Group.class" beforeDir="false" afterPath="$PROJECT_DIR$/Internet technology assignment/out/production/Chat application/server/Group.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/out/production/Chat application/server/Server$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/Internet technology assignment/out/production/Chat application/server/Server$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/out/production/Chat application/server/Server.class" beforeDir="false" afterPath="$PROJECT_DIR$/Internet technology assignment/out/production/Chat application/server/Server.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/out/production/Chat application/server/TimerThread$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/Internet technology assignment/out/production/Chat application/server/TimerThread$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/out/production/Chat application/server/TimerThread$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/Internet technology assignment/out/production/Chat application/server/TimerThread$2.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/out/production/Chat application/server/TimerThread.class" beforeDir="false" afterPath="$PROJECT_DIR$/Internet technology assignment/out/production/Chat application/server/TimerThread.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/out/production/Chat application/server/User.class" beforeDir="false" afterPath="$PROJECT_DIR$/Internet technology assignment/out/production/Chat application/server/User.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/out/production/Chat application/server/UserAndTimeOfLastMessage.class" beforeDir="false" afterPath="$PROJECT_DIR$/Internet technology assignment/out/production/Chat application/server/UserAndTimeOfLastMessage.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/out/production/client/client/Client.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/out/production/client/client/ServerConnection.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/out/production/client/server/AES.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/out/production/client/server/ClientHandler.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/out/production/client/server/FileReceiverServer.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/out/production/client/server/FileSenderServer.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/out/production/client/server/Group.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/out/production/client/server/Server$1.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/out/production/client/server/Server.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/out/production/client/server/TimerThread$1.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/out/production/client/server/TimerThread$2.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/out/production/client/server/TimerThread.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/out/production/client/server/User.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/out/production/client/server/UserAndTimeOfLastMessage.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/receive.txt" beforeDir="false" afterPath="$PROJECT_DIR$/Internet technology assignment/relatedTextFiles/receive.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/receivedFromServer.txt" beforeDir="false" afterPath="$PROJECT_DIR$/Internet technology assignment/receivedFromServer.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/client/Client.java" beforeDir="false" afterPath="$PROJECT_DIR$/Internet technology assignment/src/client/Client.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/client/ServerConnection.java" beforeDir="false" afterPath="$PROJECT_DIR$/Internet technology assignment/src/client/ServerConnection.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/server/AES.java" beforeDir="false" afterPath="$PROJECT_DIR$/Internet technology assignment/src/server/AES.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/server/ClientHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/Internet technology assignment/src/server/ClientHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/server/FileReceiverServer.java" beforeDir="false" afterPath="$PROJECT_DIR$/Internet technology assignment/src/server/FileReceiverServer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/server/FileSenderServer.java" beforeDir="false" afterPath="$PROJECT_DIR$/Internet technology assignment/src/server/FileSenderServer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/server/Group.java" beforeDir="false" afterPath="$PROJECT_DIR$/Internet technology assignment/src/server/Group.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/server/Server.java" beforeDir="false" afterPath="$PROJECT_DIR$/Internet technology assignment/src/server/Server.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/server/TimerThread.java" beforeDir="false" afterPath="$PROJECT_DIR$/Internet technology assignment/src/server/TimerThread.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/server/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/Internet technology assignment/src/server/User.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/server/UserAndTimeOfLastMessage.java" beforeDir="false" afterPath="$PROJECT_DIR$/Internet technology assignment/src/server/UserAndTimeOfLastMessage.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/.idea/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/.idea/markdown-navigator-enh.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/.idea/markdown-navigator.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/.idea/misc.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/.idea/modules.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/.idea/runConfigurations.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/.idea/server.iml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/.idea/vcs.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/CHANGELOG.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/README.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/server.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Internet technology assignment/.idea/checkstyle-idea.xml" beforeDir="false" afterPath="$PROJECT_DIR$/InternetTechnologyAssignment/.idea/checkstyle-idea.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Internet technology assignment/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/InternetTechnologyAssignment/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Internet technology assignment/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/InternetTechnologyAssignment/.idea/modules.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Internet technology assignment/.idea/sonarIssues.xml" beforeDir="false" afterPath="$PROJECT_DIR$/InternetTechnologyAssignment/.idea/sonarIssues.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Internet technology assignment/.idea/uiDesigner.xml" beforeDir="false" afterPath="$PROJECT_DIR$/InternetTechnologyAssignment/.idea/uiDesigner.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Internet technology assignment/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/InternetTechnologyAssignment/.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Internet technology assignment/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/InternetTechnologyAssignment/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Internet technology assignment/Chat application.iml" beforeDir="false" afterPath="$PROJECT_DIR$/InternetTechnologyAssignment/Chat application.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Internet technology assignment/Internet technology assignment.iml" beforeDir="false" afterPath="$PROJECT_DIR$/InternetTechnologyAssignment/InternetTechnologyAssignment.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Internet technology assignment/Javadoc/allclasses-index.html" beforeDir="false" afterPath="$PROJECT_DIR$/InternetTechnologyAssignment/Javadoc/allclasses-index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Internet technology assignment/Javadoc/allpackages-index.html" beforeDir="false" afterPath="$PROJECT_DIR$/InternetTechnologyAssignment/Javadoc/allpackages-index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Internet technology assignment/Javadoc/client/Client.html" beforeDir="false" afterPath="$PROJECT_DIR$/InternetTechnologyAssignment/Javadoc/client/Client.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Internet technology assignment/Javadoc/client/ServerConnection.html" beforeDir="false" afterPath="$PROJECT_DIR$/InternetTechnologyAssignment/Javadoc/client/ServerConnection.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Internet technology assignment/Javadoc/client/package-summary.html" beforeDir="false" afterPath="$PROJECT_DIR$/InternetTechnologyAssignment/Javadoc/client/package-summary.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Internet technology assignment/Javadoc/client/package-tree.html" beforeDir="false" afterPath="$PROJECT_DIR$/InternetTechnologyAssignment/Javadoc/client/package-tree.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Internet technology assignment/Javadoc/constant-values.html" beforeDir="false" afterPath="$PROJECT_DIR$/InternetTechnologyAssignment/Javadoc/constant-values.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Internet technology assignment/Javadoc/deprecated-list.html" beforeDir="false" afterPath="$PROJECT_DIR$/InternetTechnologyAssignment/Javadoc/deprecated-list.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Internet technology assignment/Javadoc/element-list" beforeDir="false" afterPath="$PROJECT_DIR$/InternetTechnologyAssignment/Javadoc/element-list" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Internet technology assignment/Javadoc/help-doc.html" beforeDir="false" afterPath="$PROJECT_DIR$/InternetTechnologyAssignment/Javadoc/help-doc.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Internet technology assignment/Javadoc/index-files/index-1.html" beforeDir="false" afterPath="$PROJECT_DIR$/InternetTechnologyAssignment/Javadoc/index-files/index-1.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Internet technology assignment/Javadoc/index-files/index-10.html" beforeDir="false" afterPath="$PROJECT_DIR$/InternetTechnologyAssignment/Javadoc/index-files/index-10.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Internet technology assignment/Javadoc/index-files/index-11.html" beforeDir="false" afterPath="$PROJECT_DIR$/InternetTechnologyAssignment/Javadoc/index-files/index-11.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Internet technology assignment/Javadoc/index-files/index-12.html" beforeDir="false" afterPath="$PROJECT_DIR$/InternetTechnologyAssignment/Javadoc/index-files/index-12.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Internet technology assignment/Javadoc/index-files/index-13.html" beforeDir="false" afterPath="$PROJECT_DIR$/InternetTechnologyAssignment/Javadoc/index-files/index-13.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Internet technology assignment/Javadoc/index-files/index-2.html" beforeDir="false" afterPath="$PROJECT_DIR$/InternetTechnologyAssignment/Javadoc/index-files/index-2.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Internet technology assignment/Javadoc/index-files/index-3.html" beforeDir="false" afterPath="$PROJECT_DIR$/InternetTechnologyAssignment/Javadoc/index-files/index-3.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Internet technology assignment/Javadoc/index-files/index-4.html" beforeDir="false" afterPath="$PROJECT_DIR$/InternetTechnologyAssignment/Javadoc/index-files/index-4.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Internet technology assignment/Javadoc/index-files/index-5.html" beforeDir="false" afterPath="$PROJECT_DIR$/InternetTechnologyAssignment/Javadoc/index-files/index-5.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Internet technology assignment/Javadoc/index-files/index-6.html" beforeDir="false" afterPath="$PROJECT_DIR$/InternetTechnologyAssignment/Javadoc/index-files/index-6.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Internet technology assignment/Javadoc/index-files/index-7.html" beforeDir="false" afterPath="$PROJECT_DIR$/InternetTechnologyAssignment/Javadoc/index-files/index-7.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Internet technology assignment/Javadoc/index-files/index-8.html" beforeDir="false" afterPath="$PROJECT_DIR$/InternetTechnologyAssignment/Javadoc/index-files/index-8.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Internet technology assignment/Javadoc/index-files/index-9.html" beforeDir="false" afterPath="$PROJECT_DIR$/InternetTechnologyAssignment/Javadoc/index-files/index-9.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Internet technology assignment/Javadoc/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/InternetTechnologyAssignment/Javadoc/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Internet technology assignment/Javadoc/member-search-index.js" beforeDir="false" afterPath="$PROJECT_DIR$/InternetTechnologyAssignment/Javadoc/member-search-index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Internet technology assignment/Javadoc/member-search-index.zip" beforeDir="false" afterPath="$PROJECT_DIR$/InternetTechnologyAssignment/Javadoc/member-search-index.zip" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Internet technology assignment/Javadoc/overview-summary.html" beforeDir="false" afterPath="$PROJECT_DIR$/InternetTechnologyAssignment/Javadoc/overview-summary.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Internet technology assignment/Javadoc/overview-tree.html" beforeDir="false" afterPath="$PROJECT_DIR$/InternetTechnologyAssignment/Javadoc/overview-tree.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Internet technology assignment/Javadoc/package-search-index.js" beforeDir="false" afterPath="$PROJECT_DIR$/InternetTechnologyAssignment/Javadoc/package-search-index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Internet technology assignment/Javadoc/package-search-index.zip" beforeDir="false" afterPath="$PROJECT_DIR$/InternetTechnologyAssignment/Javadoc/package-search-index.zip" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Internet technology assignment/Javadoc/resources/glass.png" beforeDir="false" afterPath="$PROJECT_DIR$/InternetTechnologyAssignment/Javadoc/resources/glass.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Internet technology assignment/Javadoc/resources/x.png" beforeDir="false" afterPath="$PROJECT_DIR$/InternetTechnologyAssignment/Javadoc/resources/x.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Internet technology assignment/Javadoc/script-dir/external/jquery/jquery.js" beforeDir="false" afterPath="$PROJECT_DIR$/InternetTechnologyAssignment/Javadoc/script-dir/external/jquery/jquery.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Internet technology assignment/Javadoc/script-dir/images/ui-bg_glass_55_fbf9ee_1x400.png" beforeDir="false" afterPath="$PROJECT_DIR$/InternetTechnologyAssignment/Javadoc/script-dir/images/ui-bg_glass_55_fbf9ee_1x400.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Internet technology assignment/Javadoc/script-dir/images/ui-bg_glass_65_dadada_1x400.png" beforeDir="false" afterPath="$PROJECT_DIR$/InternetTechnologyAssignment/Javadoc/script-dir/images/ui-bg_glass_65_dadada_1x400.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Internet technology assignment/Javadoc/script-dir/images/ui-bg_glass_75_dadada_1x400.png" beforeDir="false" afterPath="$PROJECT_DIR$/InternetTechnologyAssignment/Javadoc/script-dir/images/ui-bg_glass_75_dadada_1x400.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Internet technology assignment/Javadoc/script-dir/images/ui-bg_glass_75_e6e6e6_1x400.png" beforeDir="false" afterPath="$PROJECT_DIR$/InternetTechnologyAssignment/Javadoc/script-dir/images/ui-bg_glass_75_e6e6e6_1x400.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Internet technology assignment/Javadoc/script-dir/images/ui-bg_glass_95_fef1ec_1x400.png" beforeDir="false" afterPath="$PROJECT_DIR$/InternetTechnologyAssignment/Javadoc/script-dir/images/ui-bg_glass_95_fef1ec_1x400.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Internet technology assignment/Javadoc/script-dir/images/ui-bg_highlight-soft_75_cccccc_1x100.png" beforeDir="false" afterPath="$PROJECT_DIR$/InternetTechnologyAssignment/Javadoc/script-dir/images/ui-bg_highlight-soft_75_cccccc_1x100.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Internet technology assignment/Javadoc/script-dir/images/ui-icons_222222_256x240.png" beforeDir="false" afterPath="$PROJECT_DIR$/InternetTechnologyAssignment/Javadoc/script-dir/images/ui-icons_222222_256x240.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Internet technology assignment/Javadoc/script-dir/images/ui-icons_2e83ff_256x240.png" beforeDir="false" afterPath="$PROJECT_DIR$/InternetTechnologyAssignment/Javadoc/script-dir/images/ui-icons_2e83ff_256x240.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Internet technology assignment/Javadoc/script-dir/images/ui-icons_454545_256x240.png" beforeDir="false" afterPath="$PROJECT_DIR$/InternetTechnologyAssignment/Javadoc/script-dir/images/ui-icons_454545_256x240.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Internet technology assignment/Javadoc/script-dir/images/ui-icons_888888_256x240.png" beforeDir="false" afterPath="$PROJECT_DIR$/InternetTechnologyAssignment/Javadoc/script-dir/images/ui-icons_888888_256x240.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Internet technology assignment/Javadoc/script-dir/images/ui-icons_cd0a0a_256x240.png" beforeDir="false" afterPath="$PROJECT_DIR$/InternetTechnologyAssignment/Javadoc/script-dir/images/ui-icons_cd0a0a_256x240.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Internet technology assignment/Javadoc/script-dir/jquery-3.4.1.js" beforeDir="false" afterPath="$PROJECT_DIR$/InternetTechnologyAssignment/Javadoc/script-dir/jquery-3.4.1.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Internet technology assignment/Javadoc/script-dir/jquery-ui.css" beforeDir="false" afterPath="$PROJECT_DIR$/InternetTechnologyAssignment/Javadoc/script-dir/jquery-ui.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Internet technology assignment/Javadoc/script-dir/jquery-ui.js" beforeDir="false" afterPath="$PROJECT_DIR$/InternetTechnologyAssignment/Javadoc/script-dir/jquery-ui.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Internet technology assignment/Javadoc/script-dir/jquery-ui.min.css" beforeDir="false" afterPath="$PROJECT_DIR$/InternetTechnologyAssignment/Javadoc/script-dir/jquery-ui.min.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Internet technology assignment/Javadoc/script-dir/jquery-ui.min.js" beforeDir="false" afterPath="$PROJECT_DIR$/InternetTechnologyAssignment/Javadoc/script-dir/jquery-ui.min.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Internet technology assignment/Javadoc/script-dir/jquery-ui.structure.css" beforeDir="false" afterPath="$PROJECT_DIR$/InternetTechnologyAssignment/Javadoc/script-dir/jquery-ui.structure.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Internet technology assignment/Javadoc/script-dir/jquery-ui.structure.min.css" beforeDir="false" afterPath="$PROJECT_DIR$/InternetTechnologyAssignment/Javadoc/script-dir/jquery-ui.structure.min.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Internet technology assignment/Javadoc/script-dir/jszip-utils/dist/jszip-utils-ie.js" beforeDir="false" afterPath="$PROJECT_DIR$/InternetTechnologyAssignment/Javadoc/script-dir/jszip-utils/dist/jszip-utils-ie.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Internet technology assignment/Javadoc/script-dir/jszip-utils/dist/jszip-utils-ie.min.js" beforeDir="false" afterPath="$PROJECT_DIR$/InternetTechnologyAssignment/Javadoc/script-dir/jszip-utils/dist/jszip-utils-ie.min.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Internet technology assignment/Javadoc/script-dir/jszip-utils/dist/jszip-utils.js" beforeDir="false" afterPath="$PROJECT_DIR$/InternetTechnologyAssignment/Javadoc/script-dir/jszip-utils/dist/jszip-utils.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Internet technology assignment/Javadoc/script-dir/jszip-utils/dist/jszip-utils.min.js" beforeDir="false" afterPath="$PROJECT_DIR$/InternetTechnologyAssignment/Javadoc/script-dir/jszip-utils/dist/jszip-utils.min.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Internet technology assignment/Javadoc/script-dir/jszip/dist/jszip.js" beforeDir="false" afterPath="$PROJECT_DIR$/InternetTechnologyAssignment/Javadoc/script-dir/jszip/dist/jszip.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Internet technology assignment/Javadoc/script-dir/jszip/dist/jszip.min.js" beforeDir="false" afterPath="$PROJECT_DIR$/InternetTechnologyAssignment/Javadoc/script-dir/jszip/dist/jszip.min.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Internet technology assignment/Javadoc/script.js" beforeDir="false" afterPath="$PROJECT_DIR$/InternetTechnologyAssignment/Javadoc/script.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Internet technology assignment/Javadoc/search.js" beforeDir="false" afterPath="$PROJECT_DIR$/InternetTechnologyAssignment/Javadoc/search.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Internet technology assignment/Javadoc/server/AES.html" beforeDir="false" afterPath="$PROJECT_DIR$/InternetTechnologyAssignment/Javadoc/server/AES.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Internet technology assignment/Javadoc/server/ClientHandler.html" beforeDir="false" afterPath="$PROJECT_DIR$/InternetTechnologyAssignment/Javadoc/server/ClientHandler.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Internet technology assignment/Javadoc/server/FileReceiverServer.html" beforeDir="false" afterPath="$PROJECT_DIR$/InternetTechnologyAssignment/Javadoc/server/FileReceiverServer.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Internet technology assignment/Javadoc/server/FileSenderServer.html" beforeDir="false" afterPath="$PROJECT_DIR$/InternetTechnologyAssignment/Javadoc/server/FileSenderServer.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Internet technology assignment/Javadoc/server/Group.html" beforeDir="false" afterPath="$PROJECT_DIR$/InternetTechnologyAssignment/Javadoc/server/Group.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Internet technology assignment/Javadoc/server/SaltedMD5Example.html" beforeDir="false" afterPath="$PROJECT_DIR$/InternetTechnologyAssignment/Javadoc/server/SaltedMD5Example.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Internet technology assignment/Javadoc/server/Server.html" beforeDir="false" afterPath="$PROJECT_DIR$/InternetTechnologyAssignment/Javadoc/server/Server.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Internet technology assignment/Javadoc/server/TimerThread.html" beforeDir="false" afterPath="$PROJECT_DIR$/InternetTechnologyAssignment/Javadoc/server/TimerThread.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Internet technology assignment/Javadoc/server/User.html" beforeDir="false" afterPath="$PROJECT_DIR$/InternetTechnologyAssignment/Javadoc/server/User.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Internet technology assignment/Javadoc/server/UserAndTimeOfLastMessage.html" beforeDir="false" afterPath="$PROJECT_DIR$/InternetTechnologyAssignment/Javadoc/server/UserAndTimeOfLastMessage.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Internet technology assignment/Javadoc/server/package-summary.html" beforeDir="false" afterPath="$PROJECT_DIR$/InternetTechnologyAssignment/Javadoc/server/package-summary.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Internet technology assignment/Javadoc/server/package-tree.html" beforeDir="false" afterPath="$PROJECT_DIR$/InternetTechnologyAssignment/Javadoc/server/package-tree.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Internet technology assignment/Javadoc/stylesheet.css" beforeDir="false" afterPath="$PROJECT_DIR$/InternetTechnologyAssignment/Javadoc/stylesheet.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Internet technology assignment/Javadoc/type-search-index.js" beforeDir="false" afterPath="$PROJECT_DIR$/InternetTechnologyAssignment/Javadoc/type-search-index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Internet technology assignment/Javadoc/type-search-index.zip" beforeDir="false" afterPath="$PROJECT_DIR$/InternetTechnologyAssignment/Javadoc/type-search-index.zip" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Internet technology assignment/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/InternetTechnologyAssignment/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Internet technology assignment/out/production/Chat application/AES.class" beforeDir="false" afterPath="$PROJECT_DIR$/InternetTechnologyAssignment/out/production/Chat application/AES.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Internet technology assignment/out/production/Chat application/Client.class" beforeDir="false" afterPath="$PROJECT_DIR$/InternetTechnologyAssignment/out/production/Chat application/Client.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Internet technology assignment/out/production/Chat application/ClientHandler.class" beforeDir="false" afterPath="$PROJECT_DIR$/InternetTechnologyAssignment/out/production/Chat application/ClientHandler.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Internet technology assignment/out/production/Chat application/FileSender.class" beforeDir="false" afterPath="$PROJECT_DIR$/InternetTechnologyAssignment/out/production/Chat application/FileSender.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Internet technology assignment/out/production/Chat application/Group.class" beforeDir="false" afterPath="$PROJECT_DIR$/InternetTechnologyAssignment/out/production/Chat application/Group.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Internet technology assignment/out/production/Chat application/META-INF/Chat application.kotlin_module" beforeDir="false" afterPath="$PROJECT_DIR$/InternetTechnologyAssignment/out/production/Chat application/META-INF/Chat application.kotlin_module" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Internet technology assignment/out/production/Chat application/Server$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/InternetTechnologyAssignment/out/production/Chat application/Server$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Internet technology assignment/out/production/Chat application/Server.class" beforeDir="false" afterPath="$PROJECT_DIR$/InternetTechnologyAssignment/out/production/Chat application/Server.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Internet technology assignment/out/production/Chat application/ServerConnection.class" beforeDir="false" afterPath="$PROJECT_DIR$/InternetTechnologyAssignment/out/production/Chat application/ServerConnection.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Internet technology assignment/out/production/Chat application/TimerThread$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/InternetTechnologyAssignment/out/production/Chat application/TimerThread$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Internet technology assignment/out/production/Chat application/TimerThread$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/InternetTechnologyAssignment/out/production/Chat application/TimerThread$2.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Internet technology assignment/out/production/Chat application/TimerThread.class" beforeDir="false" afterPath="$PROJECT_DIR$/InternetTechnologyAssignment/out/production/Chat application/TimerThread.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Internet technology assignment/out/production/Chat application/User.class" beforeDir="false" afterPath="$PROJECT_DIR$/InternetTechnologyAssignment/out/production/Chat application/User.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Internet technology assignment/out/production/Chat application/UserAndTimeOfLastMessage.class" beforeDir="false" afterPath="$PROJECT_DIR$/InternetTechnologyAssignment/out/production/Chat application/UserAndTimeOfLastMessage.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Internet technology assignment/out/production/Chat application/client/Client.class" beforeDir="false" afterPath="$PROJECT_DIR$/InternetTechnologyAssignment/out/production/Chat application/client/Client.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Internet technology assignment/out/production/Chat application/client/ServerConnection.class" beforeDir="false" afterPath="$PROJECT_DIR$/InternetTechnologyAssignment/out/production/Chat application/client/ServerConnection.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Internet technology assignment/out/production/Chat application/server/AES.class" beforeDir="false" afterPath="$PROJECT_DIR$/InternetTechnologyAssignment/out/production/Chat application/server/AES.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Internet technology assignment/out/production/Chat application/server/ClientHandler.class" beforeDir="false" afterPath="$PROJECT_DIR$/InternetTechnologyAssignment/out/production/Chat application/server/ClientHandler.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Internet technology assignment/out/production/Chat application/server/FileReceiverServer.class" beforeDir="false" afterPath="$PROJECT_DIR$/InternetTechnologyAssignment/out/production/Chat application/server/FileReceiverServer.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Internet technology assignment/out/production/Chat application/server/FileSenderServer.class" beforeDir="false" afterPath="$PROJECT_DIR$/InternetTechnologyAssignment/out/production/Chat application/server/FileSenderServer.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Internet technology assignment/out/production/Chat application/server/Group.class" beforeDir="false" afterPath="$PROJECT_DIR$/InternetTechnologyAssignment/out/production/Chat application/server/Group.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Internet technology assignment/out/production/Chat application/server/Server$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/InternetTechnologyAssignment/out/production/Chat application/server/Server$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Internet technology assignment/out/production/Chat application/server/Server.class" beforeDir="false" afterPath="$PROJECT_DIR$/InternetTechnologyAssignment/out/production/Chat application/server/Server.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Internet technology assignment/out/production/Chat application/server/TimerThread$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/InternetTechnologyAssignment/out/production/Chat application/server/TimerThread$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Internet technology assignment/out/production/Chat application/server/TimerThread$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/InternetTechnologyAssignment/out/production/Chat application/server/TimerThread$2.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Internet technology assignment/out/production/Chat application/server/TimerThread.class" beforeDir="false" afterPath="$PROJECT_DIR$/InternetTechnologyAssignment/out/production/Chat application/server/TimerThread.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Internet technology assignment/out/production/Chat application/server/User.class" beforeDir="false" afterPath="$PROJECT_DIR$/InternetTechnologyAssignment/out/production/Chat application/server/User.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Internet technology assignment/out/production/Chat application/server/UserAndTimeOfLastMessage.class" beforeDir="false" afterPath="$PROJECT_DIR$/InternetTechnologyAssignment/out/production/Chat application/server/UserAndTimeOfLastMessage.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Internet technology assignment/out/production/Internet technology assignment/client/Client.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Internet technology assignment/out/production/Internet technology assignment/client/ServerConnection.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Internet technology assignment/out/production/Internet technology assignment/server/AES.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Internet technology assignment/out/production/Internet technology assignment/server/ClientHandler.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Internet technology assignment/out/production/Internet technology assignment/server/FileReceiverServer.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Internet technology assignment/out/production/Internet technology assignment/server/FileSenderServer.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Internet technology assignment/out/production/Internet technology assignment/server/Group.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Internet technology assignment/out/production/Internet technology assignment/server/SaltedMD5Example.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Internet technology assignment/out/production/Internet technology assignment/server/Server$1.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Internet technology assignment/out/production/Internet technology assignment/server/Server.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Internet technology assignment/out/production/Internet technology assignment/server/TimerThread$1.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Internet technology assignment/out/production/Internet technology assignment/server/TimerThread$2.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Internet technology assignment/out/production/Internet technology assignment/server/TimerThread.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Internet technology assignment/out/production/Internet technology assignment/server/User.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Internet technology assignment/out/production/Internet technology assignment/server/UserAndTimeOfLastMessage.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Internet technology assignment/receive.txt" beforeDir="false" afterPath="$PROJECT_DIR$/InternetTechnologyAssignment/receive.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Internet technology assignment/receivedFromServer.txt" beforeDir="false" afterPath="$PROJECT_DIR$/InternetTechnologyAssignment/receivedFromServer.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Internet technology assignment/relatedTextFiles/authenticatedUsers.txt" beforeDir="false" afterPath="$PROJECT_DIR$/InternetTechnologyAssignment/relatedTextFiles/authenticatedUsers.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Internet technology assignment/relatedTextFiles/client.txt" beforeDir="false" afterPath="$PROJECT_DIR$/InternetTechnologyAssignment/relatedTextFiles/client.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Internet technology assignment/relatedTextFiles/receive.txt" beforeDir="false" afterPath="$PROJECT_DIR$/InternetTechnologyAssignment/relatedTextFiles/receive.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Internet technology assignment/relatedTextFiles/receivedFromServer.txt" beforeDir="false" afterPath="$PROJECT_DIR$/InternetTechnologyAssignment/relatedTextFiles/receivedFromServer.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Internet technology assignment/relatedTextFiles/server.txt" beforeDir="false" afterPath="$PROJECT_DIR$/InternetTechnologyAssignment/relatedTextFiles/server.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Internet technology assignment/src/client/Client.java" beforeDir="false" afterPath="$PROJECT_DIR$/InternetTechnologyAssignment/src/client/Client.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Internet technology assignment/src/client/ServerConnection.java" beforeDir="false" afterPath="$PROJECT_DIR$/InternetTechnologyAssignment/src/client/ServerConnection.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Internet technology assignment/src/server/AES.java" beforeDir="false" afterPath="$PROJECT_DIR$/InternetTechnologyAssignment/src/server/AES.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Internet technology assignment/src/server/ClientHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/InternetTechnologyAssignment/src/server/ClientHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Internet technology assignment/src/server/FileReceiverServer.java" beforeDir="false" afterPath="$PROJECT_DIR$/InternetTechnologyAssignment/src/server/FileReceiverServer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Internet technology assignment/src/server/FileSenderServer.java" beforeDir="false" afterPath="$PROJECT_DIR$/InternetTechnologyAssignment/src/server/FileSenderServer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Internet technology assignment/src/server/Group.java" beforeDir="false" afterPath="$PROJECT_DIR$/InternetTechnologyAssignment/src/server/Group.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Internet technology assignment/src/server/Server.java" beforeDir="false" afterPath="$PROJECT_DIR$/InternetTechnologyAssignment/src/server/Server.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Internet technology assignment/src/server/TimerThread.java" beforeDir="false" afterPath="$PROJECT_DIR$/InternetTechnologyAssignment/src/server/TimerThread.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Internet technology assignment/src/server/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/InternetTechnologyAssignment/src/server/User.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Internet technology assignment/src/server/UserAndTimeOfLastMessage.java" beforeDir="false" afterPath="$PROJECT_DIR$/InternetTechnologyAssignment/src/server/UserAndTimeOfLastMessage.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -206,7 +269,7 @@
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
     <property name="jdk.selected.JAVA_MODULE" value="15" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/Internet technology assignment/relatedTextFiles" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
@@ -219,6 +282,9 @@
     <property name="project.structure.side.proportion" value="0.2" />
   </component>
   <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\steve\Advanced app developing retake\HD assignment 2\Internet_Technology\Internet technology assignment\relatedTextFiles" />
+    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\steve\Advanced app developing retake\HD assignment 2\Internet_Technology\Internet technology assignment\relatedTextFiles" />
       <recent name="C:\Users\steve\Advanced app developing retake\HD assignment 2\Internet_Technology\Internet technology assignment\src\server" />
@@ -227,80 +293,93 @@
       <recent name="client" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.SaltedMD5Example">
+  <component name="RunManager" selected="Application.Client 2">
+    <configuration name="Base64EncoderAndDecoder" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="client.Base64EncoderAndDecoder" />
+      <module name="InternetTechnologyAssignment" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="client.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="Client 1" type="Application" factoryName="Application">
       <option name="MAIN_CLASS_NAME" value="client.Client" />
-      <module name="Internet technology assignment" />
+      <module name="InternetTechnologyAssignment" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
     <configuration name="Client 10" type="Application" factoryName="Application">
       <option name="MAIN_CLASS_NAME" value="client.Client" />
-      <module name="Internet technology assignment" />
+      <module name="InternetTechnologyAssignment" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
     <configuration name="Client 2" type="Application" factoryName="Application" temporary="true">
       <option name="MAIN_CLASS_NAME" value="client.Client" />
-      <module name="Internet technology assignment" />
+      <module name="InternetTechnologyAssignment" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
     <configuration name="Client 3" type="Application" factoryName="Application">
       <option name="MAIN_CLASS_NAME" value="client.Client" />
-      <module name="Internet technology assignment" />
+      <module name="InternetTechnologyAssignment" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
     <configuration name="Client 4" type="Application" factoryName="Application">
       <option name="MAIN_CLASS_NAME" value="client.Client" />
-      <module name="Internet technology assignment" />
+      <module name="InternetTechnologyAssignment" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
     <configuration name="Client 5" type="Application" factoryName="Application">
       <option name="MAIN_CLASS_NAME" value="client.Client" />
-      <module name="Internet technology assignment" />
+      <module name="InternetTechnologyAssignment" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
     <configuration name="Client 6" type="Application" factoryName="Application">
       <option name="MAIN_CLASS_NAME" value="client.Client" />
-      <module name="Internet technology assignment" />
+      <module name="InternetTechnologyAssignment" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
     <configuration name="Client 7" type="Application" factoryName="Application">
       <option name="MAIN_CLASS_NAME" value="client.Client" />
-      <module name="Internet technology assignment" />
+      <module name="InternetTechnologyAssignment" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
     <configuration name="Client 8" type="Application" factoryName="Application">
       <option name="MAIN_CLASS_NAME" value="client.Client" />
-      <module name="Internet technology assignment" />
+      <module name="InternetTechnologyAssignment" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
     <configuration name="Client 9" type="Application" factoryName="Application">
       <option name="MAIN_CLASS_NAME" value="client.Client" />
-      <module name="Internet technology assignment" />
+      <module name="InternetTechnologyAssignment" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
     <configuration name="SaltedMD5Example" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="server.SaltedMD5Example" />
-      <module name="Internet technology assignment" />
+      <module name="InternetTechnologyAssignment" />
       <extension name="coverage">
         <pattern>
           <option name="PATTERN" value="server.*" />
@@ -313,14 +392,14 @@
     </configuration>
     <configuration name="Server" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="server.Server" />
-      <module name="Internet technology assignment" />
+      <module name="InternetTechnologyAssignment" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
     <configuration name="SimpleMD5Example" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="server.SimpleMD5Example" />
-      <module name="Internet technology assignment" />
+      <module name="InternetTechnologyAssignment" />
       <extension name="coverage">
         <pattern>
           <option name="PATTERN" value="server.*" />
@@ -345,13 +424,15 @@
       <item itemvalue="Application.Server" />
       <item itemvalue="Application.SimpleMD5Example" />
       <item itemvalue="Application.SaltedMD5Example" />
+      <item itemvalue="Application.Base64EncoderAndDecoder" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Application.Client 2" />
+        <item itemvalue="Application.Server" />
+        <item itemvalue="Application.Base64EncoderAndDecoder" />
         <item itemvalue="Application.SaltedMD5Example" />
         <item itemvalue="Application.SimpleMD5Example" />
-        <item itemvalue="Application.Server" />
-        <item itemvalue="Application.Client 2" />
       </list>
     </recent_temporary>
   </component>
@@ -412,6 +493,12 @@
       <workItem from="1651924958439" duration="8118000" />
       <workItem from="1652022949118" duration="870000" />
       <workItem from="1652039511636" duration="3159000" />
+      <workItem from="1652098364669" duration="1654000" />
+      <workItem from="1652986046024" duration="4057000" />
+      <workItem from="1653038293246" duration="2856000" />
+      <workItem from="1653070572504" duration="9088000" />
+      <workItem from="1653128017811" duration="6966000" />
+      <workItem from="1653158444364" duration="3486000" />
     </task>
     <task id="LOCAL-00001" summary="bug fixed">
       <created>1647128816152</created>
@@ -455,7 +542,14 @@
       <option name="project" value="LOCAL" />
       <updated>1647782006847</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="A lot of changes">
+      <created>1652098536360</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1652098536360</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -525,7 +619,8 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="bug fixed" />
-    <option name="LAST_COMMIT_MESSAGE" value="bug fixed" />
+    <MESSAGE value="A lot of changes" />
+    <option name="LAST_COMMIT_MESSAGE" value="A lot of changes" />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/client/src/server/Server.java">

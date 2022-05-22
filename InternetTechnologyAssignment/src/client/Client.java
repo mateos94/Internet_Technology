@@ -42,27 +42,13 @@ public class Client
         {
             sendMessage = keyRead.readLine();
             if (startsWithIgnoreCase("Send ", sendMessage)){
-                String fileLocation = sendMessage.substring(sendMessage.lastIndexOf(" ")+1);
+                String fileLocation = sendMessage.substring(sendMessage.lastIndexOf(" ") + 1);
                 File file = new File(fileLocation);
+                String textBeforeFileLocation = sendMessage.substring(0, sendMessage.lastIndexOf(" ") + 1);
                 if (file.exists()) {
-                try {
-                    FileInputStream fis = new FileInputStream(fileLocation);
-
-                        byte b[] = new byte[2002];
-                        MessageDigest md = MessageDigest.getInstance("MD5");
-                        try (InputStream is = Files.newInputStream(Paths.get(fileLocation));
-                             DigestInputStream dis = new DigestInputStream(is, md))
-                        {
-                            dis.read(b, 0, b.length);
-                        }
-                        byte[] d = md.digest();
-                        fis.read(d, 0, b.length);
-                        OutputStream os = socket.getOutputStream();
-                        os.write(d, 0, b.length);
-                    }
-                catch (Exception e) {
-                    e.printStackTrace();
-                }
+                    File targetFile = new File(fileLocation);
+                    String fileName = fileLocation.substring(fileLocation.lastIndexOf("/") + 1);
+                    sendMessage = textBeforeFileLocation + fileName + " " + Base64EncoderAndDecoder.encodeFileToBase64(targetFile);
                 }
                 else {
                     printAndFlush("Ignore message");
